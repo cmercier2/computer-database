@@ -8,13 +8,12 @@ public class ListCompany implements Command{
 	private Company company;
 	
 	@Override
-	public void exucute() {
-		// TODO Auto-generated method stub
-		
+	public Result exucute() {
+		return null;
 	}
 
 	@Override
-	public void handleArgument(ArrayList<String> argument) {
+	public void handleArgument() {
 		// TODO Auto-generated method stub
 		
 	}

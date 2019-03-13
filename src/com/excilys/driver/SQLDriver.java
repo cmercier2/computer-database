@@ -1,6 +1,7 @@
 package com.excilys.driver;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class SQLDriver {
@@ -15,11 +16,14 @@ public class SQLDriver {
 		}
 	}
 	
-	
 	public static SQLDriver start() {
 		SQLDriver driver = new SQLDriver();
 		driver.initiateConnection();
 		return driver;
+	}
+	
+	public PreparedStatement prepareConnection(String request) throws SQLException {
+		return conn.prepareStatement(request);
 	}
 	
 	public void close() {

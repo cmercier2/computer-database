@@ -7,10 +7,10 @@ public class Computer {
 	private String name;
 	private Date introduced;
 	private Date discontinued;
-	private Company company;
+	private int company;
 	
 	
-	public Computer(int id, String name, Date introduced, Date discontinued, Company company) {
+	public Computer(int id, String name, Date introduced, Date discontinued, int company) {
 		Objects.requireNonNull(name);
 		Objects.requireNonNull(introduced);
 		Objects.requireNonNull(discontinued);
@@ -21,6 +21,16 @@ public class Computer {
 		this.company = company;
 	}
 
+	public Computer(int id) {
+		this.id = id;
+	}
+	
+	public Computer(String name, Date introduced, Date discontinued, int company) {
+		this.name = name;
+		this.company = company;
+		this.introduced = introduced;
+		this.discontinued = discontinued;
+	}
 
 	public int getId() {
 		return id;
@@ -62,12 +72,12 @@ public class Computer {
 	}
 
 
-	public Company getCompany() {
+	public int getCompany() {
 		return company;
 	}
 
 
-	public void setCompany(Company company) {
+	public void setCompany(int company) {
 		this.company = company;
 	}
 	

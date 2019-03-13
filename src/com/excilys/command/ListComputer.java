@@ -8,13 +8,12 @@ public class ListComputer implements Command{
 	ArrayList<Computer> computers;
 
 	@Override
-	public void exucute() {
-		// TODO Auto-generated method stub
-		
+	public Result exucute() {
+		return null;
 	}
 
 	@Override
-	public void handleArgument(ArrayList<String> argument) {
+	public void handleArgument() {
 		// TODO Auto-generated method stub
 		
 	}

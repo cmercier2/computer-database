@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import com.excilys.command.Result;
+
 public class CommandLineInterface {
 	private Scanner reader = new Scanner(System.in);
 	private ArrayList<String> command = new ArrayList<>();
@@ -18,4 +20,10 @@ public class CommandLineInterface {
 		command.addAll(Arrays.asList(input));
 		return command;
 	}
+	
+	
+	public void Show(Result res) {
+		
+	}
+	
 }
