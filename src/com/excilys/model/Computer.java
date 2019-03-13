@@ -11,9 +11,6 @@ public class Computer {
 	
 	
 	public Computer(int id, String name, Date introduced, Date discontinued, int company) {
-		Objects.requireNonNull(name);
-		Objects.requireNonNull(introduced);
-		Objects.requireNonNull(discontinued);
 		this.id = id;
 		this.name = name;
 		this.introduced = introduced;
@@ -81,6 +78,10 @@ public class Computer {
 		this.company = company;
 	}
 	
-	
+	@Override
+	public String toString() {
+		
+		return this.id + " " + this.name + " " + Objects.toString(this.introduced) + " " + Objects.toString(this.discontinued) + " " + this.company;
+	}
 	
 }

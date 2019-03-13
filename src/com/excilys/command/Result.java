@@ -1,6 +1,5 @@
 package com.excilys.command;
 
-import java.sql.ResultSet;
 
 public class Result {
 	private int statut;
@@ -9,6 +8,14 @@ public class Result {
 	public Result(int statut, String message) {
 		this.message = message;
 		this.statut = statut;
+	}
+	
+	public String getMessage() {
+		return message;
+	}
+	
+	public int getStatut() {
+		return statut;
 	}
 	
 }

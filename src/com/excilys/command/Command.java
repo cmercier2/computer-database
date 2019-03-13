@@ -1,8 +1,8 @@
 package com.excilys.command;
 
-import java.util.ArrayList;
+import com.excilys.ui.CommandLineInterface;
 
 public interface Command {
-	public Result exucute();
-	public void handleArgument();
+	public Result exucute(CommandLineInterface cli);
+	public Result handleArgument();
 }

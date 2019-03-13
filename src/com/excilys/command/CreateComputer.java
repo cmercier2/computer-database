@@ -4,21 +4,23 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.excilys.model.Computer;
 import com.excilys.service.IDAO.IDAOComputer;
 import com.excilys.service.JDBC.JDBCComputer;
+import com.excilys.ui.CommandLineInterface;
 
 public class CreateComputer implements Command{
-	private ArrayList<String> command;
+	private String command;
 	private Computer computer;
 	
-	public CreateComputer(ArrayList<String> command) {
+	public CreateComputer(String command) {
 		this.command = command;
 	}
 
 	@Override
-	public Result exucute() {
+	public Result exucute(CommandLineInterface cli) {
 		IDAOComputer comp = new JDBCComputer();
 		comp.create(computer);
 		return new Result(1, "test");
@@ -37,16 +39,19 @@ public class CreateComputer implements Command{
 	
 	
 	@Override
-	public void handleArgument() {
+	public Result handleArgument() {
+		String argument = command.split(" ", 2)[1];
+		System.out.println(argument);
 		int idCompany;
 		Date introduced, discontinued;
-		try {
+		/*try {
 			idCompany = parseId(command.get(4));
 			introduced = parseDate(command.get(2));
 			discontinued = parseDate(command.get(3));
 			computer = new Computer(command.get(1), introduced, discontinued, idCompany);
 		}catch(ParseException  e) {
-			e.printStackTrace();
-		}
+			return new Result(0, e.getMessage());
+		}*/
+		return new Result(1, "");
 	}
 }

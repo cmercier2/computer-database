@@ -1,22 +1,27 @@
 package com.excilys.command;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
-import com.excilys.driver.SQLDriver;
-import com.excilys.model.Computer;
 
 public class Switch {
-	public static Command switcher(ArrayList<String> commande) {
-		switch(commande.get(0)) {
-			case "add" :
-				if(commande.size() == 5) {
-					
+	public static Command switcher(String commande) {
+		String com = Arrays.asList(commande.split(" ")).get(0);
+		switch(com) {
+			case "createcomputer" :
 					return new CreateComputer(commande);
-				}else {
-					
-				}
+			case "listcomputer":
+					return new ListComputer();
+			case "updatecomputer":
+					return new UpdateComputer();
+			case "deletecomputer":
+					System.out.println("test");
+					return new DeleteComputer(commande);
+			case "listcompany":
+					return new ListCompany();
+			case "show":
+					return new ShowComputer(commande);
 				default:
-				return new CreateComputer(new ArrayList<>());
+				return new InvalidCommand();
 		}
 		
 		
