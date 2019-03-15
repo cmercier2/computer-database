@@ -48,8 +48,11 @@ public class JDBCComputer implements IDAOComputer {
 		PreparedStatement statement = null;
 		try {
 			statement = driver.prepareConnection(UPDATE);
-			statement.setString(1, computer.getName());
-			statement.setInt(2, computer.getCompany());
+			statement.setInt(1, computer.getId());
+			statement.setString(2, computer.getName());
+			statement.setDate(3, computer.getIntroduced());
+			statement.setDate(4, computer.getDiscontinued());
+			statement.setInt(3, computer.getCompany());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
