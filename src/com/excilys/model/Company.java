@@ -3,7 +3,7 @@ package com.excilys.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Company implements Serializable{
+public class Company implements Serializable {
 	/**
 	 * 
 	 */
@@ -23,6 +23,7 @@ public class Company implements Serializable{
 	}
 
 	/**
+	 * getter id
 	 * 
 	 * @return
 	 */
@@ -31,6 +32,7 @@ public class Company implements Serializable{
 	}
 
 	/**
+	 * setter id
 	 * 
 	 * @param id
 	 */
@@ -39,6 +41,7 @@ public class Company implements Serializable{
 	}
 
 	/**
+	 * get name
 	 * 
 	 * @return
 	 */
@@ -47,6 +50,7 @@ public class Company implements Serializable{
 	}
 
 	/**
+	 * seter name
 	 * 
 	 * @param name
 	 */

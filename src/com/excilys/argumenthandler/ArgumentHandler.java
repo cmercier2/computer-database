@@ -8,6 +8,7 @@ import com.excilys.model.Computer;
 
 public class ArgumentHandler {
 	/**
+	 * Convert string to int
 	 * 
 	 * @param idToParse
 	 * @return
@@ -23,9 +24,10 @@ public class ArgumentHandler {
 	}
 
 	/**
+	 * COnvert string to date
 	 * 
 	 * @param dateString
-	 * @return
+	 * @return Date
 	 */
 	private static Date parseDate(String dateString) {
 		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
@@ -39,9 +41,10 @@ public class ArgumentHandler {
 	}
 
 	/**
+	 * Convert an input string command to a computer
 	 * 
 	 * @param command
-	 * @return
+	 * @return Computer
 	 */
 	public static Computer creationArgument(String command) {
 		Computer computer = null;
@@ -65,6 +68,7 @@ public class ArgumentHandler {
 	}
 
 	/**
+	 * Parse show command arguments
 	 * 
 	 * @param command
 	 * @return
@@ -76,9 +80,10 @@ public class ArgumentHandler {
 	}
 
 	/**
+	 * Parse delete command arguments
 	 * 
 	 * @param command
-	 * @return
+	 * @return int
 	 */
 	public static int deleteArgument(String command) {
 		String argument = command.split(" ", 2)[1];
@@ -87,9 +92,10 @@ public class ArgumentHandler {
 	}
 
 	/**
+	 * Convert an input string command to a computer for update it
 	 * 
 	 * @param command
-	 * @return
+	 * @return Computer
 	 */
 	public static Computer updateArgument(String command) {
 		Computer computer = null;

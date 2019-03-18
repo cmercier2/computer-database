@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
-public class Computer implements Serializable{
+public class Computer implements Serializable {
 	/**
 	 * 
 	 */
@@ -52,7 +52,7 @@ public class Computer implements Serializable{
 	public Computer(int id) {
 		this.id = id;
 	}
-	
+
 	public Computer(int id, String name) {
 		this.id = id;
 		this.name = name;
@@ -67,6 +67,7 @@ public class Computer implements Serializable{
 	}
 
 	/**
+	 * getter id
 	 * 
 	 * @return
 	 */
@@ -75,6 +76,7 @@ public class Computer implements Serializable{
 	}
 
 	/**
+	 * setter id
 	 * 
 	 * @param id
 	 */
@@ -83,6 +85,7 @@ public class Computer implements Serializable{
 	}
 
 	/**
+	 * getter name
 	 * 
 	 * @return
 	 */
@@ -91,6 +94,7 @@ public class Computer implements Serializable{
 	}
 
 	/**
+	 * setter name
 	 * 
 	 * @param name
 	 */
@@ -99,6 +103,7 @@ public class Computer implements Serializable{
 	}
 
 	/**
+	 * getter introduced date
 	 * 
 	 * @return
 	 */
@@ -107,6 +112,7 @@ public class Computer implements Serializable{
 	}
 
 	/**
+	 * setter introduced date
 	 * 
 	 * @param introduced
 	 */
@@ -115,6 +121,7 @@ public class Computer implements Serializable{
 	}
 
 	/**
+	 * getter discontinued date
 	 * 
 	 * @return
 	 */
@@ -123,6 +130,7 @@ public class Computer implements Serializable{
 	}
 
 	/**
+	 * setter discontinued date
 	 * 
 	 * @param discontinued
 	 */
@@ -131,6 +139,7 @@ public class Computer implements Serializable{
 	}
 
 	/**
+	 * getter company id
 	 * 
 	 * @return
 	 */
@@ -139,6 +148,7 @@ public class Computer implements Serializable{
 	}
 
 	/**
+	 * setter company id
 	 * 
 	 * @param company
 	 */

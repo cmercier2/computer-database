@@ -1,6 +1,8 @@
 package com.excilys.controller;
 
 import java.util.Arrays;
+import java.util.Objects;
+
 import com.excilys.argumenthandler.ArgumentHandler;
 import com.excilys.driver.SQLDriver;
 import com.excilys.model.Company;
@@ -19,21 +21,26 @@ public class Controller {
 
 	/**
 	 * Constructor of controller
+	 * 
 	 * @param driver
 	 * @param cli
 	 */
 	public Controller(SQLDriver driver, CommandLineInterface cli) {
+		Objects.requireNonNull(driver);
+		Objects.requireNonNull(cli);
 		this.driver = driver;
 		this.cli = cli;
 	}
 
 	/**
-	 * Call 
+	 * Get a command line with a computer id and print information about this
+	 * computer
 	 * 
 	 * @param commande
-	 * @return
+	 * @return Result
 	 */
 	private Result showComputer(String commande) {
+		Objects.requireNonNull(commande);
 		IDAOComputer comp = new JDBCComputer(driver);
 		Computer computer = new Computer(ArgumentHandler.showArgument(commande));
 		cli.show(comp.select(computer));
@@ -41,8 +48,9 @@ public class Controller {
 	}
 
 	/**
+	 * List all computers and start pagination
 	 * 
-	 * @return
+	 * @return Result
 	 */
 	private Result listComputers() {
 		IDAOComputer comp = new JDBCComputer(driver);
@@ -52,9 +60,10 @@ public class Controller {
 	}
 
 	/**
+	 * Create a computer with informations enter by the user
 	 * 
 	 * @param commande
-	 * @return
+	 * @return Result
 	 */
 	private Result createComputerComputer(String commande) {
 		IDAOComputer comp = new JDBCComputer(driver);
@@ -64,9 +73,10 @@ public class Controller {
 	}
 
 	/**
+	 * Update a computer with informations enter by the user
 	 * 
 	 * @param commande
-	 * @return
+	 * @return Result
 	 */
 	private Result updateComputerComputer(String commande) {
 		IDAOComputer comp = new JDBCComputer(driver);
@@ -78,9 +88,10 @@ public class Controller {
 	}
 
 	/**
+	 * Get a command line with a id and delete the corresponding computer
 	 * 
 	 * @param commande
-	 * @return
+	 * @return Result
 	 */
 	private Result deleteComputerComputer(String commande) {
 		IDAOComputer comp = new JDBCComputer(driver);
@@ -90,8 +101,9 @@ public class Controller {
 	}
 
 	/**
+	 * List all companys and start pagination
 	 * 
-	 * @return
+	 * @return Result
 	 */
 	public Result listCompanys() {
 		IDAOCompany comp = new JDBCCompany(driver);
@@ -101,6 +113,8 @@ public class Controller {
 	}
 
 	/**
+	 * 
+	 * Retrieve the first element of user input and call the corresponding function
 	 * 
 	 */
 	public void switcher() {
@@ -132,6 +146,5 @@ public class Controller {
 			}
 		}
 	}
-		
-	
+
 }

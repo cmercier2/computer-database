@@ -24,9 +24,9 @@ public class Pagination<T> {
 	}
 
 	/**
-	 * 
+	 * Print next step element of toPrint arraylist
 	 */
-	private void previous() {
+	public void previous() {
 		List<T> buff = null;
 		end = false;
 		startStep -= step;
@@ -39,9 +39,9 @@ public class Pagination<T> {
 	}
 
 	/**
-	 * 
+	 * Print next step element of toPrint arraylist
 	 */
-	private void next() {
+	public void next() {
 		List<T> buff = null;
 		startStep += step;
 		endStep += step;
@@ -57,7 +57,7 @@ public class Pagination<T> {
 	}
 
 	/**
-	 * 
+	 * print step first element of the arraylist
 	 */
 	public void init() {
 		List<T> buff = null;
@@ -73,7 +73,7 @@ public class Pagination<T> {
 	}
 
 	/**
-	 * 
+	 * switch function for user to navigate through the arraylist
 	 */
 	public void pagine() {
 		String input = "";

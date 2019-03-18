@@ -7,12 +7,13 @@ import java.sql.SQLException;
 
 public class SQLDriver {
 	private static Connection conn;
+	private final String url = "jdbc:mysql://localhost:3306/computer-database-db";
 
 	/**
+	 * Start sql connection
 	 * 
 	 */
 	private void initiateConnection() {
-		String url = "jdbc:mysql://localhost:3306/computer-database-db";
 		try {
 			conn = DriverManager.getConnection(url, "admincdb", "qwerty1234");
 		} catch (SQLException e) {
@@ -21,8 +22,9 @@ public class SQLDriver {
 	}
 
 	/**
+	 * Factory method for creation of SQLDriver
 	 * 
-	 * @return
+	 * @return SqlDriver
 	 */
 	public static SQLDriver start() {
 		SQLDriver driver = new SQLDriver();
@@ -31,9 +33,10 @@ public class SQLDriver {
 	}
 
 	/**
+	 * Prepare sql request
 	 * 
 	 * @param request
-	 * @return
+	 * @return PreparedStatement
 	 * @throws SQLException
 	 */
 	public PreparedStatement prepareConnection(String request) throws SQLException {
@@ -41,7 +44,7 @@ public class SQLDriver {
 	}
 
 	/**
-	 * 
+	 * Close the sql connection
 	 */
 	public void close() {
 		try {
