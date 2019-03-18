@@ -3,7 +3,9 @@ package com.excilys.controller;
 import java.util.Arrays;
 import com.excilys.argumenthandler.ArgumentHandler;
 import com.excilys.driver.SQLDriver;
+import com.excilys.model.Company;
 import com.excilys.model.Computer;
+import com.excilys.pagination.Pagination;
 import com.excilys.service.IDAO.IDAOCompany;
 import com.excilys.service.IDAO.IDAOComputer;
 import com.excilys.service.JDBC.JDBCCompany;
@@ -16,7 +18,7 @@ public class Controller {
 	private CommandLineInterface cli;
 
 	/**
-	 * 
+	 * Constructor of controller
 	 * @param driver
 	 * @param cli
 	 */
@@ -26,6 +28,7 @@ public class Controller {
 	}
 
 	/**
+	 * Call 
 	 * 
 	 * @param commande
 	 * @return
@@ -43,8 +46,8 @@ public class Controller {
 	 */
 	private Result listComputers() {
 		IDAOComputer comp = new JDBCComputer(driver);
-		//Pagination page = new Pagination();
-		cli.showComputers(comp.selectAll());
+		Pagination<Computer> page = new Pagination<>(cli, comp.selectAll());
+		page.pagine();
 		return new Result(1, "");
 	}
 
@@ -92,7 +95,8 @@ public class Controller {
 	 */
 	public Result listCompanys() {
 		IDAOCompany comp = new JDBCCompany(driver);
-		cli.showCompany(comp.selectAll());
+		Pagination<Company> page = new Pagination<>(cli, comp.selectAll());
+		page.pagine();
 		return new Result(1, "");
 	}
 
