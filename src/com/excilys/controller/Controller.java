@@ -1,7 +1,6 @@
 package com.excilys.controller;
 
 import java.util.Arrays;
-
 import com.excilys.argumenthandler.ArgumentHandler;
 import com.excilys.driver.SQLDriver;
 import com.excilys.model.Computer;
@@ -44,6 +43,7 @@ public class Controller {
 	 */
 	private Result listComputers() {
 		IDAOComputer comp = new JDBCComputer(driver);
+		//Pagination page = new Pagination();
 		cli.showComputers(comp.selectAll());
 		return new Result(1, "");
 	}
@@ -128,17 +128,6 @@ public class Controller {
 			}
 		}
 	}
-
-	public static void main(String args[]) throws ClassNotFoundException {
-		CommandLineInterface cli = new CommandLineInterface();
-		Controller controle;
-		SQLDriver driver = null;
-		try {
-			driver = SQLDriver.start();
-			controle = new Controller(driver, cli);
-			controle.switcher();
-		} finally {
-			driver.close();
-		}
-	}
+		
+	
 }
