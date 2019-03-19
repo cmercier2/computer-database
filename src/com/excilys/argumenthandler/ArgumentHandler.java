@@ -50,7 +50,12 @@ public class ArgumentHandler {
 		Computer computer = null;
 		Date introduced, discontinued;
 		int idcompany;
-		String argument = command.split(" ", 2)[1];
+		String argument;
+		String[] parse = command.split(" ", 2);
+		if(parse.length != 2) {
+			return null;
+		}
+		argument = parse[1];
 		String tokens[] = argument.split(";");
 		if (tokens.length == 4) {
 			computer = new Computer(tokens[0]);
@@ -74,9 +79,13 @@ public class ArgumentHandler {
 	 * @return
 	 */
 	public static int showArgument(String command) {
-		String argument = command.split(" ", 2)[1];
-		int entier = parseId(argument);
-		return entier;
+		String[] tokens = command.split(" ", 2);
+		if(tokens.length == 2) {
+			String argument = tokens[1];
+			int entier = parseId(argument);
+			return entier;
+		}
+		return -1;
 	}
 
 	/**
@@ -86,9 +95,13 @@ public class ArgumentHandler {
 	 * @return int
 	 */
 	public static int deleteArgument(String command) {
-		String argument = command.split(" ", 2)[1];
-		int entier = parseId(argument);
-		return entier;
+		String[] tokens = command.split(" ", 2);
+		if(tokens.length == 2) {
+			String argument = tokens[1];
+			int entier = parseId(argument);
+			return entier;
+		}
+		return -1;
 	}
 
 	/**

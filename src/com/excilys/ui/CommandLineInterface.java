@@ -28,7 +28,7 @@ public class CommandLineInterface {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * 
 	 * @return
@@ -53,6 +53,14 @@ public class CommandLineInterface {
 		for (Computer c : res) {
 			System.out.println(c.toString());
 		}
+	}
+
+	/**
+	 * 
+	 * @param message
+	 */
+	public void ShowMessage(String message) {
+		System.out.println(message);
 	}
 
 	/**

@@ -9,8 +9,8 @@ public class Computer implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int id;
-	private String name;
+	private int id = -1;
+	private String name = "";
 	private Date introduced;
 	private Date discontinued;
 	private int company;
@@ -43,6 +43,7 @@ public class Computer implements Serializable {
 		this.company = company;
 		this.introduced = introduced;
 		this.discontinued = discontinued;
+		this.company = company;
 	}
 
 	/**
@@ -160,6 +161,16 @@ public class Computer implements Serializable {
 	public String toString() {
 		return this.id + " " + this.name + " " + Objects.toString(this.introduced) + " "
 				+ Objects.toString(this.discontinued) + " " + this.company;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Computer) {
+			Computer c = (Computer) obj;
+			return this.id == c.getId() && this.name.equals(c.getName()) && this.introduced.equals(c.getIntroduced())
+					&& this.discontinued.equals(c.getDiscontinued()) && this.company == c.getCompany();
+		}
+		return false;
 	}
 
 }

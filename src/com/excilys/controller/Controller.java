@@ -3,6 +3,8 @@ package com.excilys.controller;
 import java.util.Arrays;
 import java.util.Objects;
 
+import org.apache.log4j.Logger;
+
 import com.excilys.argumenthandler.ArgumentHandler;
 import com.excilys.driver.SQLDriver;
 import com.excilys.model.Company;
@@ -13,11 +15,13 @@ import com.excilys.service.IDAO.IDAOComputer;
 import com.excilys.service.JDBC.JDBCCompany;
 import com.excilys.service.JDBC.JDBCComputer;
 import com.excilys.ui.CommandLineInterface;
+import com.excilys.utils.LoggerConfigurator;
 import com.excilys.utils.Result;
 
 public class Controller {
 	private SQLDriver driver;
 	private CommandLineInterface cli;
+	private static final Logger log = LoggerConfigurator.configureLogger(Controller.class);
 
 	/**
 	 * Constructor of controller
@@ -43,8 +47,15 @@ public class Controller {
 		Objects.requireNonNull(commande);
 		IDAOComputer comp = new JDBCComputer(driver);
 		Computer computer = new Computer(ArgumentHandler.showArgument(commande));
-		cli.show(comp.select(computer));
-		return new Result(1, "");
+		Computer result = comp.select(computer);
+		if (result != null) {
+			log.debug("show computer" + computer.getId());
+			cli.show(result);
+			return new Result(1, "");
+		} else {
+			cli.ShowMessage("Unknown computer");
+			return new Result(0, "");
+		}
 	}
 
 	/**
@@ -55,6 +66,7 @@ public class Controller {
 	private Result listComputers() {
 		IDAOComputer comp = new JDBCComputer(driver);
 		Pagination<Computer> page = new Pagination<>(cli, comp.selectAll());
+		log.debug("list computer");
 		page.pagine();
 		return new Result(1, "");
 	}
@@ -68,6 +80,7 @@ public class Controller {
 	private Result createComputerComputer(String commande) {
 		IDAOComputer comp = new JDBCComputer(driver);
 		Computer computer = ArgumentHandler.creationArgument(commande);
+		log.debug("create computer" + computer.toString());
 		comp.create(computer);
 		return new Result(1, "");
 	}
@@ -81,6 +94,7 @@ public class Controller {
 	private Result updateComputerComputer(String commande) {
 		IDAOComputer comp = new JDBCComputer(driver);
 		Computer computer = new Computer(1);
+		log.debug("update computer");
 		if (computer != null) {
 			comp.update(computer);
 		}
@@ -96,6 +110,7 @@ public class Controller {
 	private Result deleteComputerComputer(String commande) {
 		IDAOComputer comp = new JDBCComputer(driver);
 		Computer computer = new Computer(ArgumentHandler.deleteArgument(commande));
+		log.debug("delete computer" + computer.getId());
 		comp.delete(computer);
 		return new Result(1, "");
 	}
@@ -108,6 +123,7 @@ public class Controller {
 	public Result listCompanys() {
 		IDAOCompany comp = new JDBCCompany(driver);
 		Pagination<Company> page = new Pagination<>(cli, comp.selectAll());
+		log.debug("list company");
 		page.pagine();
 		return new Result(1, "");
 	}
