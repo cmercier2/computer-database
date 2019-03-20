@@ -1,4 +1,4 @@
-package com.excilys.service.JDBC;
+package com.excilys.servlet;
 
 import java.io.IOException;
 

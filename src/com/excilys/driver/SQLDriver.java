@@ -45,12 +45,9 @@ public class SQLDriver {
 
 	/**
 	 * Close the sql connection
+	 * @throws SQLException 
 	 */
-	public void close() {
-		try {
+	public void close() throws SQLException {
 			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 }

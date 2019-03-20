@@ -3,6 +3,7 @@ package com.excilys.utils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import com.excilys.model.Company;
 import com.excilys.model.Computer;
@@ -29,12 +30,12 @@ public class MapResultSet {
 	 * @return
 	 * @throws SQLException
 	 */
-	public static Computer mapResultSetComputer(ResultSet res) throws SQLException {
+	public static Optional<Computer> mapResultSetComputer(ResultSet res) throws SQLException {
 		if (res.next()) {
-			return new Computer(res.getInt("id"), res.getString("name"), res.getDate("introduced"),
-					res.getDate("discontinued"), res.getInt("company_id"));
+			return Optional.of(new Computer(res.getInt("id"), res.getString("name"), res.getDate("introduced"),
+					res.getDate("discontinued"), res.getInt("company_id")));
 		} else {
-			return null;
+			return Optional.ofNullable(null);
 		}
 	}
 
@@ -58,12 +59,11 @@ public class MapResultSet {
 	 * @return
 	 * @throws SQLException
 	 */
-	public static Company mapResultSetCompany(ResultSet res) throws SQLException {
+	public static Optional<Company> mapResultSetCompany(ResultSet res) throws SQLException {
 		if (res.next()) {
-			return new Company(res.getInt("id"), res.getString("name"));
-		} else {
-			return null;
-		}
+			return Optional.of(new Company(res.getInt("id"), res.getString("name")));
+		} 
+			return Optional.ofNullable(null);
 	}
 
 }

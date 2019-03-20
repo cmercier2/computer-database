@@ -9,38 +9,26 @@ import org.apache.log4j.Logger;
 
 import com.excilys.driver.SQLDriver;
 import com.excilys.model.Company;
-import com.excilys.service.IDAO.IDAOCompany;
 import com.excilys.utils.LoggerConfigurator;
 import com.excilys.utils.MapResultSet;
 
-public class JDBCCompany implements IDAOCompany {
+public class JDBCCompany {
 	private static final Logger log = LoggerConfigurator.configureLogger(JDBCCompany.class);
-	private SQLDriver driver;
 	private final String SELECTALL = "SELECT * FROM company;";
-	
-	public JDBCCompany(SQLDriver driver) {
-		this.driver = driver;
-	}
 
-	@Override
-	public ArrayList<Company> selectAll() {
+	public ArrayList<Company> selectAll() throws SQLException {
+		SQLDriver driver = null;
 		ArrayList<Company> comp;
 		log.debug("list computers");
 		PreparedStatement statement = null;
 		try {
-			 statement = driver.prepareConnection(SELECTALL);
+			driver = SQLDriver.start();
+			statement = driver.prepareConnection(SELECTALL);
 			ResultSet result = statement.executeQuery();
 			comp = MapResultSet.mapAllResultSetCompany(result);
 			return comp;
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
-			try {
-				statement.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			driver.close();
 		}
-		return null;
 	}
 }

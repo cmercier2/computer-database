@@ -1,4 +1,4 @@
-package com.excilys.argumenthandler;
+package com.excilys.service;
 
 import java.sql.Date;
 import java.text.ParseException;

@@ -1,2 +1,5 @@
 select computer : 8  null null 0
 show computer8
+select computer : -1  null null 0
+select computer : 1  null null 0
+select computer : 1  null null 0

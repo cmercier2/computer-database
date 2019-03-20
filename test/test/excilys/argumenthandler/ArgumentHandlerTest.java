@@ -8,8 +8,8 @@ import java.text.SimpleDateFormat;
 
 import org.junit.jupiter.api.Test;
 
-import com.excilys.argumenthandler.ArgumentHandler;
 import com.excilys.model.Computer;
+import com.excilys.service.ArgumentHandler;
 
 class ArgumentHandlerTest {
 

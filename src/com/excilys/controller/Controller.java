@@ -1,17 +1,17 @@
 package com.excilys.controller;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.apache.log4j.Logger;
 
-import com.excilys.argumenthandler.ArgumentHandler;
 import com.excilys.driver.SQLDriver;
 import com.excilys.model.Company;
 import com.excilys.model.Computer;
 import com.excilys.pagination.Pagination;
-import com.excilys.service.IDAO.IDAOCompany;
-import com.excilys.service.IDAO.IDAOComputer;
+import com.excilys.service.ArgumentHandler;
 import com.excilys.service.JDBC.JDBCCompany;
 import com.excilys.service.JDBC.JDBCComputer;
 import com.excilys.ui.CommandLineInterface;
@@ -19,7 +19,6 @@ import com.excilys.utils.LoggerConfigurator;
 import com.excilys.utils.Result;
 
 public class Controller {
-	private SQLDriver driver;
 	private CommandLineInterface cli;
 	private static final Logger log = LoggerConfigurator.configureLogger(Controller.class);
 
@@ -29,10 +28,8 @@ public class Controller {
 	 * @param driver
 	 * @param cli
 	 */
-	public Controller(SQLDriver driver, CommandLineInterface cli) {
-		Objects.requireNonNull(driver);
+	public Controller(CommandLineInterface cli) {
 		Objects.requireNonNull(cli);
-		this.driver = driver;
 		this.cli = cli;
 	}
 
@@ -43,18 +40,25 @@ public class Controller {
 	 * @param commande
 	 * @return Result
 	 */
-	private Result showComputer(String commande) {
-		Objects.requireNonNull(commande);
-		IDAOComputer comp = new JDBCComputer(driver);
-		Computer computer = new Computer(ArgumentHandler.showArgument(commande));
-		Computer result = comp.select(computer);
-		if (result != null) {
+	private void showComputer(String commande) {
+		JDBCComputer comp = new JDBCComputer();
+		int id = ArgumentHandler.showArgument(commande);
+		if (id == -1) {
+			cli.ShowMessage("Unknown Computer");
+			return;
+		}
+		Computer computer = new Computer(id);
+		try {
+			Optional<Computer> result = comp.select(computer);
+			if (!result.isPresent()) {
+				cli.ShowMessage("Unknown computer");
+				return;
+			}
+			cli.show(result.get());
 			log.debug("show computer" + computer.getId());
-			cli.show(result);
-			return new Result(1, "");
-		} else {
-			cli.ShowMessage("Unknown computer");
-			return new Result(0, "");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 	}
 
@@ -63,12 +67,17 @@ public class Controller {
 	 * 
 	 * @return Result
 	 */
-	private Result listComputers() {
-		IDAOComputer comp = new JDBCComputer(driver);
-		Pagination<Computer> page = new Pagination<>(cli, comp.selectAll());
-		log.debug("list computer");
-		page.pagine();
-		return new Result(1, "");
+	private void listComputers() {
+		JDBCComputer comp = new JDBCComputer();
+		Pagination<Computer> page;
+		try {
+			page = new Pagination<>(cli, comp.selectAll());
+			log.debug("list computer");
+			page.pagine();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			log.error(e.getMessage());
+		}
 	}
 
 	/**
@@ -77,12 +86,16 @@ public class Controller {
 	 * @param commande
 	 * @return Result
 	 */
-	private Result createComputerComputer(String commande) {
-		IDAOComputer comp = new JDBCComputer(driver);
+	private void createComputerComputer(String commande) {
+		JDBCComputer comp = new JDBCComputer();
 		Computer computer = ArgumentHandler.creationArgument(commande);
 		log.debug("create computer" + computer.toString());
-		comp.create(computer);
-		return new Result(1, "");
+		try {
+			comp.create(computer);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			log.error(e.getMessage());
+		}
 	}
 
 	/**
@@ -91,14 +104,16 @@ public class Controller {
 	 * @param commande
 	 * @return Result
 	 */
-	private Result updateComputerComputer(String commande) {
-		IDAOComputer comp = new JDBCComputer(driver);
+	private void updateComputerComputer(String commande) {
+		JDBCComputer comp = new JDBCComputer();
 		Computer computer = new Computer(1);
 		log.debug("update computer");
-		if (computer != null) {
+		try {
 			comp.update(computer);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			log.error(e.getMessage());
 		}
-		return new Result(1, "");
 	}
 
 	/**
@@ -107,12 +122,20 @@ public class Controller {
 	 * @param commande
 	 * @return Result
 	 */
-	private Result deleteComputerComputer(String commande) {
-		IDAOComputer comp = new JDBCComputer(driver);
-		Computer computer = new Computer(ArgumentHandler.deleteArgument(commande));
+	private void deleteComputerComputer(String commande) {
+		JDBCComputer comp = new JDBCComputer();
+		int id = ArgumentHandler.deleteArgument(commande);
+		if (id == -1) {
+			return;
+		}
+		Computer computer = new Computer(id);
 		log.debug("delete computer" + computer.getId());
-		comp.delete(computer);
-		return new Result(1, "");
+		try {
+			comp.delete(computer);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			log.error(e.getMessage());
+		}
 	}
 
 	/**
@@ -120,12 +143,17 @@ public class Controller {
 	 * 
 	 * @return Result
 	 */
-	public Result listCompanys() {
-		IDAOCompany comp = new JDBCCompany(driver);
-		Pagination<Company> page = new Pagination<>(cli, comp.selectAll());
-		log.debug("list company");
-		page.pagine();
-		return new Result(1, "");
+	public void listCompanys() {
+		JDBCCompany comp = new JDBCCompany();
+		Pagination<Company> page;
+		try {
+			page = new Pagination<>(cli, comp.selectAll());
+			log.debug("list company");
+			page.pagine();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			log.error(e.getMessage());
+		}
 	}
 
 	/**
