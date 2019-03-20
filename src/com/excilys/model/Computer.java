@@ -3,6 +3,7 @@ package com.excilys.model;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
+import java.util.Optional;
 
 public class Computer implements Serializable {
 	/**
