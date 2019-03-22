@@ -3,8 +3,10 @@ package com.excilys.service;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Optional;
 
 import com.excilys.model.Computer;
+import com.excilys.model.Computer.ComputerBuilder;
 
 public class ArgumentHandler {
 	/**
@@ -13,7 +15,7 @@ public class ArgumentHandler {
 	 * @param idToParse
 	 * @return
 	 */
-	private static int parseId(String idToParse) {
+	public static int parseId(String idToParse) {
 		int number;
 		try {
 			number = Integer.parseInt(idToParse);
@@ -29,7 +31,7 @@ public class ArgumentHandler {
 	 * @param dateString
 	 * @return Date
 	 */
-	private static Date parseDate(String dateString) {
+	private static Optional<Date> parseDate(String dateString) {
 		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 		java.util.Date utilDate = null;
 		try {
@@ -37,7 +39,7 @@ public class ArgumentHandler {
 		} catch (ParseException e) {
 			return null;
 		}
-		return new Date(utilDate.getTime());
+		return Optional.of(new Date(utilDate.getTime()));
 	}
 
 	/**
@@ -46,62 +48,13 @@ public class ArgumentHandler {
 	 * @param command
 	 * @return Computer
 	 */
-	public static Computer creationArgument(String command) {
-		Computer computer = null;
-		Date introduced, discontinued;
-		int idcompany;
-		String argument;
-		String[] parse = command.split(" ", 2);
-		if(parse.length != 2) {
-			return null;
-		}
-		argument = parse[1];
-		String tokens[] = argument.split(";");
+	public static Optional<Computer> creationArgument(String command) {
+		String tokens[] = command.split(";");
 		if (tokens.length == 4) {
-			computer = new Computer(tokens[0]);
-			if ((introduced = parseDate(tokens[1])) != null) {
-				computer.setIntroduced(introduced);
-			}
-			if ((discontinued = parseDate(tokens[2])) != null) {
-				computer.setDiscontinued(discontinued);
-			}
-			if ((idcompany = parseId(tokens[3])) != -1) {
-				computer.setCompany(idcompany);
-			}
+			Optional.of(new ComputerBuilder().setName(tokens[0]).setIntroduced(parseDate(tokens[1]).orElse(null))
+					.setDiscontinuede(parseDate(tokens[2]).orElse(null)).setCompany(parseId(tokens[3])).build());
 		}
-		return computer;
-	}
-
-	/**
-	 * Parse show command arguments
-	 * 
-	 * @param command
-	 * @return
-	 */
-	public static int showArgument(String command) {
-		String[] tokens = command.split(" ", 2);
-		if(tokens.length == 2) {
-			String argument = tokens[1];
-			int entier = parseId(argument);
-			return entier;
-		}
-		return -1;
-	}
-
-	/**
-	 * Parse delete command arguments
-	 * 
-	 * @param command
-	 * @return int
-	 */
-	public static int deleteArgument(String command) {
-		String[] tokens = command.split(" ", 2);
-		if(tokens.length == 2) {
-			String argument = tokens[1];
-			int entier = parseId(argument);
-			return entier;
-		}
-		return -1;
+		return Optional.empty();
 	}
 
 	/**
@@ -110,29 +63,15 @@ public class ArgumentHandler {
 	 * @param command
 	 * @return Computer
 	 */
-	public static Computer updateArgument(String command) {
-		Computer computer = null;
-		Date introduced, discontinued;
-		int idcompany, idcomputer;
-		String argument = command.split(" ", 2)[1];
-		String idToUpdate = command.split(" ", 2)[2];
-		String tokens[] = argument.split(";");
-		if (tokens.length == 4) {
-			computer = new Computer(tokens[0]);
-			if ((introduced = parseDate(tokens[1])) != null) {
-				computer.setIntroduced(introduced);
-			}
-			if ((discontinued = parseDate(tokens[2])) != null) {
-				computer.setDiscontinued(discontinued);
-			}
-			if ((idcompany = parseId(tokens[3])) != -1) {
-				computer.setCompany(idcompany);
-			}
-			if ((idcomputer = parseId(idToUpdate)) != -1) {
-				computer.setId(idcomputer);
-			}
+	public static Optional<Computer> updateArgument(String command) {
+		String tokens[] = command.split(";");
+		if (tokens.length == 5) {
+
+			return Optional.of(new ComputerBuilder().setId(parseId(tokens[0])).setName(tokens[1])
+					.setIntroduced(parseDate(tokens[2]).orElse(null))
+					.setDiscontinuede(parseDate(tokens[3]).orElse(null)).setCompany(parseId(tokens[4])).build());
 		}
-		return computer;
+		return Optional.empty();
 	}
 
 }

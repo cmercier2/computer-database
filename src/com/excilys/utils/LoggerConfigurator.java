@@ -6,7 +6,7 @@ import org.apache.log4j.PropertyConfigurator;
 public class LoggerConfigurator {
 
 	private static void addConfiguration() {
-		PropertyConfigurator.configure("./ressources/log4j.properties");
+		PropertyConfigurator.configure("computer-database/ressources/log4j.properties");
 	}
 
 	/**
@@ -15,6 +15,7 @@ public class LoggerConfigurator {
 	 * @return
 	 */
 	public static Logger configureLogger(Class<?> classname) {
+		System.out.println(System.getProperty("java.class.path"));
 		Logger logger;
 		logger = Logger.getLogger(classname);
 		addConfiguration();

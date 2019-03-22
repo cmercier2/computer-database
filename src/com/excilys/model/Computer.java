@@ -16,57 +16,14 @@ public class Computer implements Serializable {
 	private Date discontinued;
 	private int company;
 
-	/**
-	 * 
-	 * @param id
-	 * @param name
-	 * @param introduced
-	 * @param discontinued
-	 * @param company
-	 */
-	public Computer(int id, String name, Date introduced, Date discontinued, int company) {
-		this.id = id;
-		this.name = name;
-		this.introduced = introduced;
-		this.discontinued = discontinued;
-		this.company = company;
-	}
-
-	/**
-	 * 
-	 * @param name
-	 * @param introduced
-	 * @param discontinued
-	 * @param company
-	 */
-	public Computer(String name, Date introduced, Date discontinued, int company) {
-		this.name = name;
-		this.company = company;
-		this.introduced = introduced;
-		this.discontinued = discontinued;
-		this.company = company;
-	}
-
-	/**
-	 * 
-	 * @param id
-	 */
-	public Computer(int id) {
-		this.id = id;
-	}
-
-	public Computer(int id, String name) {
-		this.id = id;
-		this.name = name;
-	}
-
-	/**
-	 * 
-	 * @param name
-	 */
-	public Computer(String name) {
-		this.name = name;
-	}
+	
+	private Computer(ComputerBuilder comp) {
+		this.id = comp.id;
+		this.name = comp.name;
+		this.introduced = comp.introduced;
+		this.discontinued = comp.discontinued;
+		this.company = comp.company;
+		}
 
 	/**
 	 * getter id
@@ -157,7 +114,7 @@ public class Computer implements Serializable {
 	public void setCompany(int company) {
 		this.company = company;
 	}
-
+	
 	@Override
 	public String toString() {
 		return this.id + " " + this.name + " " + Objects.toString(this.introduced) + " "
@@ -172,6 +129,44 @@ public class Computer implements Serializable {
 					&& this.discontinued.equals(c.getDiscontinued()) && this.company == c.getCompany();
 		}
 		return false;
+	}
+	
+	public static class ComputerBuilder{
+		private int id;
+		private String name;
+		private Date introduced;
+		private Date discontinued;
+		private int company;
+		
+		public ComputerBuilder setId(int id) {
+			this.id = id;
+			return this;
+		}
+		
+		public ComputerBuilder setName(String name) {
+			this.name = name;
+			return this;
+		}
+		
+		public ComputerBuilder setIntroduced(Date introduced) {
+			this.introduced = introduced;
+			return this;
+		}
+		
+		public ComputerBuilder setDiscontinuede(Date discontinued) {
+			this.discontinued = discontinued;
+			return this;
+		}
+		
+		public ComputerBuilder setCompany(int company) {
+			this.company = company;
+			return this;
+		}
+		
+		public Computer build() {
+			return new Computer(this);
+		}
+		
 	}
 
 }

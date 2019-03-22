@@ -16,6 +16,7 @@ import com.excilys.utils.MapResultSet;
 public class JDBCComputer {
 	private static final Logger log = LoggerConfigurator.configureLogger(JDBCComputer.class);
 	private final String SELECTALL = "SELECT * FROM computer;";
+	private final String SELECTALLWITHOFFSET = "SELECT * FROM computer LIMIT ?, ?;";
 	private final String INSERT = "INSERT INTO computer (name,introduced,discontinued,company_id) VALUES (?, ?, ?, ?);";
 	private final String UPDATE = "INSERT INTO computer (name,introduced,discontinued,company_id) VALUES (?, ?, ?, ?);";
 	private final String DELETE = "DELETE FROM computer WHERE id = ?;";
@@ -71,15 +72,15 @@ public class JDBCComputer {
 
 	}
 
-	public Optional<Computer> select(Computer computer) throws SQLException {
+	public Optional<Computer> select(int id) throws SQLException {
 		SQLDriver driver = null;
 		PreparedStatement statement = null;
-		log.debug("select computer : " + computer.toString());
+		log.debug("select computer : " + id);
 		try {
 			driver = SQLDriver.start();
 			driver = SQLDriver.start();
 			statement = driver.prepareConnection(SELECT);
-			statement.setInt(1, computer.getId());
+			statement.setInt(1, id);
 			ResultSet result = statement.executeQuery();
 			return MapResultSet.mapResultSetComputer(result);
 		} finally {
@@ -95,6 +96,24 @@ public class JDBCComputer {
 		try {
 			driver = SQLDriver.start();
 			statement = driver.prepareConnection(SELECTALL);
+			ResultSet result = statement.executeQuery();
+			comps = MapResultSet.mapAllResultSetComputer(result);
+			return comps;
+		} finally {
+			driver.close();
+		}
+	}
+	
+	public ArrayList<Computer> selectAll(int start, int step) throws SQLException{
+		SQLDriver driver = null;
+		PreparedStatement statement = null;
+		log.debug("list computers");
+		ArrayList<Computer> comps;
+		try {
+			driver = SQLDriver.start();
+			statement = driver.prepareConnection(SELECTALLWITHOFFSET);
+			statement.setInt(1, start);
+			statement.setInt(2, step);
 			ResultSet result = statement.executeQuery();
 			comps = MapResultSet.mapAllResultSetComputer(result);
 			return comps;

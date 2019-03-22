@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import com.excilys.model.Company;
 import com.excilys.model.Computer;
+import com.excilys.model.Computer.ComputerBuilder;
 
 public class MapResultSet {
 	/**
@@ -18,8 +19,9 @@ public class MapResultSet {
 	public static ArrayList<Computer> mapAllResultSetComputer(ResultSet res) throws SQLException {
 		ArrayList<Computer> computers = new ArrayList<>();
 		while (res.next()) {
-			computers.add(new Computer(res.getInt("id"), res.getString("name"), res.getDate("introduced"),
-					res.getDate("discontinued"), res.getInt("company_id")));
+			computers.add(new ComputerBuilder().setId(res.getInt("id")).setName(res.getString("name"))
+					.setIntroduced(res.getDate("introduced")).setDiscontinuede(res.getDate("discontinued"))
+					.setCompany(res.getInt("company_id")).build());
 		}
 		return computers;
 	}
@@ -32,10 +34,11 @@ public class MapResultSet {
 	 */
 	public static Optional<Computer> mapResultSetComputer(ResultSet res) throws SQLException {
 		if (res.next()) {
-			return Optional.of(new Computer(res.getInt("id"), res.getString("name"), res.getDate("introduced"),
-					res.getDate("discontinued"), res.getInt("company_id")));
+			return Optional.of(new ComputerBuilder().setId(res.getInt("id")).setName(res.getString("name"))
+					.setIntroduced(res.getDate("introduced")).setDiscontinuede(res.getDate("discontinued"))
+					.setCompany(res.getInt("company_id")).build());
 		} else {
-			return Optional.ofNullable(null);
+			return Optional.empty();
 		}
 	}
 
@@ -62,8 +65,8 @@ public class MapResultSet {
 	public static Optional<Company> mapResultSetCompany(ResultSet res) throws SQLException {
 		if (res.next()) {
 			return Optional.of(new Company(res.getInt("id"), res.getString("name")));
-		} 
-			return Optional.ofNullable(null);
+		}
+		return Optional.ofNullable(null);
 	}
 
 }

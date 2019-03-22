@@ -1,3 +1,8 @@
+<%@page contentType="text/html"
+        pageEncoding="UTF-8"
+        errorPage="erreur.jsp"
+        import="java.util.*"
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +16,7 @@
 <body>
     <header class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/"> Application - Computer Database </a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/DashBoard"> Application - Computer Database </a>
         </div>
     </header>
 

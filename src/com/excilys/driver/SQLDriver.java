@@ -15,8 +15,12 @@ public class SQLDriver {
 	 */
 	private void initiateConnection() {
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(url, "admincdb", "qwerty1234");
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
