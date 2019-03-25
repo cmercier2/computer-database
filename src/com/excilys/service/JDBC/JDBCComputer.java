@@ -1,5 +1,7 @@
 package com.excilys.service.JDBC;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,118 +10,95 @@ import java.util.Optional;
 
 import org.apache.log4j.Logger;
 
-import com.excilys.driver.SQLDriver;
 import com.excilys.model.Computer;
 import com.excilys.utils.LoggerConfigurator;
 import com.excilys.utils.MapResultSet;
 
 public class JDBCComputer {
-	private static final Logger log = LoggerConfigurator.configureLogger(JDBCComputer.class);
+	//private static final Logger log = LoggerConfigurator.configureLogger(JDBCComputer.class);
 	private final String SELECTALL = "SELECT * FROM computer;";
-	private final String SELECTALLWITHOFFSET = "SELECT * FROM computer LIMIT ?, ?;";
+	private final String SELECTALLWITHOFFSET = "SELECT * FROM computer LIMIT ? OFFSET ?;";
 	private final String INSERT = "INSERT INTO computer (name,introduced,discontinued,company_id) VALUES (?, ?, ?, ?);";
 	private final String UPDATE = "INSERT INTO computer (name,introduced,discontinued,company_id) VALUES (?, ?, ?, ?);";
 	private final String DELETE = "DELETE FROM computer WHERE id = ?;";
 	private final String SELECT = "SELECT * FROM computer WHERE id = ?;";
+	private final String url = "jdbc:mysql://localhost:3306/computer-database-db";
+	private final String user = "admincdb";
+	private final String mdp = "qwerty1234";
 
-	public int create(Computer computer) throws SQLException {
-		SQLDriver driver = null;
-		PreparedStatement statement = null;
-		log.debug("create computer : " + computer.toString());
-		try {
-			driver = SQLDriver.start();
-			statement = driver.prepareConnection(INSERT);
+	public int create(Computer computer) throws SQLException, ClassNotFoundException {
+		//log.debug("create computer : " + computer.toString());
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		try(Connection conn = DriverManager.getConnection(url, user, mdp)){
+			PreparedStatement statement = conn.prepareStatement(INSERT);
 			statement.setString(1, computer.getName());
 			statement.setDate(2, computer.getIntroduced());
 			statement.setDate(3, computer.getDiscontinued());
 			statement.setInt(4, computer.getCompany());
 			return statement.executeUpdate();
-		} finally {
-			driver.close();
 		}
 	}
 
-	public int update(Computer computer) throws SQLException {
-		SQLDriver driver = null;
-		PreparedStatement statement = null;
-		log.debug("update computer : " + computer.toString());
-		try {
-			driver = SQLDriver.start();
-			statement = driver.prepareConnection(UPDATE);
+	public int update(Computer computer) throws SQLException, ClassNotFoundException {
+		//log.debug("update computer : " + computer.toString());
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		try(Connection conn = DriverManager.getConnection(url, user, mdp)){
+			PreparedStatement statement = conn.prepareStatement(UPDATE);
 			statement.setInt(1, computer.getId());
 			statement.setString(2, computer.getName());
 			statement.setDate(3, computer.getIntroduced());
 			statement.setDate(4, computer.getDiscontinued());
 			statement.setInt(5, computer.getCompany());
 			return statement.executeUpdate();
-		} finally {
-			driver.close();
 		}
 	}
 
-	public int delete(Computer computer) throws SQLException {
-		SQLDriver driver = null;
-		PreparedStatement statement = null;
-		log.debug("delete computer : " + computer.toString());
-		try {
-			driver = SQLDriver.start();
-			statement = driver.prepareConnection(DELETE);
+	public int delete(Computer computer) throws SQLException, ClassNotFoundException {
+		//log.debug("delete computer : " + computer.toString());
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		try(Connection conn = DriverManager.getConnection(url, user, mdp)){
+			PreparedStatement statement = conn.prepareStatement(DELETE);
 			statement.setInt(1, computer.getId());
 			return statement.executeUpdate();
-		} finally {
-				statement.close();
 		}
-
 	}
 
-	public Optional<Computer> select(int id) throws SQLException {
-		SQLDriver driver = null;
-		PreparedStatement statement = null;
-		log.debug("select computer : " + id);
-		try {
-			driver = SQLDriver.start();
-			driver = SQLDriver.start();
-			statement = driver.prepareConnection(SELECT);
+	public Optional<Computer> select(int id) throws SQLException, ClassNotFoundException {
+		//log.debug("select computer : " + id);
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		try(Connection conn = DriverManager.getConnection(url, user, mdp)){
+			PreparedStatement statement = conn.prepareStatement(SELECT);
 			statement.setInt(1, id);
 			ResultSet result = statement.executeQuery();
 			return MapResultSet.mapResultSetComputer(result);
-		} finally {
-				statement.close();
 		}
 	}
 
-	public ArrayList<Computer> selectAll() throws SQLException {
-		SQLDriver driver = null;
-		PreparedStatement statement = null;
-		log.debug("list computers");
+	public ArrayList<Computer> selectAll() throws SQLException, ClassNotFoundException {
+		//log.debug("list computers");
+		Class.forName("com.mysql.cj.jdbc.Driver");
 		ArrayList<Computer> comps;
-		try {
-			driver = SQLDriver.start();
-			statement = driver.prepareConnection(SELECTALL);
+		try(Connection conn = DriverManager.getConnection(url, user, mdp)){
+			PreparedStatement statement = conn.prepareStatement(SELECTALL);
 			ResultSet result = statement.executeQuery();
 			comps = MapResultSet.mapAllResultSetComputer(result);
-			return comps;
-		} finally {
-			driver.close();
-		}
+		} 
+		return comps;
 	}
 	
-	public ArrayList<Computer> selectAll(int start, int step) throws SQLException{
-		SQLDriver driver = null;
-		PreparedStatement statement = null;
-		log.debug("list computers");
+	public ArrayList<Computer> selectAll(int start, int step) throws SQLException, ClassNotFoundException{
+		//log.debug("list computers");
+		Class.forName("com.mysql.cj.jdbc.Driver");
 		ArrayList<Computer> comps;
-		try {
-			driver = SQLDriver.start();
-			statement = driver.prepareConnection(SELECTALLWITHOFFSET);
-			statement.setInt(1, start);
-			statement.setInt(2, step);
+		try(Connection conn = DriverManager.getConnection(url, user, mdp)){
+			PreparedStatement statement = conn.prepareStatement(SELECTALLWITHOFFSET);
+			statement.setInt(1, step);
+			statement.setInt(2, start);
 			ResultSet result = statement.executeQuery();
 			comps = MapResultSet.mapAllResultSetComputer(result);
-			return comps;
-		} finally {
-			driver.close();
-		}
+		} 
+		return comps;
 	}
+
 
 }

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.excilys.model.Computer;
 import com.excilys.service.ArgumentHandler;
+import com.excilys.service.EditComputerService;
 import com.excilys.service.JDBC.JDBCComputer;
 
 /**
@@ -35,15 +36,11 @@ public class EditComputer extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = ArgumentHandler.parseId(request.getParameter("id"));
-		JDBCComputer jdbc = new JDBCComputer();
-		try {
-			Optional<Computer> comp = jdbc.select(id);
-			request.setAttribute("Computer", comp.get());
+		EditComputerService service = new EditComputerService();
+			Computer comp = service.getComputer(id);
+			request.setAttribute("Computer", comp);
 			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/editComputer.jsp");
 			view.forward(request, response);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 	/**

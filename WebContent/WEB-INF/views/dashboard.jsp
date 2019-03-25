@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@page contentType="text/html"
         pageEncoding="UTF-8"
         errorPage="erreur.jsp"
@@ -66,6 +66,7 @@
 									class="fa fa-trash-o fa-lg"></i>
 							</a>
 						</span></th>
+						<th>Id</th>
 						<th>Computer name</th>
 						<th>Introduced date</th>
 						<!-- Table header for Discontinued Date -->
@@ -82,6 +83,7 @@
     	<tr>
 						<td class="editMode"><input type="checkbox" name="cb"
 							class="cb" value="0"></td>
+							<td><c:out value="${current.id}" /></td>
 						<td><a href="${pageContext.request.contextPath}/EditComputer?id=${current.id}" onclick=""><c:out value="${current.name}" /></a></td>
 						<td><c:out value="${current.introduced}" /></td>
 						<td><c:out value="${current.discontinued}" /></td>
@@ -89,18 +91,6 @@
 
 					</tr>
     	</c:forEach>
-
-
-					<tr>
-						<td class="editMode"><input type="checkbox" name="cb"
-							class="cb" value="0"></td>
-						<td><a href="editComputer.html" onclick="">MacBook Pro</a></td>
-						<td>2006-01-10</td>
-						<td></td>
-						<td>Apple Inc.</td>
-
-					</tr>
-
 				</tbody>
 			</table>
 		</div>
@@ -109,18 +99,12 @@
 	<footer class="navbar-fixed-bottom">
 		<!-- <div class="container text-center"> -->
 		<ul class="pagination">
-			<li><a href="#" aria-label="Previous"> <span
+			<li><a href="${pageContext.request.contextPath}/DashBoard?navigate=previous" aria-label="Previous"> <span
 					aria-hidden="true">&laquo;</span>
 			</a></li>
-			<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+			<li><a href="${pageContext.request.contextPath}/DashBoard?navigate=next" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 			</a></li>
 		</ul>
-
-		<div class="btn-group btn-group-sm pull-right" role="group">
-			<button type="button" class="btn btn-default">10</button>
-			<button type="button" class="btn btn-default">50</button>
-			<button type="button" class="btn btn-default">100</button>
-		</div>
 
 	</footer>
 	<script src="static/js/jquery.min.js"></script>
