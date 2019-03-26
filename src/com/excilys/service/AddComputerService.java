@@ -10,7 +10,10 @@ import com.excilys.service.JDBC.JDBCCompany;
 import com.excilys.service.JDBC.JDBCComputer;
 
 public class AddComputerService {
-
+	/**
+	 * 
+	 * @param values
+	 */
 	public void addComputer(String values) {
 		JDBCComputer jdb = new JDBCComputer();
 		Optional<Computer> opt = ArgumentHandler.creationArgument(values);
@@ -25,6 +28,10 @@ public class AddComputerService {
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public ArrayList<Company> listCompanys() {
 		ArrayList<Company> listCompany = new ArrayList<>();
 		JDBCCompany jdbc = new JDBCCompany();

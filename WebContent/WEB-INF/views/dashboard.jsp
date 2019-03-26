@@ -1,11 +1,8 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-<%@page contentType="text/html"
-        pageEncoding="UTF-8"
-        errorPage="erreur.jsp"
-        import="java.util.*"
-%>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="com.excilys.model.Computer" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"
+	errorPage="erreur.jsp" import="java.util.*"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="com.excilys.model.Computer"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,8 +18,9 @@
 <body>
 	<header class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="${pageContext.request.contextPath}/DashBoard">
-				Application - Computer Database </a>
+			<a class="navbar-brand"
+				href="${pageContext.request.contextPath}/DashBoard"> Application
+				- Computer Database </a>
 		</div>
 	</header>
 
@@ -73,24 +71,24 @@
 						<th>Discontinued date</th>
 						<!-- Table header for Company -->
 						<th>Company</th>
-
 					</tr>
 				</thead>
 				<!-- Browse attribute computers -->
 				<tbody id="results">
-
-    	<c:forEach items="${ComputerList}" var="current">
-    	<tr>
-						<td class="editMode"><input type="checkbox" name="cb"
-							class="cb" value="0"></td>
+					<c:forEach items="${ComputerList}" var="current">
+						<tr>
+							<td class="editMode"><input type="checkbox" name="cb"
+								class="cb" value="0"></td>
 							<td><c:out value="${current.id}" /></td>
-						<td><a href="${pageContext.request.contextPath}/EditComputer?id=${current.id}" onclick=""><c:out value="${current.name}" /></a></td>
-						<td><c:out value="${current.introduced}" /></td>
-						<td><c:out value="${current.discontinued}" /></td>
-						<td><c:out value="${current.company}" /></td>
+							<td><a
+								href="${pageContext.request.contextPath}/EditComputer?id=${current.id}"
+								onclick=""><c:out value="${current.name}" /></a></td>
+							<td><c:out value="${current.introduced}" /></td>
+							<td><c:out value="${current.discontinued}" /></td>
+							<td><c:out value="${current.company}" /></td>
 
-					</tr>
-    	</c:forEach>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
@@ -99,10 +97,13 @@
 	<footer class="navbar-fixed-bottom">
 		<!-- <div class="container text-center"> -->
 		<ul class="pagination">
-			<li><a href="${pageContext.request.contextPath}/DashBoard?navigate=previous" aria-label="Previous"> <span
-					aria-hidden="true">&laquo;</span>
+			<li><a
+				href="${pageContext.request.contextPath}/DashBoard?navigate=previous"
+				aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 			</a></li>
-			<li><a href="${pageContext.request.contextPath}/DashBoard?navigate=next" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+			<li><a
+				href="${pageContext.request.contextPath}/DashBoard?navigate=next"
+				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 			</a></li>
 		</ul>
 

@@ -8,8 +8,8 @@ import com.excilys.pagination.Pagination;
 
 public class PrintComputerService {
 	private Pagination page = new Pagination();
-	
-	public ArrayList<Computer> init(){
+
+	public ArrayList<Computer> init() {
 		ArrayList<Computer> pageInit = new ArrayList<>();
 		try {
 			pageInit = page.init();
@@ -19,8 +19,8 @@ public class PrintComputerService {
 		}
 		return pageInit;
 	}
-	
-	public ArrayList<Computer> next(){
+
+	public ArrayList<Computer> next() {
 		ArrayList<Computer> pageNext = new ArrayList<>();
 		try {
 			pageNext = page.next();
@@ -30,8 +30,8 @@ public class PrintComputerService {
 		}
 		return pageNext;
 	}
-	
-	public ArrayList<Computer> previous(){
+
+	public ArrayList<Computer> previous() {
 		ArrayList<Computer> pagePrevious = new ArrayList<>();
 		try {
 			pagePrevious = page.previous();
@@ -41,5 +41,5 @@ public class PrintComputerService {
 		}
 		return pagePrevious;
 	}
-	
+
 }

@@ -18,8 +18,8 @@ public class Company implements Serializable {
 	 */
 	public Company(int id, String name) {
 		Objects.requireNonNull(name);
-		this.setId(id);
-		this.setName(name);
+		this.id = id;
+		this.name = name;
 	}
 
 	/**
@@ -32,30 +32,12 @@ public class Company implements Serializable {
 	}
 
 	/**
-	 * setter id
-	 * 
-	 * @param id
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	/**
 	 * get name
 	 * 
 	 * @return
 	 */
 	public String getName() {
 		return name;
-	}
-
-	/**
-	 * seter name
-	 * 
-	 * @param name
-	 */
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	@Override

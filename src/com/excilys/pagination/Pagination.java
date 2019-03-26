@@ -7,7 +7,6 @@ import com.excilys.model.Computer;
 import com.excilys.service.JDBC.JDBCComputer;
 
 public class Pagination {
-	// private ArrayList<T> toPrint = new ArrayList<>();
 	private int startStep = 0;
 	private int step = 10;
 	private boolean end = false;
