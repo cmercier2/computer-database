@@ -1,6 +1,7 @@
 package com.excilys.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -10,14 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.excilys.model.Computer;
+import com.excilys.DTO.ComputerDTO;
 import com.excilys.service.PrintComputerService;
 
 /**
  * Servlet implementation class ShowComputer
  */
+//@WebServlet("/DashBoard")
 public class DashBoard extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 10L;
 	private PrintComputerService printService = new PrintComputerService();
 
 	/**
@@ -25,10 +27,9 @@ public class DashBoard extends HttpServlet {
 	 */
 	public DashBoard() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	private ArrayList<Computer> handleRequest(Optional<String> req) {
+	private ArrayList<ComputerDTO> handleRequest(Optional<String> req) throws ClassNotFoundException, SQLException {
 		switch (req.orElse("")) {
 		case "next":
 			return printService.next();
@@ -46,10 +47,15 @@ public class DashBoard extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Optional<String> req = Optional.ofNullable(request.getParameter("navigate"));
-		ArrayList<Computer> comp = handleRequest(req);
-		request.setAttribute("ComputerList", comp);
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/dashboard.jsp");
-		view.forward(request, response);
+		ArrayList<ComputerDTO> comp;
+		try {
+			comp = handleRequest(req);
+			request.setAttribute("ComputerList", comp);
+			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/dashboard.jsp");
+			view.forward(request, response);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

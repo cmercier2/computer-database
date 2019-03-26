@@ -2,44 +2,58 @@ package com.excilys.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
-import com.excilys.model.Computer;
+import com.excilys.DTO.ComputerDTO;
+import com.excilys.DTO.ComputerDTO.ComputerDTOBuilder;
 import com.excilys.pagination.Pagination;
 
 public class PrintComputerService {
 	private Pagination page = new Pagination();
 
-	public ArrayList<Computer> init() {
-		ArrayList<Computer> pageInit = new ArrayList<>();
-		try {
-			pageInit = page.init();
-			return pageInit;
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return pageInit;
+	/**
+	 * 
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public ArrayList<ComputerDTO> init() throws ClassNotFoundException, SQLException {
+		return new ArrayList<ComputerDTO>(page.init().stream()
+				.map(x -> new ComputerDTOBuilder().setId(x.getId()).setName(x.getName())
+						.setIntroduced(x.getIntroduced() == null ? "" : x.getIntroduced().toString())
+						.setDiscontinuede(x.getDiscontinued() == null ? "" : x.getDiscontinued().toString())
+						.setCompany(x.getCompany()).build())
+				.collect(Collectors.toList()));
 	}
 
-	public ArrayList<Computer> next() {
-		ArrayList<Computer> pageNext = new ArrayList<>();
-		try {
-			pageNext = page.next();
-			return pageNext;
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return pageNext;
+	/**
+	 * 
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public ArrayList<ComputerDTO> next() throws ClassNotFoundException, SQLException {
+		return new ArrayList<ComputerDTO>(page.next().stream()
+				.map(x -> new ComputerDTOBuilder().setId(x.getId()).setName(x.getName())
+						.setIntroduced(x.getIntroduced() == null ? "" : x.getIntroduced().toString())
+						.setDiscontinuede(x.getDiscontinued() == null ? "" : x.getDiscontinued().toString())
+						.setCompany(x.getCompany()).build())
+				.collect(Collectors.toList()));
 	}
 
-	public ArrayList<Computer> previous() {
-		ArrayList<Computer> pagePrevious = new ArrayList<>();
-		try {
-			pagePrevious = page.previous();
-			return pagePrevious;
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return pagePrevious;
+	/**
+	 * 
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public ArrayList<ComputerDTO> previous() throws ClassNotFoundException, SQLException {
+		return new ArrayList<ComputerDTO>(page.previous().stream()
+				.map(x -> new ComputerDTOBuilder().setId(x.getId()).setName(x.getName())
+						.setIntroduced(x.getIntroduced() == null ? "" : x.getIntroduced().toString())
+						.setDiscontinuede(x.getDiscontinued() == null ? "" : x.getDiscontinued().toString())
+						.setCompany(x.getCompany()).build())
+				.collect(Collectors.toList()));
 	}
 
 }

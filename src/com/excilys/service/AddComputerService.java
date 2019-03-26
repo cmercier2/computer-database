@@ -20,9 +20,7 @@ public class AddComputerService {
 		if (opt.isPresent()) {
 			try {
 				jdb.create(opt.get());
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
+			} catch (ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
 			}
 		}

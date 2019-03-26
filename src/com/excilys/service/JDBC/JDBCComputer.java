@@ -13,12 +13,12 @@ import com.excilys.utils.MapResultSet;
 public class JDBCComputer {
 	// private static final Logger log =
 	// LoggerConfigurator.configureLogger(JDBCComputer.class);
-	private final String SELECTALL = "SELECT * FROM computer;";
-	private final String SELECTALLWITHOFFSET = "SELECT * FROM computer LIMIT ? OFFSET ?;";
+	private final String SELECTALL = "SELECT id, name, introduced, discontinued, company_id FROM computer;";
+	private final String SELECTALLWITHOFFSET = "SELECT id, name, introduced, discontinued, company_id FROM computer LIMIT ? OFFSET ?;";
 	private final String INSERT = "INSERT INTO computer (name,introduced,discontinued,company_id) VALUES (?, ?, ?, ?);";
 	private final String UPDATE = "INSERT INTO computer (name,introduced,discontinued,company_id) VALUES (?, ?, ?, ?);";
 	private final String DELETE = "DELETE FROM computer WHERE id = ?;";
-	private final String SELECT = "SELECT * FROM computer WHERE id = ?;";
+	private final String SELECT = "SELECT id, name, introduced, discontinued, company_id FROM computer WHERE id = ?;";
 	private final String url = "jdbc:mysql://localhost:3306/computer-database-db";
 	private final String user = "admincdb";
 	private final String mdp = "qwerty1234";
@@ -74,27 +74,23 @@ public class JDBCComputer {
 	public ArrayList<Computer> selectAll() throws SQLException, ClassNotFoundException {
 		// log.debug("list computers");
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		ArrayList<Computer> comps;
 		try (Connection conn = DriverManager.getConnection(url, user, mdp)) {
 			PreparedStatement statement = conn.prepareStatement(SELECTALL);
 			ResultSet result = statement.executeQuery();
-			comps = MapResultSet.mapAllResultSetComputer(result);
+			return MapResultSet.mapAllResultSetComputer(result);
 		}
-		return comps;
 	}
 
 	public ArrayList<Computer> selectAll(int start, int step) throws SQLException, ClassNotFoundException {
 		// log.debug("list computers");
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		ArrayList<Computer> comps;
 		try (Connection conn = DriverManager.getConnection(url, user, mdp)) {
 			PreparedStatement statement = conn.prepareStatement(SELECTALLWITHOFFSET);
 			statement.setInt(1, step);
 			statement.setInt(2, start);
 			ResultSet result = statement.executeQuery();
-			comps = MapResultSet.mapAllResultSetComputer(result);
+			return MapResultSet.mapAllResultSetComputer(result);
 		}
-		return comps;
 	}
 
 }

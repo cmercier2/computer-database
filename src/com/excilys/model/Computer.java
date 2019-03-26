@@ -30,30 +30,12 @@ public class Computer implements Serializable {
 	}
 
 	/**
-	 * setter id
-	 * 
-	 * @param id
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	/**
 	 * getter name
 	 * 
 	 * @return
 	 */
 	public String getName() {
 		return name;
-	}
-
-	/**
-	 * setter name
-	 * 
-	 * @param name
-	 */
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	/**
@@ -66,15 +48,6 @@ public class Computer implements Serializable {
 	}
 
 	/**
-	 * setter introduced date
-	 * 
-	 * @param introduced
-	 */
-	public void setIntroduced(Date introduced) {
-		this.introduced = introduced;
-	}
-
-	/**
 	 * getter discontinued date
 	 * 
 	 * @return
@@ -84,30 +57,12 @@ public class Computer implements Serializable {
 	}
 
 	/**
-	 * setter discontinued date
-	 * 
-	 * @param discontinued
-	 */
-	public void setDiscontinued(Date discontinued) {
-		this.discontinued = discontinued;
-	}
-
-	/**
 	 * getter company id
 	 * 
 	 * @return
 	 */
 	public int getCompany() {
 		return company;
-	}
-
-	/**
-	 * setter company id
-	 * 
-	 * @param company
-	 */
-	public void setCompany(int company) {
-		this.company = company;
 	}
 
 	@Override

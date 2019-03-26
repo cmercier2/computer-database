@@ -40,7 +40,6 @@ public class Pagination {
 		if (startStep != 0)
 			startStep -= step;
 		toPrint = jdb.selectAll(startStep, step);
-
 		return toPrint;
 	}
 

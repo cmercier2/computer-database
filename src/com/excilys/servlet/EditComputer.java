@@ -18,14 +18,13 @@ import com.excilys.service.EditComputerService;
  */
 @WebServlet("/EditComputer")
 public class EditComputer extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 100L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public EditComputer() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

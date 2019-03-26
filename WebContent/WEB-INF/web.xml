@@ -10,7 +10,7 @@
         </servlet>
 
         <servlet-mapping>
-            <servlet-name>DashBoard </servlet-name>
-            <url-pattern>/DashBoard </url-pattern> 
+            <servlet-name>DashBoard</servlet-name>
+            <url-pattern>/DashBoard</url-pattern> 
         </servlet-mapping>
 </web-app>
