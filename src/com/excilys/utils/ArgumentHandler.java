@@ -1,15 +1,10 @@
 package com.excilys.utils;
 
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
-
-import com.excilys.model.Computer;
-import com.excilys.model.Computer.ComputerBuilder;
 
 public class ArgumentHandler {
 	/**

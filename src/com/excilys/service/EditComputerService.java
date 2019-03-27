@@ -1,9 +1,11 @@
 package com.excilys.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Optional;
-
+import com.excilys.model.Company;
 import com.excilys.model.Computer;
+import com.excilys.service.JDBC.JDBCCompany;
 import com.excilys.service.JDBC.JDBCComputer;
 
 public class EditComputerService {
@@ -11,17 +13,23 @@ public class EditComputerService {
 	 * 
 	 * @param id
 	 * @return
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
-	public Computer getComputer(int id) {
+	public Optional<Computer> getComputer(int id) throws ClassNotFoundException, SQLException {
 		JDBCComputer jdbc = new JDBCComputer();
-		try {
-			Optional<Computer> comp = jdbc.select(id);
-			if (comp.isPresent()) {
-				return comp.get();
-			}
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
+			return jdbc.select(id);
 	}
+	
+	/**
+	 * 
+	 * @return
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
+	 */
+	public ArrayList<Company> listCompanys() throws ClassNotFoundException, SQLException {
+		JDBCCompany jdbc = new JDBCCompany();
+			return jdbc.selectAll();
+	}
+	
 }

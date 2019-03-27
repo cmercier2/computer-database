@@ -17,8 +17,9 @@ public class ComputerDTO implements Serializable {
 		this.discontinued = builderDTO.discontinued;
 		this.company = builderDTO.company;
 	}
-	
-	public ComputerDTO() {}
+
+	public ComputerDTO() {
+	}
 
 	public int getId() {
 		return this.id;

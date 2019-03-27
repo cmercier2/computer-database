@@ -2,7 +2,6 @@ package com.excilys.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import com.excilys.DTO.ComputerDTO;
 import com.excilys.model.Company;
 import com.excilys.model.Computer;
@@ -12,7 +11,12 @@ import com.excilys.utils.ArgumentHandler;
 import com.excilys.model.Computer.ComputerBuilder;
 
 public class AddComputerService {
-
+	/**
+	 * 
+	 * @param computerDTO
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public void addComputer(ComputerDTO computerDTO) throws ClassNotFoundException, SQLException {
 		JDBCComputer jdb = new JDBCComputer();
 		Computer computer = new ComputerBuilder().setName(computerDTO.getName())

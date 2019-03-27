@@ -1,15 +1,14 @@
 package com.excilys.servlet;
 
 import java.io.IOException;
-
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.excilys.model.Computer;
+import com.excilys.exception.ComputerNotFoundException;
 import com.excilys.service.EditComputerService;
 import com.excilys.utils.ArgumentHandler;
 
@@ -35,10 +34,15 @@ public class EditComputer extends HttpServlet {
 			throws ServletException, IOException {
 		int id = ArgumentHandler.parseId(request.getParameter("id"));
 		EditComputerService service = new EditComputerService();
-		Computer comp = service.getComputer(id);
-		request.setAttribute("Computer", comp);
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/editComputer.jsp");
-		view.forward(request, response);
+		try {
+			request.setAttribute("Computer",
+					service.getComputer(id).orElseThrow(() -> new ComputerNotFoundException()));
+			request.setAttribute("CompanyList", service.listCompanys());
+			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/editComputer.jsp");
+			view.forward(request, response);
+		} catch (ClassNotFoundException | SQLException | ComputerNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

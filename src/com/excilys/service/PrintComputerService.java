@@ -3,7 +3,6 @@ package com.excilys.service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
-
 import com.excilys.DTO.ComputerDTO;
 import com.excilys.DTO.ComputerDTO.ComputerDTOBuilder;
 import com.excilys.pagination.Pagination;

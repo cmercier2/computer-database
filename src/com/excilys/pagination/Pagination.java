@@ -2,7 +2,6 @@ package com.excilys.pagination;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import com.excilys.model.Computer;
 import com.excilys.service.JDBC.JDBCComputer;
 

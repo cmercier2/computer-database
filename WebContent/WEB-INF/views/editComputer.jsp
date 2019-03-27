@@ -1,5 +1,9 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"
 	errorPage="erreur.jsp" import="java.util.*"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="com.excilys.model.Computer"%>
+<%@ page import="com.excilys.model.Company"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,22 +37,31 @@
 							<div class="form-group">
 								<label for="computerName">Computer name</label> <input
 									type="text" class="form-control" id="computerName"
-									placeholder="Computer name">
+									value="${Computer.name}" placeholder="Computer name">
 							</div>
 							<div class="form-group">
 								<label for="introduced">Introduced date</label> <input
 									type="date" class="form-control" id="introduced"
-									placeholder="Introduced date">
+									value="${Computer.introduced}" placeholder="Introduced date">
 							</div>
 							<div class="form-group">
 								<label for="discontinued">Discontinued date</label> <input
 									type="date" class="form-control" id="discontinued"
-									placeholder="Discontinued date">
+									value="${Computer.discontinued}" placeholder="Discontinued date">
 							</div>
 							<div class="form-group">
 								<label for="companyId">Company</label> <select
 									class="form-control" id="companyId">
-									<option value="0">--</option>
+									<c:forEach items="${CompanyList}" var="current">
+									<c:choose>
+									<c:when test="${current.id == Computer.id }">
+										<option  value="${current.id}"selected>${current.name}</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${current.id}">${current.name}</option>
+									</c:otherwise>
+									</c:choose>
+									</c:forEach>
 								</select>
 							</div>
 						</fieldset>

@@ -3,14 +3,12 @@ package com.excilys.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.excilys.DTO.ComputerDTO;
 import com.excilys.DTO.ComputerDTO.ComputerDTOBuilder;
 import com.excilys.model.Company;
@@ -39,9 +37,7 @@ public class AddComputer extends HttpServlet {
 			throws ServletException, IOException {
 		AddComputerService service = new AddComputerService();
 		ArrayList<Company> comp = service.listCompanys();
-		ComputerDTO computerDTO = new ComputerDTO();
 		request.setAttribute("CompanyList", comp);
-		request.setAttribute("Computer", computerDTO);
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/addComputer.jsp");
 		view.forward(request, response);
 	}
