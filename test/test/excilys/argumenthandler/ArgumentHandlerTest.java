@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import org.junit.jupiter.api.Test;
 
 import com.excilys.model.Computer;
-import com.excilys.service.ArgumentHandler;
+import com.excilys.utils.ArgumentHandler;
 
 class ArgumentHandlerTest {
 

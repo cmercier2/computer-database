@@ -20,7 +20,7 @@ public class MapResultSet {
 		ArrayList<Computer> computers = new ArrayList<>();
 		while (res.next()) {
 			computers.add(new ComputerBuilder().setId(res.getInt("id")).setName(res.getString("name"))
-					.setIntroduced(res.getDate("introduced")).setDiscontinuede(res.getDate("discontinued"))
+					.setIntroduced(res.getDate("introduced")).setDiscontinued(res.getDate("discontinued"))
 					.setCompany(res.getInt("company_id")).build());
 		}
 		return computers;
@@ -35,7 +35,7 @@ public class MapResultSet {
 	public static Optional<Computer> mapResultSetComputer(ResultSet res) throws SQLException {
 		if (res.next()) {
 			return Optional.of(new ComputerBuilder().setId(res.getInt("id")).setName(res.getString("name"))
-					.setIntroduced(res.getDate("introduced")).setDiscontinuede(res.getDate("discontinued"))
+					.setIntroduced(res.getDate("introduced")).setDiscontinued(res.getDate("discontinued"))
 					.setCompany(res.getInt("company_id")).build());
 		} else {
 			return Optional.empty();

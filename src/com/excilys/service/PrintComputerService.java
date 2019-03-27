@@ -21,7 +21,7 @@ public class PrintComputerService {
 		return new ArrayList<ComputerDTO>(page.init().stream()
 				.map(x -> new ComputerDTOBuilder().setId(x.getId()).setName(x.getName())
 						.setIntroduced(x.getIntroduced() == null ? "" : x.getIntroduced().toString())
-						.setDiscontinuede(x.getDiscontinued() == null ? "" : x.getDiscontinued().toString())
+						.setDiscontinued(x.getDiscontinued() == null ? "" : x.getDiscontinued().toString())
 						.setCompany(x.getCompany()).build())
 				.collect(Collectors.toList()));
 	}
@@ -36,7 +36,7 @@ public class PrintComputerService {
 		return new ArrayList<ComputerDTO>(page.next().stream()
 				.map(x -> new ComputerDTOBuilder().setId(x.getId()).setName(x.getName())
 						.setIntroduced(x.getIntroduced() == null ? "" : x.getIntroduced().toString())
-						.setDiscontinuede(x.getDiscontinued() == null ? "" : x.getDiscontinued().toString())
+						.setDiscontinued(x.getDiscontinued() == null ? "" : x.getDiscontinued().toString())
 						.setCompany(x.getCompany()).build())
 				.collect(Collectors.toList()));
 	}
@@ -51,7 +51,7 @@ public class PrintComputerService {
 		return new ArrayList<ComputerDTO>(page.previous().stream()
 				.map(x -> new ComputerDTOBuilder().setId(x.getId()).setName(x.getName())
 						.setIntroduced(x.getIntroduced() == null ? "" : x.getIntroduced().toString())
-						.setDiscontinuede(x.getDiscontinued() == null ? "" : x.getDiscontinued().toString())
+						.setDiscontinued(x.getDiscontinued() == null ? "" : x.getDiscontinued().toString())
 						.setCompany(x.getCompany()).build())
 				.collect(Collectors.toList()));
 	}

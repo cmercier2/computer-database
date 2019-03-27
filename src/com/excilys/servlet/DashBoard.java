@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.excilys.DTO.ComputerDTO;
 import com.excilys.service.PrintComputerService;
+import com.excilys.switcher.Navigate;
 
 /**
  * Servlet implementation class ShowComputer
@@ -30,11 +31,13 @@ public class DashBoard extends HttpServlet {
 	}
 
 	private ArrayList<ComputerDTO> handleRequest(Optional<String> req) throws ClassNotFoundException, SQLException {
-		switch (req.orElse("")) {
-		case "next":
+		switch (Navigate.valueOf((req.orElse("INIT")))) {
+		case NEXT:
 			return printService.next();
-		case "previous":
+		case PREVIOUS:
 			return printService.previous();
+		case INIT:
+			return printService.init();
 		default:
 			return printService.init();
 		}

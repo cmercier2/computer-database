@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.excilys.model.Computer;
-import com.excilys.service.ArgumentHandler;
 import com.excilys.service.EditComputerService;
+import com.excilys.utils.ArgumentHandler;
 
 /**
  * Servlet implementation class EditComputer

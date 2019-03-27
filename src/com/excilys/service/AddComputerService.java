@@ -2,28 +2,24 @@ package com.excilys.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Optional;
 
+import com.excilys.DTO.ComputerDTO;
 import com.excilys.model.Company;
 import com.excilys.model.Computer;
 import com.excilys.service.JDBC.JDBCCompany;
 import com.excilys.service.JDBC.JDBCComputer;
+import com.excilys.utils.ArgumentHandler;
+import com.excilys.model.Computer.ComputerBuilder;
 
 public class AddComputerService {
-	/**
-	 * 
-	 * @param values
-	 */
-	public void addComputer(String values) {
+
+	public void addComputer(ComputerDTO computerDTO) throws ClassNotFoundException, SQLException {
 		JDBCComputer jdb = new JDBCComputer();
-		Optional<Computer> opt = ArgumentHandler.creationArgument(values);
-		if (opt.isPresent()) {
-			try {
-				jdb.create(opt.get());
-			} catch (ClassNotFoundException | SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		Computer computer = new ComputerBuilder().setName(computerDTO.getName())
+				.setIntroduced(ArgumentHandler.parseDate(computerDTO.getIntroduced()).orElse(null))
+				.setDiscontinued(ArgumentHandler.parseDate(computerDTO.getDiscontinued()).orElse(null))
+				.setCompany(computerDTO.getCompany()).build();
+		jdb.create(computer);
 	}
 
 	/**

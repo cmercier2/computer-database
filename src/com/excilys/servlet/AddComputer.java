@@ -1,6 +1,7 @@
 package com.excilys.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -10,8 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.excilys.DTO.ComputerDTO;
+import com.excilys.DTO.ComputerDTO.ComputerDTOBuilder;
 import com.excilys.model.Company;
 import com.excilys.service.AddComputerService;
+import com.excilys.utils.ArgumentHandler;
 
 /**
  * Servlet implementation class AddComputer
@@ -35,7 +39,9 @@ public class AddComputer extends HttpServlet {
 			throws ServletException, IOException {
 		AddComputerService service = new AddComputerService();
 		ArrayList<Company> comp = service.listCompanys();
+		ComputerDTO computerDTO = new ComputerDTO();
 		request.setAttribute("CompanyList", comp);
+		request.setAttribute("Computer", computerDTO);
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/addComputer.jsp");
 		view.forward(request, response);
 	}
@@ -46,11 +52,15 @@ public class AddComputer extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String name = request.getParameter("name");
-		String introduced = request.getParameter("introduced");
-		String discontinued = request.getParameter("discontinued");
-		String idCompany = request.getParameter("idCompany");
-		System.out.println(name + " " + introduced + " " + discontinued + " " + idCompany);
+		ComputerDTO computer = new ComputerDTOBuilder().setName(request.getParameter("name"))
+				.setIntroduced(request.getParameter("introduced")).setDiscontinued(request.getParameter("discontinued"))
+				.setCompany(ArgumentHandler.parseId(request.getParameter("idCompany"))).build();
+		AddComputerService service = new AddComputerService();
+		try {
+			service.addComputer(computer);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
 		doGet(request, response);
 	}
 

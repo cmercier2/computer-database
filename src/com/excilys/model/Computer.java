@@ -112,7 +112,7 @@ public class Computer implements Serializable {
 			return this;
 		}
 
-		public ComputerBuilder setDiscontinuede(Date discontinued) {
+		public ComputerBuilder setDiscontinued(Date discontinued) {
 			this.discontinued = discontinued;
 			return this;
 		}

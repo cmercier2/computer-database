@@ -17,6 +17,8 @@ public class ComputerDTO implements Serializable {
 		this.discontinued = builderDTO.discontinued;
 		this.company = builderDTO.company;
 	}
+	
+	public ComputerDTO() {}
 
 	public int getId() {
 		return this.id;
@@ -60,7 +62,7 @@ public class ComputerDTO implements Serializable {
 			return this;
 		}
 
-		public ComputerDTOBuilder setDiscontinuede(String discontinued) {
+		public ComputerDTOBuilder setDiscontinued(String discontinued) {
 			this.discontinued = discontinued;
 			return this;
 		}

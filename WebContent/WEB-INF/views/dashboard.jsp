@@ -98,11 +98,11 @@
 		<!-- <div class="container text-center"> -->
 		<ul class="pagination">
 			<li><a
-				href="${pageContext.request.contextPath}/DashBoard?navigate=previous"
+				href="${pageContext.request.contextPath}/DashBoard?navigate=PREVIOUS"
 				aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 			</a></li>
 			<li><a
-				href="${pageContext.request.contextPath}/DashBoard?navigate=next"
+				href="${pageContext.request.contextPath}/DashBoard?navigate=NEXT"
 				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 			</a></li>
 		</ul>
