@@ -3,6 +3,8 @@ package com.excilys.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.excilys.DTO.ComputerDTO;
 import com.excilys.DTO.ComputerDTO.ComputerDTOBuilder;
+import com.excilys.exception.InvalidComputerName;
 import com.excilys.model.Company;
 import com.excilys.service.AddComputerService;
 import com.excilys.utils.ArgumentHandler;
@@ -38,6 +41,7 @@ public class AddComputer extends HttpServlet {
 		AddComputerService service = new AddComputerService();
 		ArrayList<Company> comp = service.listCompanys();
 		request.setAttribute("CompanyList", comp);
+		request.setAttribute("Computer", new ComputerDTOBuilder().build());
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/addComputer.jsp");
 		view.forward(request, response);
 	}
@@ -54,7 +58,7 @@ public class AddComputer extends HttpServlet {
 		AddComputerService service = new AddComputerService();
 		try {
 			service.addComputer(computer);
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException | SQLException | InvalidComputerName e) {
 			e.printStackTrace();
 		}
 		doGet(request, response);

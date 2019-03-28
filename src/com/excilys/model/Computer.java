@@ -102,7 +102,7 @@ public class Computer implements Serializable {
 			return this;
 		}
 
-		public ComputerBuilder setName(String name) {
+		public ComputerBuilder setName(String name){
 			this.name = name;
 			return this;
 		}

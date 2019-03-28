@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.excilys.exception.ComputerNotFoundException;
+import com.excilys.exception.InvalidComputerName;
 import com.excilys.service.EditComputerService;
 import com.excilys.utils.ArgumentHandler;
 
@@ -36,11 +37,11 @@ public class EditComputer extends HttpServlet {
 		EditComputerService service = new EditComputerService();
 		try {
 			request.setAttribute("Computer",
-					service.getComputer(id).orElseThrow(() -> new ComputerNotFoundException()));
+					service.getComputer(id).orElseThrow(() -> new ComputerNotFoundException("No computer with id " + id)));
 			request.setAttribute("CompanyList", service.listCompanys());
 			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/editComputer.jsp");
 			view.forward(request, response);
-		} catch (ClassNotFoundException | SQLException | ComputerNotFoundException e) {
+		} catch (ClassNotFoundException | SQLException | ComputerNotFoundException | InvalidComputerName e) {
 			e.printStackTrace();
 		}
 	}

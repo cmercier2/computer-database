@@ -1,6 +1,7 @@
 package com.excilys.utils;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -24,10 +25,11 @@ public class ArgumentHandler {
 	 * @return Date
 	 */
 	public static Optional<Date> parseDate(String dateString){
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		try {
-			return Optional.of(Date.valueOf(LocalDateTime.parse(dateString, formatter).toLocalDate()));
+			return Optional.of(Date.valueOf(LocalDate.parse(dateString.trim(), formatter)));
 		} catch (DateTimeParseException e) {
+			e.printStackTrace();
 			return Optional.empty();
 		}
 	}

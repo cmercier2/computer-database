@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
+
+import com.excilys.exception.InvalidComputerName;
 import com.excilys.model.Company;
 import com.excilys.model.Computer;
 import com.excilys.model.Computer.ComputerBuilder;
@@ -14,6 +16,7 @@ public class MapResultSet {
 	 * @param res
 	 * @return
 	 * @throws SQLException
+	 * @throws InvalidComputerName 
 	 */
 	public static ArrayList<Computer> mapAllResultSetComputer(ResultSet res) throws SQLException {
 		ArrayList<Computer> computers = new ArrayList<>();
@@ -30,6 +33,7 @@ public class MapResultSet {
 	 * @param res
 	 * @return
 	 * @throws SQLException
+	 * @throws InvalidComputerName 
 	 */
 	public static Optional<Computer> mapResultSetComputer(ResultSet res) throws SQLException {
 		if (res.next()) {

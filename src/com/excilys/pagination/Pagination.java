@@ -15,6 +15,7 @@ public class Pagination {
 	 * @return
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
+	 * @throws  
 	 */
 	public ArrayList<Computer> next() throws SQLException, ClassNotFoundException {
 		JDBCComputer jdb = new JDBCComputer();

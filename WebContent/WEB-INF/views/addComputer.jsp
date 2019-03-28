@@ -35,16 +35,16 @@
 							<div class="form-group">
 								<label for="computerName">Computer name</label> <input
 									type="text" class="form-control" name="name" id="computerName"
-									placeholder="Computer name">
+									placeholder="Computer name" value="${Computer.name}">
 							</div>
 							<div class="form-group">
 								<label for="introduced">Introduced date</label> <input
-									type="date" class="form-control" name="introduced"
+									type="date" data-role="date" class="form-control" name="introduced"
 									id="introduced" placeholder="Introduced date">
 							</div>
 							<div class="form-group">
 								<label for="discontinued">Discontinued date</label> <input
-									type="date" class="form-control" name="discontinued"
+									type="date" data-role="date" class="form-control" name="discontinued"
 									id="discontinued" placeholder="Discontinued date">
 							</div>
 							<div class="form-group">
@@ -58,7 +58,8 @@
 						</fieldset>
 						<div class="actions pull-right">
 							<input type="submit" value="Add" class="btn btn-primary">
-							or <a href="${pageContext.request.contextPath}/DashBoard" class="btn btn-default">Cancel</a>
+							or <a href="${pageContext.request.contextPath}/DashBoard"
+								class="btn btn-default">Cancel</a>
 						</div>
 					</form>
 				</div>
@@ -66,4 +67,5 @@
 		</div>
 	</section>
 </body>
+<script src="static/js/jquery.min.js"></script>
 </html>
