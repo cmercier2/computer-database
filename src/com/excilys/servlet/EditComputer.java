@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.excilys.DTO.ComputerDTO;
+import com.excilys.DTO.ComputerDTO.ComputerDTOBuilder;
 import com.excilys.exception.ComputerNotFoundException;
 import com.excilys.exception.InvalidComputerName;
 import com.excilys.service.EditComputerService;
@@ -34,6 +36,7 @@ public class EditComputer extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int id = ArgumentHandler.parseId(request.getParameter("id"));
+		System.out.println(id);
 		EditComputerService service = new EditComputerService();
 		try {
 			request.setAttribute("Computer",
@@ -52,6 +55,15 @@ public class EditComputer extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		ComputerDTO computer = new ComputerDTOBuilder().setId(ArgumentHandler.parseId(request.getParameter("id"))).setName(request.getParameter("name"))
+				.setIntroduced(request.getParameter("introduced")).setDiscontinued(request.getParameter("discontinued"))
+				.setCompany(ArgumentHandler.parseId(request.getParameter("idCompany"))).build();
+		EditComputerService service = new EditComputerService();
+			try {
+				service.editComputer(computer);
+			} catch (ClassNotFoundException | InvalidComputerName | SQLException e) {
+				e.printStackTrace();
+			}
 		doGet(request, response);
 	}
 

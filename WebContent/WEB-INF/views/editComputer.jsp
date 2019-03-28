@@ -36,22 +36,22 @@
 						<fieldset>
 							<div class="form-group">
 								<label for="computerName">Computer name</label> <input
-									type="text" class="form-control" id="computerName"
+									type="text" class="form-control" name="name" id="computerName"
 									value="${Computer.name}" placeholder="Computer name">
 							</div>
 							<div class="form-group">
 								<label for="introduced">Introduced date</label> <input
-									type="date" class="form-control" id="introduced"
+									type="date" data-role="date" class="form-control" name="introduced" id="introduced"
 									value="${Computer.introduced}" placeholder="Introduced date">
 							</div>
 							<div class="form-group">
 								<label for="discontinued">Discontinued date</label> <input
-									type="date" class="form-control" id="discontinued"
+									type="date" data-role="date" class="form-control" name="discontinued" id="discontinued"
 									value="${Computer.discontinued}" placeholder="Discontinued date">
 							</div>
 							<div class="form-group">
 								<label for="companyId">Company</label> <select
-									class="form-control" id="companyId">
+									class="form-control" id="companyId" name="idCompany">
 									<c:forEach items="${CompanyList}" var="current">
 									<c:choose>
 									<c:when test="${current.id == Computer.id }">
