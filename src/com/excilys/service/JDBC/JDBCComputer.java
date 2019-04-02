@@ -16,7 +16,7 @@ public class JDBCComputer {
 	private final String SELECTALL = "SELECT id, name, introduced, discontinued, company_id FROM computer;";
 	private final String SELECTALLWITHOFFSET = "SELECT id, name, introduced, discontinued, company_id FROM computer LIMIT ? OFFSET ?;";
 	private final String INSERT = "INSERT INTO computer (name,introduced,discontinued,company_id) VALUES (?, ?, ?, ?);";
-	private final String UPDATE = "INSERT INTO computer (name,introduced,discontinued,company_id) VALUES (?, ?, ?, ?);";
+	private final String UPDATE = "UPDATE computer SET name = ?, introduced = ?, discontinued = ?, company_id = ? WHERE id = ?;";
 	private final String DELETE = "DELETE FROM computer WHERE id = ?;";
 	private final String SELECT = "SELECT id, name, introduced, discontinued, company_id FROM computer WHERE id = ?;";
 	private final String url = "jdbc:mysql://localhost:3306/computer-database-db";
@@ -41,11 +41,11 @@ public class JDBCComputer {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		try (Connection conn = DriverManager.getConnection(url, user, mdp)) {
 			PreparedStatement statement = conn.prepareStatement(UPDATE);
-			statement.setInt(1, computer.getId());
-			statement.setString(2, computer.getName());
-			statement.setDate(3, computer.getIntroduced());
-			statement.setDate(4, computer.getDiscontinued());
-			statement.setInt(5, computer.getCompany());
+			statement.setString(1, computer.getName());
+			statement.setDate(2, computer.getIntroduced());
+			statement.setDate(3, computer.getDiscontinued());
+			statement.setInt(4, computer.getCompany());
+			statement.setInt(5, computer.getId());
 			return statement.executeUpdate();
 		}
 	}

@@ -1,5 +1,5 @@
 package com.excilys.switcher;
 
 public enum Navigate {
-	PREVIOUS, NEXT, INIT
+	PREVIOUS, NEXT, INIT, CURRENT
 }

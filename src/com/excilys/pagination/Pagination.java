@@ -26,6 +26,14 @@ public class Pagination {
 			end = true;
 		return toPrint;
 	}
+	
+	public ArrayList<Computer> current() throws SQLException, ClassNotFoundException {
+		JDBCComputer jdb = new JDBCComputer();
+		ArrayList<Computer> toPrint = jdb.selectAll(startStep, step);
+		if (toPrint.size() < step)
+			end = true;
+		return toPrint;
+	}
 
 	/**
 	 * 

@@ -30,10 +30,15 @@
 					<div class="label label-default pull-right">id: 0</div>
 					<h1>Edit Computer</h1>
 
-					<form action="editComputer" method="POST">
+					<form action="${pageContext.request.contextPath}/EditComputer" method="POST">
 						<input type="hidden" value="0" id="id" />
 						<!-- TODO: Change this value with the computer id -->
 						<fieldset>
+							<div class="form-group">
+								<input
+									type="hidden" class="form-control" name="id" id="computerId"
+									value="${Computer.id}">
+							</div>
 							<div class="form-group">
 								<label for="computerName">Computer name</label> <input
 									type="text" class="form-control" name="name" id="computerName"

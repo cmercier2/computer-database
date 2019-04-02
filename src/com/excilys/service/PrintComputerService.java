@@ -24,6 +24,21 @@ public class PrintComputerService {
 						.setCompany(x.getCompany()).build())
 				.collect(Collectors.toList()));
 	}
+	
+	/**
+	 * 
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public ArrayList<ComputerDTO> current() throws ClassNotFoundException, SQLException {
+		return new ArrayList<ComputerDTO>(page.current().stream()
+				.map(x -> new ComputerDTOBuilder().setId(x.getId()).setName(x.getName())
+						.setIntroduced(x.getIntroduced() == null ? "" : x.getIntroduced().toString())
+						.setDiscontinued(x.getDiscontinued() == null ? "" : x.getDiscontinued().toString())
+						.setCompany(x.getCompany()).build())
+				.collect(Collectors.toList()));
+	}
 
 	/**
 	 * 

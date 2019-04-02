@@ -36,6 +36,8 @@ public class DashBoard extends HttpServlet {
 			return printService.previous();
 		case INIT:
 			return printService.init();
+		case CURRENT:
+			return printService.current();
 		default:
 			return printService.init();
 		}
