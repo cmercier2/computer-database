@@ -98,26 +98,31 @@ public class Computer implements Serializable {
 		private int company;
 
 		public ComputerBuilder setId(int id) {
+			System.out.println("test1");
 			this.id = id;
 			return this;
 		}
 
 		public ComputerBuilder setName(String name){
+			System.out.println("test2");
 			this.name = name;
 			return this;
 		}
 
 		public ComputerBuilder setIntroduced(Date introduced) {
+			System.out.println("test3");
 			this.introduced = introduced;
 			return this;
 		}
 
 		public ComputerBuilder setDiscontinued(Date discontinued) {
+			System.out.println("test4");
 			this.discontinued = discontinued;
 			return this;
 		}
 
 		public ComputerBuilder setCompany(int company) {
+			System.out.println("test5");
 			this.company = company;
 			return this;
 		}

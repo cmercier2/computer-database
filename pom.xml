@@ -21,18 +21,27 @@
 	</build>
 	<properties>
 		<mysql-connector>8.0.15</mysql-connector>
+		<junit.jupiter>5.4.1</junit.jupiter>
 		<junit>4.12</junit>
 		<log4j>1.2.17</log4j>
 		<dbunit>2.4.9</dbunit>
 		<tomcat>6.0.43</tomcat>
 		<servlet-api>3.0.1</servlet-api>
 		<jstl>1.2</jstl>
+		<HikariCP>2.6.1</HikariCP>
+		<mockito>1.9.5</mockito>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>${log4j}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit}</version>
 		</dependency>
 
 		<dependency>
@@ -61,17 +70,28 @@
 		</dependency>
 
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit}</version>
-			<scope>test</scope>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.jupiter}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.dbunit</groupId>
 			<artifactId>dbunit</artifactId>
 			<version>${dbunit}</version>
-			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>${HikariCP}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>${mockito}</version>
+		</dependency>
+
 	</dependencies>
 </project>
