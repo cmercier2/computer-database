@@ -13,7 +13,7 @@ public class JDBCCompany {
 	// private static final Logger log =
 	// LoggerConfigurator.configureLogger(JDBCCompany.class);
 	private final String SELECTALL = "SELECT id, name FROM company;";
-	private final String url = "jdbc:mysql://localhost:3306/computer-database-db";
+	private final String url = "jdbc:mysql://localhost:3306/computer-database-db?serverTimezone=UTC";
 	private final String user = "admincdb";
 	private final String mdp = "qwerty1234";
 

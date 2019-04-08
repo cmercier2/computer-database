@@ -19,7 +19,8 @@ public class JDBCComputer {
 	private final String UPDATE = "UPDATE computer SET name = ?, introduced = ?, discontinued = ?, company_id = ? WHERE id = ?;";
 	private final String DELETE = "DELETE FROM computer WHERE id = ?;";
 	private final String SELECT = "SELECT id, name, introduced, discontinued, company_id FROM computer WHERE id = ?;";
-	private final String url = "jdbc:mysql://localhost:3306/computer-database-db";
+	private final String SELECTSEARCH = "SELECT id, name, introduced, discontinued, company_id FROM computer WHERE name like ?";
+	private final String url = "jdbc:mysql://localhost:3306/computer-database-db?serverTimezone=UTC";
 	private final String user = "admincdb";
 	private final String mdp = "qwerty1234";
 
@@ -76,6 +77,17 @@ public class JDBCComputer {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		try (Connection conn = DriverManager.getConnection(url, user, mdp)) {
 			PreparedStatement statement = conn.prepareStatement(SELECTALL);
+			ResultSet result = statement.executeQuery();
+			return MapResultSet.mapAllResultSetComputer(result);
+		}
+	}
+	
+	public ArrayList<Computer> selectSearch(String search) throws SQLException, ClassNotFoundException {
+		// log.debug("list computers");
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		try (Connection conn = DriverManager.getConnection(url, user, mdp)) {
+			PreparedStatement statement = conn.prepareStatement(SELECTSEARCH);
+			statement.setString(1, search);
 			ResultSet result = statement.executeQuery();
 			return MapResultSet.mapAllResultSetComputer(result);
 		}

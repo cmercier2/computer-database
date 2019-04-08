@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
@@ -23,9 +23,8 @@ public class MapResultSetTest {
 	@Mock
 	private ResultSet res = Mockito.mock(ResultSet.class);
 
-	@BeforeEach
-	public void mockFunction() throws SQLException {
-		System.out.println("EXCECUTE");
+	@Before
+	public void setUp() throws SQLException {
 		mockNext();
 		mockGetId();
 		mockGetName();
@@ -35,34 +34,28 @@ public class MapResultSetTest {
 	}
 
 	private void mockNext() throws SQLException {
-		System.out.println("testNEXT");
 		Mockito.when(res.next()).thenReturn(true).thenReturn(true).thenReturn(false);
 	}
 
 	private void mockGetId() throws SQLException {
-		System.out.println("testID");
 		Mockito.when(res.getInt("id")).thenReturn(new Integer(1)).thenReturn(new Integer(2));
 	}
 
 	private void mockGetName() throws SQLException {
-		System.out.println("testNAME");
 		Mockito.when(res.getString("name")).thenReturn("test").thenReturn("test2");
 	}
 
 	private void mockGetIntroduced() throws SQLException {
-		System.out.println("testINTRODUCED");
 		Mockito.when(res.getDate("introduced")).thenReturn(new Date(new Timestamp(10000).getTime()))
 				.thenReturn(new Date(new Timestamp(11000).getTime()));
 	}
 
 	private void mockGetDiscontinued() throws SQLException {
-		System.out.println("testDISCONTINUED");
 		Mockito.when(res.getDate("discontinued")).thenReturn(new Date(new Timestamp(15000).getTime()))
 				.thenReturn(new Date(new Timestamp(16000).getTime()));
 	}
 
 	private void mockGetCompanyId() throws SQLException {
-		System.out.println("testCOMPANY");
 		Mockito.when(res.getInt("company_id")).thenReturn(new Integer(8)).thenReturn(new Integer(9));
 	}
 

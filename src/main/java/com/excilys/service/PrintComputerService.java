@@ -2,6 +2,7 @@ package com.excilys.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import com.excilys.DTO.ComputerDTO;
 import com.excilys.DTO.ComputerDTO.ComputerDTOBuilder;
@@ -63,6 +64,15 @@ public class PrintComputerService {
 	 */
 	public ArrayList<ComputerDTO> previous() throws ClassNotFoundException, SQLException {
 		return new ArrayList<ComputerDTO>(page.previous().stream()
+				.map(x -> new ComputerDTOBuilder().setId(x.getId()).setName(x.getName())
+						.setIntroduced(x.getIntroduced() == null ? "" : x.getIntroduced().toString())
+						.setDiscontinued(x.getDiscontinued() == null ? "" : x.getDiscontinued().toString())
+						.setCompany(x.getCompany()).build())
+				.collect(Collectors.toList()));
+	}
+
+	public ArrayList<ComputerDTO> search(String search) throws ClassNotFoundException, SQLException {
+		return new ArrayList<ComputerDTO>(page.search(search).stream()
 				.map(x -> new ComputerDTOBuilder().setId(x.getId()).setName(x.getName())
 						.setIntroduced(x.getIntroduced() == null ? "" : x.getIntroduced().toString())
 						.setDiscontinued(x.getDiscontinued() == null ? "" : x.getDiscontinued().toString())

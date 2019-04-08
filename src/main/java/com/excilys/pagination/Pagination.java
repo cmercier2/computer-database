@@ -51,6 +51,13 @@ public class Pagination {
 		toPrint = jdb.selectAll(startStep, step);
 		return toPrint;
 	}
+	
+	public ArrayList<Computer> search(String search) throws ClassNotFoundException, SQLException{
+		JDBCComputer jdb = new JDBCComputer();
+		ArrayList<Computer> toPrint = new ArrayList<>();
+		toPrint = jdb.selectSearch(search);
+		return toPrint;
+	}
 
 	/**
 	 * 

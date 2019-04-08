@@ -20,6 +20,7 @@ import com.excilys.switcher.Navigate;
 public class DashBoard extends HttpServlet {
 	private static final long serialVersionUID = 10L;
 	private PrintComputerService printService = new PrintComputerService();
+	private Optional<String> search;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -38,6 +39,11 @@ public class DashBoard extends HttpServlet {
 			return printService.init();
 		case CURRENT:
 			return printService.current();
+		case SEARCH:
+			if ("".equals(search.orElse("")))
+				return printService.current();
+			else
+				return printService.search(search.get());
 		default:
 			return printService.init();
 		}
@@ -50,6 +56,7 @@ public class DashBoard extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Optional<String> req = Optional.ofNullable(request.getParameter("navigate"));
+		search = Optional.ofNullable(request.getParameter("SEARCH"));
 		ArrayList<ComputerDTO> comp;
 		try {
 			comp = handleRequest(req);
@@ -67,7 +74,7 @@ public class DashBoard extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// doGet(request, response);
+		System.out.println(request.getAttribute("selection"));
 	}
 
 }

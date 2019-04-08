@@ -22,6 +22,7 @@ import com.excilys.utils.ArgumentHandler;
 @WebServlet("/EditComputer")
 public class EditComputer extends HttpServlet {
 	private static final long serialVersionUID = 100L;
+	private int currentId;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -36,13 +37,12 @@ public class EditComputer extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int id = ArgumentHandler.parseId(request.getParameter("id"));
+		currentId = ArgumentHandler.parseId(request.getParameter("id"));
 		System.out.println("get : today was a good day");
 		EditComputerService service = new EditComputerService();
 		try {
-			request.setAttribute("Computer",
-					service.getComputer(id)
-					.orElseThrow(() -> new ComputerNotFoundException("No computer with id " + id)));
+			request.setAttribute("Computer", service.getComputer(currentId)
+					.orElseThrow(() -> new ComputerNotFoundException("No computer with id " + currentId)));
 			request.setAttribute("CompanyList", service.listCompanys());
 			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/editComputer.jsp");
 			view.forward(request, response);
@@ -63,14 +63,13 @@ public class EditComputer extends HttpServlet {
 				.setDiscontinued(request.getParameter("discontinued"))
 				.setCompany(ArgumentHandler.parseId(request.getParameter("idCompany"))).build();
 		EditComputerService service = new EditComputerService();
-			try {
-				service.editComputer(computer);
-			} catch (ClassNotFoundException | InvalidComputerName | SQLException e) {
-				e.printStackTrace();
-			}
-			request.setAttribute("navigate", Navigate.CURRENT);
-			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/dashboard.jsp");
-			view.forward(request, response);
+		try {
+			service.editComputer(computer);
+		} catch (ClassNotFoundException | InvalidComputerName | SQLException e) {
+			e.printStackTrace();
+		}
+		request.setAttribute("id", currentId);
+		doGet(request, response);
 	}
 
 }
