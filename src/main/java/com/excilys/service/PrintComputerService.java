@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import com.excilys.DTO.ComputerDTO;
 import com.excilys.DTO.ComputerDTO.ComputerDTOBuilder;
+import com.excilys.enums.OrderBy;
 import com.excilys.pagination.Pagination;
 
 public class PrintComputerService {
@@ -17,15 +18,15 @@ public class PrintComputerService {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public ArrayList<ComputerDTO> init() throws ClassNotFoundException, SQLException {
-		return new ArrayList<ComputerDTO>(page.init().stream()
+	public ArrayList<ComputerDTO> init(String search, Optional<String> ord) throws ClassNotFoundException, SQLException {
+		return new ArrayList<ComputerDTO>(page.init(search, OrderBy.valueOf(ord.orElse("ID"))).stream()
 				.map(x -> new ComputerDTOBuilder().setId(x.getId()).setName(x.getName())
 						.setIntroduced(x.getIntroduced() == null ? "" : x.getIntroduced().toString())
 						.setDiscontinued(x.getDiscontinued() == null ? "" : x.getDiscontinued().toString())
 						.setCompany(x.getCompany()).build())
 				.collect(Collectors.toList()));
 	}
-	
+
 	/**
 	 * 
 	 * @return
@@ -59,6 +60,14 @@ public class PrintComputerService {
 	/**
 	 * 
 	 * @return
+	 */
+	public int getsize() {
+		return page.getTotalComputer();
+	}
+
+	/**
+	 * 
+	 * @return
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
@@ -70,14 +79,4 @@ public class PrintComputerService {
 						.setCompany(x.getCompany()).build())
 				.collect(Collectors.toList()));
 	}
-
-	public ArrayList<ComputerDTO> search(String search) throws ClassNotFoundException, SQLException {
-		return new ArrayList<ComputerDTO>(page.search(search).stream()
-				.map(x -> new ComputerDTOBuilder().setId(x.getId()).setName(x.getName())
-						.setIntroduced(x.getIntroduced() == null ? "" : x.getIntroduced().toString())
-						.setDiscontinued(x.getDiscontinued() == null ? "" : x.getDiscontinued().toString())
-						.setCompany(x.getCompany()).build())
-				.collect(Collectors.toList()));
-	}
-
 }

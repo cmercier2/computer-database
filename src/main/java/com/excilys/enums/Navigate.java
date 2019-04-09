@@ -1,4 +1,4 @@
-package com.excilys.switcher;
+package com.excilys.enums;
 
 public enum Navigate {
 	PREVIOUS, NEXT, INIT, CURRENT, SEARCH

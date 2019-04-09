@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.excilys.DTO.ComputerDTO;
 import com.excilys.DTO.ComputerDTO.ComputerDTOBuilder;
+import com.excilys.enums.Navigate;
 import com.excilys.exception.ComputerNotFoundException;
 import com.excilys.exception.InvalidComputerName;
 import com.excilys.service.EditComputerService;
-import com.excilys.switcher.Navigate;
 import com.excilys.utils.ArgumentHandler;
 
 /**

@@ -26,7 +26,7 @@
 
 	<section id="main">
 		<div class="container">
-			<h1 id="homeTitle">121 Computers found</h1>
+			<h1 id="homeTitle">${size}Computers found</h1>
 			<div id="actions" class="form-horizontal">
 				<div class="pull-left">
 					<form id="searchForm" action="#" method="GET" class="form-inline">
@@ -64,11 +64,14 @@
 									class="fa fa-trash-o fa-lg"></i>
 							</a>
 						</span></th>
-						<th>Id</th>
-						<th>Computer name</th>
-						<th>Introduced date</th>
+						<th>Computer name<a href="${pageContext.request.contextPath}/DashBoard?orderBy=NAME"><span
+								class="glyphicon glyphicon-chevron-up"></span> </a>
+						</th>
+						<th>Introduced date<a href="${pageContext.request.contextPath}/DashBoard?orderBy=INTRODUCED"><span
+								class="glyphicon glyphicon-chevron-up"></span> </a></th>
 						<!-- Table header for Discontinued Date -->
-						<th>Discontinued date</th>
+						<th>Discontinued date<a href="${pageContext.request.contextPath}/DashBoard?orderBy=DISCONTINUED"><span
+								class="glyphicon glyphicon-chevron-up"></span> </a></th>
 						<!-- Table header for Company -->
 						<th>Company</th>
 					</tr>
@@ -78,8 +81,8 @@
 					<c:forEach items="${ComputerList}" var="current">
 						<tr>
 							<td class="editMode"><input type="checkbox" name="cb"
-								class="cb" value="0"></td>
-							<td><c:out value="${current.id}" /></td>
+								class="cb" value="${current.id}"></td>
+							<td style="display: none;"><c:out value="${current.id}" /></td>
 							<td><a
 								href="${pageContext.request.contextPath}/EditComputer?id=${current.id}"
 								onclick=""><c:out value="${current.name}" /></a></td>
