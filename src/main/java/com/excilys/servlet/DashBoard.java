@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,9 +35,18 @@ public class DashBoard extends HttpServlet {
 		super();
 	}
 
+	@Override
+	public void init(ServletConfig config) throws ServletException{
+		super.init(config);
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private ArrayList<ComputerDTO> handleRequest(Optional<String> req) throws ClassNotFoundException, SQLException {
 		String str = search.orElse("");
-		System.out.println("order by : " + orderBy.orElse(""));
 		switch (Navigate.valueOf(req.orElse("INIT"))) {
 		case NEXT:
 			return printService.next();

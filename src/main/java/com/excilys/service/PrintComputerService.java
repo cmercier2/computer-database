@@ -18,7 +18,7 @@ public class PrintComputerService {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public ArrayList<ComputerDTO> init(String search, Optional<String> ord) throws ClassNotFoundException, SQLException {
+	public ArrayList<ComputerDTO> init(String search, Optional<String> ord) throws SQLException {
 		return new ArrayList<ComputerDTO>(page.init(search, OrderBy.valueOf(ord.orElse("ID"))).stream()
 				.map(x -> new ComputerDTOBuilder().setId(x.getId()).setName(x.getName())
 						.setIntroduced(x.getIntroduced() == null ? "" : x.getIntroduced().toString())
@@ -33,7 +33,7 @@ public class PrintComputerService {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public ArrayList<ComputerDTO> current() throws ClassNotFoundException, SQLException {
+	public ArrayList<ComputerDTO> current() throws SQLException {
 		return new ArrayList<ComputerDTO>(page.current().stream()
 				.map(x -> new ComputerDTOBuilder().setId(x.getId()).setName(x.getName())
 						.setIntroduced(x.getIntroduced() == null ? "" : x.getIntroduced().toString())
@@ -48,7 +48,7 @@ public class PrintComputerService {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public ArrayList<ComputerDTO> next() throws ClassNotFoundException, SQLException {
+	public ArrayList<ComputerDTO> next() throws SQLException {
 		return new ArrayList<ComputerDTO>(page.next().stream()
 				.map(x -> new ComputerDTOBuilder().setId(x.getId()).setName(x.getName())
 						.setIntroduced(x.getIntroduced() == null ? "" : x.getIntroduced().toString())
@@ -71,7 +71,7 @@ public class PrintComputerService {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public ArrayList<ComputerDTO> previous() throws ClassNotFoundException, SQLException {
+	public ArrayList<ComputerDTO> previous() throws SQLException {
 		return new ArrayList<ComputerDTO>(page.previous().stream()
 				.map(x -> new ComputerDTOBuilder().setId(x.getId()).setName(x.getName())
 						.setIntroduced(x.getIntroduced() == null ? "" : x.getIntroduced().toString())

@@ -19,7 +19,7 @@ public class Pagination {
 	 * 
 	 * @return @throws SQLException @throws ClassNotFoundException @throws
 	 */
-	public ArrayList<Computer> next() throws SQLException, ClassNotFoundException {
+	public ArrayList<Computer> next() throws SQLException {
 		JDBCComputer jdb = new JDBCComputer();
 		ArrayList<Computer> toPrint = new ArrayList<>();
 		if (!end)
@@ -30,7 +30,12 @@ public class Pagination {
 		return toPrint;
 	}
 
-	private int totalSize() throws ClassNotFoundException, SQLException {
+	/**
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	private int totalSize() throws SQLException {
 		JDBCComputer jdb = new JDBCComputer();
 		return jdb.count(search);
 	}
@@ -41,7 +46,7 @@ public class Pagination {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public ArrayList<Computer> current() throws SQLException, ClassNotFoundException {
+	public ArrayList<Computer> current() throws SQLException {
 		JDBCComputer jdb = new JDBCComputer();
 		ArrayList<Computer> toPrint = new ArrayList<>();
 		toPrint = jdb.selectAllSearchOrder(startStep, step, search, ord);
@@ -56,7 +61,7 @@ public class Pagination {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public ArrayList<Computer> previous() throws SQLException, ClassNotFoundException {
+	public ArrayList<Computer> previous() throws SQLException {
 		JDBCComputer jdb = new JDBCComputer();
 		end = false;
 		ArrayList<Computer> toPrint = new ArrayList<>();
@@ -72,7 +77,7 @@ public class Pagination {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public ArrayList<Computer> init(String str, OrderBy order) throws SQLException, ClassNotFoundException {
+	public ArrayList<Computer> init(String str, OrderBy order) throws SQLException {
 		JDBCComputer jdb = new JDBCComputer();
 		ord = order;
 		search = str;
@@ -81,13 +86,13 @@ public class Pagination {
 		startStep = 0;
 		toPrint = jdb.selectAllSearchOrder(startStep, step, search, ord);
 		sizeList = totalSize();
-		for(Computer comp : toPrint) {
-			System.out.println(comp.toString());
-		}
 		return toPrint;
 	}
-	
-	
+
+	/**
+	 * 
+	 * @return
+	 */
 	public int getTotalComputer() {
 		return sizeList;
 	}
