@@ -34,16 +34,6 @@ public class DashBoard extends HttpServlet {
 	public DashBoard() {
 		super();
 	}
-
-	@Override
-	public void init(ServletConfig config) throws ServletException{
-		super.init(config);
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
 	
 	private ArrayList<ComputerDTO> handleRequest(Optional<String> req) throws ClassNotFoundException, SQLException {
 		String str = search.orElse("");
