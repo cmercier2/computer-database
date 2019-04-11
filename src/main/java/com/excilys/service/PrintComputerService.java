@@ -4,11 +4,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import com.excilys.DTO.ComputerDTO;
 import com.excilys.DTO.ComputerDTO.ComputerDTOBuilder;
 import com.excilys.enums.OrderBy;
 import com.excilys.pagination.Pagination;
 
+@Service
 public class PrintComputerService {
 	private Pagination page = new Pagination();
 

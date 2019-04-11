@@ -2,6 +2,9 @@ package com.excilys.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import org.springframework.stereotype.Service;
+
 import com.excilys.DTO.ComputerDTO;
 import com.excilys.JDBC.JDBCCompany;
 import com.excilys.JDBC.JDBCComputer;
@@ -11,6 +14,7 @@ import com.excilys.model.Computer;
 import com.excilys.utils.ArgumentHandler;
 import com.excilys.model.Computer.ComputerBuilder;
 
+@Service
 public class AddComputerService {
 	/**
 	 * 
