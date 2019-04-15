@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"
 	errorPage="erreur.jsp" import="java.util.*"%>
@@ -10,10 +11,10 @@
 <title>Computer Database</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap -->
-<link href="static/css/bootstrap.min.css" rel="stylesheet"
+<link href="/WebContent/WEB-INF/static/css/bootstrap.min.css" rel="stylesheet"
 	media="screen">
-<link href="static/css/font-awesome.css" rel="stylesheet" media="screen">
-<link href="static/css/main.css" rel="stylesheet" media="screen">
+<link href="/WebContent/WEB-INF/static/css/font-awesome.css" rel="stylesheet" media="screen">
+<link href="/WebContent/WEB-INF/static/css/main.css" rel="stylesheet" media="screen">
 </head>
 <body>
 	<header class="navbar navbar-inverse navbar-fixed-top">
@@ -67,5 +68,5 @@
 		</div>
 	</section>
 </body>
-<script src="static/js/jquery.min.js"></script>
+<script src="/WebContent/WEB-INF/static/js/jquery.min.js"></script>
 </html>

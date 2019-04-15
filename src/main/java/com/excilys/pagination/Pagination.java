@@ -81,7 +81,6 @@ public class Pagination {
 		JDBCComputer jdb = new JDBCComputer();
 		ord = order;
 		search = str;
-		System.out.println(ord.get());
 		ArrayList<Computer> toPrint = new ArrayList<>();
 		startStep = 0;
 		toPrint = jdb.selectAllSearchOrder(startStep, step, search, ord);

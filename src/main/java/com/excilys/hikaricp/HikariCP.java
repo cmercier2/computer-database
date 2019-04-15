@@ -8,8 +8,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
-
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -19,14 +17,13 @@ public class HikariCP {
 	private String JDBCurl;
 	private String username;
 	private String password;
-	private final static Logger logger = Logger.getLogger(HikariCP.class);
+	//private final static Logger logger = Logger.getLogger(HikariCP.class);
 
 	private static HikariConfig config = new HikariConfig();
 	private static HikariDataSource ds;
 	private final static HikariCP _instance = new HikariCP();
 
 	private HikariCP() {
-		System.out.println("Working Directory = " +  System.getProperty("server.config.dir"));
 		try (InputStream in = HikariCP.class.getResourceAsStream("/database.properties")) {
 			properties.load(in);
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -35,13 +32,13 @@ public class HikariCP {
 			this.password = properties.getProperty("password");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			logger.error("Cannot find property file for database.", e);
+			//logger.error("Cannot find property file for database.", e);
 		} catch (IOException e) {
 			e.printStackTrace();
-			logger.error("Cannot load or close property file stream.", e);
+			//logger.error("Cannot load or close property file stream.", e);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			logger.error("Cannot load mysql Driver", e);
+			//logger.error("Cannot load mysql Driver", e);
 		}
 
 		config.setJdbcUrl(this.JDBCurl);

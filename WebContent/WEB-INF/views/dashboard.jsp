@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"
 	errorPage="erreur.jsp" import="java.util.*"%>
@@ -10,16 +11,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="utf-8">
 <!-- Bootstrap -->
-<link href="static/css/bootstrap.min.css" rel="stylesheet"
+<link href="/WebContent/WEB-INF/static/css/bootstrap.min.css" rel="stylesheet"
 	media="screen">
-<link href="static/css/font-awesome.css" rel="stylesheet" media="screen">
-<link href="static/css/main.css" rel="stylesheet" media="screen">
+<link href="/WebContent/WEB-INF/static/css/font-awesome.css" rel="stylesheet" media="screen">
+<link href="/WebContent/WEB-INF/static/css/main.css" rel="stylesheet" media="screen">
 </head>
 <body>
 	<header class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<a class="navbar-brand"
-				href="${pageContext.request.contextPath}/DashBoard"> Application
+				href="${pageContext.request.contextPath}/dashboard"> Application
 				- Computer Database </a>
 		</div>
 	</header>
@@ -64,13 +65,13 @@
 									class="fa fa-trash-o fa-lg"></i>
 							</a>
 						</span></th>
-						<th>Computer name<a href="${pageContext.request.contextPath}/DashBoard?orderBy=NAME"><span
+						<th>Computer name<a href="${pageContext.request.contextPath}/dashboard?orderBy=NAME"><span
 								class="glyphicon glyphicon-chevron-up"></span> </a>
 						</th>
-						<th>Introduced date<a href="${pageContext.request.contextPath}/DashBoard?orderBy=INTRODUCED"><span
+						<th>Introduced date<a href="${pageContext.request.contextPath}/dashboard?orderBy=INTRODUCED"><span
 								class="glyphicon glyphicon-chevron-up"></span> </a></th>
 						<!-- Table header for Discontinued Date -->
-						<th>Discontinued date<a href="${pageContext.request.contextPath}/DashBoard?orderBy=DISCONTINUED"><span
+						<th>Discontinued date<a href="${pageContext.request.contextPath}/dashboard?orderBy=DISCONTINUED"><span
 								class="glyphicon glyphicon-chevron-up"></span> </a></th>
 						<!-- Table header for Company -->
 						<th>Company</th>
@@ -101,19 +102,19 @@
 		<!-- <div class="container text-center"> -->
 		<ul class="pagination">
 			<li><a
-				href="${pageContext.request.contextPath}/DashBoard?navigate=PREVIOUS"
+				href="${pageContext.request.contextPath}/dashboard?navigate=PREVIOUS"
 				aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 			</a></li>
 			<li><a
-				href="${pageContext.request.contextPath}/DashBoard?navigate=NEXT"
+				href="${pageContext.request.contextPath}/dashboard?navigate=NEXT"
 				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 			</a></li>
 		</ul>
 
 	</footer>
-	<script src="static/js/jquery.min.js"></script>
-	<script src="static/js/bootstrap.min.js"></script>
-	<script src="static/js/dashboard.js"></script>
+	<script src="/WebContent/WEB-INF/static/js/jquery.min.js"></script>
+	<script src="/WebContent/WEB-INF/static/js/bootstrap.min.js"></script>
+	<script src="/WebContent/WEB-INF/static/js/dashboard.js"></script>
 
 </body>
 </html>
