@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.excilys.DTO.ComputerDTO;
-import com.excilys.DTO.ComputerDTO.ComputerDTOBuilder;
+import com.excilys.dto.ComputerDTO;
+import com.excilys.dto.ComputerDTO.ComputerDTOBuilder;
 import com.excilys.exception.ComputerNotFoundException;
 import com.excilys.exception.InvalidComputerName;
 import com.excilys.service.EditComputerService;

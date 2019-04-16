@@ -11,16 +11,16 @@
 <title>Computer Database</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap -->
-<link href="/WebContent/WEB-INF/static/css/bootstrap.min.css" rel="stylesheet"
+<link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet"
 	media="screen">
-<link href="/WebContent/WEB-INF/static/css/font-awesome.css" rel="stylesheet" media="screen">
-<link href="/WebContent/WEB-INF/static/css/main.css" rel="stylesheet" media="screen">
+<link href="<c:url value="/resources/css/font-awesome.css"/>" rel="stylesheet" media="screen">
+<link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet" media="screen">
 </head>
 <body>
 	<header class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<a class="navbar-brand"
-				href="${pageContext.request.contextPath}/DashBoard"> Application
+				href="${pageContext.request.contextPath}/dashboard"> Application
 				- Computer Database </a>
 		</div>
 	</header>
@@ -59,7 +59,7 @@
 						</fieldset>
 						<div class="actions pull-right">
 							<input type="submit" value="Add" class="btn btn-primary">
-							or <a href="${pageContext.request.contextPath}/DashBoard"
+							or <a href="${pageContext.request.contextPath}/dashboard"
 								class="btn btn-default">Cancel</a>
 						</div>
 					</form>
@@ -68,5 +68,5 @@
 		</div>
 	</section>
 </body>
-<script src="/WebContent/WEB-INF/static/js/jquery.min.js"></script>
+<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 </html>

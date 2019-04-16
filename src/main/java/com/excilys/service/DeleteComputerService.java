@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import org.springframework.stereotype.Service;
 
-import com.excilys.JDBC.JDBCComputer;
+import com.excilys.jdbc.JDBCComputer;
 import com.excilys.utils.ArgumentHandler;
 
 @Service

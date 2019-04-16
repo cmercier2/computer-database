@@ -3,10 +3,15 @@ package com.excilys.pagination;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.excilys.JDBC.JDBCComputer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.excilys.enums.OrderBy;
+import com.excilys.jdbc.JDBCComputer;
+import com.excilys.jdbctemplate.JDBCTemplateComputer;
 import com.excilys.model.Computer;
 
+@Service
 public class Pagination {
 	private int startStep = 0;
 	private int step = 10;
@@ -14,13 +19,13 @@ public class Pagination {
 	private String search;
 	private int sizeList = -1;
 	private OrderBy ord = OrderBy.ID;
-
+	@Autowired
+	JDBCTemplateComputer jdb;
 	/**
 	 * 
 	 * @return @throws SQLException @throws ClassNotFoundException @throws
 	 */
 	public ArrayList<Computer> next() throws SQLException {
-		JDBCComputer jdb = new JDBCComputer();
 		ArrayList<Computer> toPrint = new ArrayList<>();
 		if (!end)
 			startStep += step;
@@ -36,7 +41,6 @@ public class Pagination {
 	 * @throws SQLException
 	 */
 	private int totalSize() throws SQLException {
-		JDBCComputer jdb = new JDBCComputer();
 		return jdb.count(search);
 	}
 
@@ -47,7 +51,6 @@ public class Pagination {
 	 * @throws ClassNotFoundException
 	 */
 	public ArrayList<Computer> current() throws SQLException {
-		JDBCComputer jdb = new JDBCComputer();
 		ArrayList<Computer> toPrint = new ArrayList<>();
 		toPrint = jdb.selectAllSearchOrder(startStep, step, search, ord);
 		if (toPrint.size() < step)
@@ -62,7 +65,6 @@ public class Pagination {
 	 * @throws ClassNotFoundException
 	 */
 	public ArrayList<Computer> previous() throws SQLException {
-		JDBCComputer jdb = new JDBCComputer();
 		end = false;
 		ArrayList<Computer> toPrint = new ArrayList<>();
 		if (startStep != 0)
@@ -78,7 +80,6 @@ public class Pagination {
 	 * @throws ClassNotFoundException
 	 */
 	public ArrayList<Computer> init(String str, OrderBy order) throws SQLException {
-		JDBCComputer jdb = new JDBCComputer();
 		ord = order;
 		search = str;
 		ArrayList<Computer> toPrint = new ArrayList<>();

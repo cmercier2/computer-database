@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
-import com.excilys.DTO.ComputerDTO;
-import com.excilys.JDBC.JDBCCompany;
-import com.excilys.JDBC.JDBCComputer;
+import com.excilys.dto.ComputerDTO;
 import com.excilys.exception.InvalidComputerName;
+import com.excilys.jdbc.JDBCCompany;
+import com.excilys.jdbc.JDBCComputer;
 import com.excilys.model.Company;
 import com.excilys.model.Computer;
 import com.excilys.utils.ArgumentHandler;

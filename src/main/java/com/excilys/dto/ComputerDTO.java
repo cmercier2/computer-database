@@ -1,4 +1,4 @@
-package com.excilys.DTO;
+package com.excilys.dto;
 
 import java.io.Serializable;
 

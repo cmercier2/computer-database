@@ -11,10 +11,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="utf-8">
 <!-- Bootstrap -->
-<link href="/WebContent/WEB-INF/static/css/bootstrap.min.css" rel="stylesheet"
+<link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet"
 	media="screen">
-<link href="/WebContent/WEB-INF/static/css/font-awesome.css" rel="stylesheet" media="screen">
-<link href="/WebContent/WEB-INF/static/css/main.css" rel="stylesheet" media="screen">
+<link href="<c:url value="/resources/css/font-awesome.css"/>" rel="stylesheet" media="screen">
+<link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet" media="screen">
 </head>
 <body>
 	<header class="navbar navbar-inverse navbar-fixed-top">
@@ -27,7 +27,7 @@
 
 	<section id="main">
 		<div class="container">
-			<h1 id="homeTitle">${size}Computers found</h1>
+			<h1 id="homeTitle">${size} Computers found</h1>
 			<div id="actions" class="form-horizontal">
 				<div class="pull-left">
 					<form id="searchForm" action="#" method="GET" class="form-inline">
@@ -112,9 +112,9 @@
 		</ul>
 
 	</footer>
-	<script src="/WebContent/WEB-INF/static/js/jquery.min.js"></script>
-	<script src="/WebContent/WEB-INF/static/js/bootstrap.min.js"></script>
-	<script src="/WebContent/WEB-INF/static/js/dashboard.js"></script>
+	<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/dashboard.js"/>"></script>
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.excilys.JDBC;
+package com.excilys.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

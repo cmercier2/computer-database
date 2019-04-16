@@ -5,16 +5,18 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.excilys.DTO.ComputerDTO;
-import com.excilys.DTO.ComputerDTO.ComputerDTOBuilder;
+import com.excilys.dto.ComputerDTO;
+import com.excilys.dto.ComputerDTO.ComputerDTOBuilder;
 import com.excilys.enums.OrderBy;
 import com.excilys.pagination.Pagination;
 
 @Service
 public class PrintComputerService {
-	private Pagination page = new Pagination();
+	@Autowired
+	private Pagination page;
 
 	/**
 	 * 

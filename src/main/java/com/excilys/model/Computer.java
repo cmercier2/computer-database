@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
+import org.springframework.lang.NonNull;
+
 public class Computer implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id = -1;
@@ -102,6 +104,7 @@ public class Computer implements Serializable {
 			return this;
 		}
 
+		@NonNull
 		public ComputerBuilder setName(String name){
 			this.name = name;
 			return this;

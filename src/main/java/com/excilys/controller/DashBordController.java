@@ -3,6 +3,7 @@ package com.excilys.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.excilys.DTO.ComputerDTO;
+import com.excilys.dto.ComputerDTO;
 import com.excilys.enums.Navigate;
 import com.excilys.service.DeleteComputerService;
 import com.excilys.service.PrintComputerService;
@@ -65,13 +66,15 @@ public class DashBordController {
 	}
 
 	@PostMapping({ "/dashboard", "/" })
-	public void doPost(@RequestParam(required = false) Map<String, String> paths, Model model) throws IOException {
-		/*
-		 * Optional<String[]> req = Optional.ofNullable(paths.get("selection")); try {
-		 * deleteService.delete(req.orElse(new String[] {})); doGet(paths, model); }
-		 * catch (ClassNotFoundException | SQLException e) { e.printStackTrace(); }
-		 */
-
+	public String doPost(@RequestParam(required = false) Map<String, String> paths, Model model) throws IOException {
+		Optional<String> req = Optional.ofNullable( paths.get("selection"));
+		try {
+			deleteService.delete(req.orElse("").split(","));
+			doGet(paths, model);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return "dashboard";
 	}
 
 }

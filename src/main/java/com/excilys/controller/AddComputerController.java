@@ -5,8 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.excilys.DTO.ComputerDTO;
-import com.excilys.DTO.ComputerDTO.ComputerDTOBuilder;
+import com.excilys.dto.ComputerDTO;
+import com.excilys.dto.ComputerDTO.ComputerDTOBuilder;
 import com.excilys.exception.InvalidComputerName;
 import com.excilys.model.Company;
 
