@@ -8,7 +8,6 @@ import com.excilys.model.Computer;
 import com.excilys.model.Computer.ComputerBuilder;
 
 public class ComputerMapper implements RowMapper<Computer>{
-	private Computer c;
 
 	@Override
 	public Computer mapRow(ResultSet res, int rowNum) throws SQLException {

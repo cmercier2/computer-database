@@ -13,12 +13,14 @@ import com.excilys.model.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.excilys.service.AddComputerService;
-import com.excilys.utils.ArgumentHandler;
 
 @Controller
 public class AddComputerController {
@@ -38,16 +40,13 @@ public class AddComputerController {
 	 *      response)
 	 */
 	@PostMapping({ "/AddComputer" })
-	protected void doPost(@RequestParam(required = false) Map<String, String> paths, Model model) throws IOException {
-		ComputerDTO computer = new ComputerDTOBuilder().setName(paths.get("name"))
-				.setIntroduced(paths.get("introduced")).setDiscontinued(paths.get("discontinued"))
-				.setCompany(ArgumentHandler.parseId(paths.get("idCompany"))).build();
-		AddComputerService service = new AddComputerService();
+	protected String doPost(@ModelAttribute("Computer") @Validated ComputerDTO computer, ModelMap model) throws IOException {
+		System.out.println("computer : " + computer.toString());
 		try {
 			service.addComputer(computer);
 		} catch (ClassNotFoundException | SQLException | InvalidComputerName e) {
 			e.printStackTrace();
 		}
-		doGet(paths, model);
+		return "dashboard";
 	}
 }

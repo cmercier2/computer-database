@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.excilys.enums.OrderBy;
-import com.excilys.jdbc.JDBCComputer;
 import com.excilys.jdbctemplate.JDBCTemplateComputer;
 import com.excilys.model.Computer;
 
@@ -20,7 +19,7 @@ public class Pagination {
 	private int sizeList = -1;
 	private OrderBy ord = OrderBy.ID;
 	@Autowired
-	JDBCTemplateComputer jdb;
+	private JDBCTemplateComputer jdb;
 	/**
 	 * 
 	 * @return @throws SQLException @throws ClassNotFoundException @throws

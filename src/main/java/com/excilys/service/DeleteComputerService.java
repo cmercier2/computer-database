@@ -2,19 +2,20 @@ package com.excilys.service;
 
 import java.sql.SQLException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.excilys.jdbc.JDBCComputer;
-import com.excilys.utils.ArgumentHandler;
+import com.excilys.jdbctemplate.JDBCTemplateComputer;
 
 @Service
 public class DeleteComputerService {
+	@Autowired
+	private JDBCTemplateComputer jdb;
 
 	public void delete(String[] toDelete) throws ClassNotFoundException, SQLException {
 		if(toDelete.length > 0) {
-			JDBCComputer jdb = new JDBCComputer();
 			for(String idStr : toDelete) {
-				int id = ArgumentHandler.parseId(idStr);
+				int id = Integer.parseInt(idStr);
 				jdb.delete(id);
 			}
 		}

@@ -1,7 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"
-	errorPage="erreur.jsp" import="java.util.*"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="com.excilys.model.Computer"%>
 <!DOCTYPE html>
@@ -89,7 +87,7 @@
 								onclick=""><c:out value="${current.name}" /></a></td>
 							<td><c:out value="${current.introduced}" /></td>
 							<td><c:out value="${current.discontinued}" /></td>
-							<td><c:out value="${current.company}" /></td>
+							<td><c:out value="${current.companyId}" /></td>
 
 						</tr>
 					</c:forEach>

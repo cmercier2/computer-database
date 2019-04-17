@@ -3,12 +3,13 @@ package com.excilys.service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.excilys.dto.ComputerDTO;
 import com.excilys.exception.InvalidComputerName;
-import com.excilys.jdbc.JDBCCompany;
-import com.excilys.jdbc.JDBCComputer;
+import com.excilys.jdbctemplate.JDBCTemplateCompany;
+import com.excilys.jdbctemplate.JDBCTemplateComputer;
 import com.excilys.model.Company;
 import com.excilys.model.Computer;
 import com.excilys.utils.ArgumentHandler;
@@ -16,6 +17,10 @@ import com.excilys.model.Computer.ComputerBuilder;
 
 @Service
 public class AddComputerService {
+	@Autowired
+	private JDBCTemplateComputer jdb;
+	@Autowired
+	private JDBCTemplateCompany jdbcompany;
 	/**
 	 * 
 	 * @param computerDTO
@@ -24,12 +29,11 @@ public class AddComputerService {
 	 * @throws InvalidComputerName
 	 */
 	public void addComputer(ComputerDTO computerDTO) throws ClassNotFoundException, SQLException, InvalidComputerName {
-		JDBCComputer jdb = new JDBCComputer();
 		Computer computer = new ComputerBuilder()
 				.setName(computerDTO.getName() != null ? computerDTO.getName().trim() : "")
 				.setIntroduced(ArgumentHandler.parseDate(computerDTO.getIntroduced()).orElse(null))
 				.setDiscontinued(ArgumentHandler.parseDate(computerDTO.getDiscontinued()).orElse(null))
-				.setCompany(computerDTO.getCompany()).build();
+				.setCompany(computerDTO.getCompanyId()).build();
 		System.out.println(computer.toString());
 		if ("".equals(computer.getName()))
 			throw new InvalidComputerName("Computer name can't be empty");
@@ -42,11 +46,10 @@ public class AddComputerService {
 	 */
 	public ArrayList<Company> listCompanys() {
 		ArrayList<Company> listCompany = new ArrayList<>();
-		JDBCCompany jdbc = new JDBCCompany();
 		try {
-			listCompany = jdbc.selectAll();
+			listCompany = jdbcompany.selectAll();
 			return listCompany;
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return listCompany;

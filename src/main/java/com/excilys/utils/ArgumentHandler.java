@@ -8,16 +8,6 @@ import java.util.Optional;
 
 public class ArgumentHandler {
 	/**
-	 * Convert string to int
-	 * 
-	 * @param idToParse
-	 * @return
-	 */
-	public static int parseId(String idToParse) throws NumberFormatException{
-		return Integer.parseInt(idToParse);
-	}
-
-	/**
 	 * COnvert string to date
 	 * 
 	 * @param dateString

@@ -1,7 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"
-	errorPage="erreur.jsp" import="java.util.*"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="com.excilys.model.Computer"%>
 <%@ page import="com.excilys.model.Company"%>
@@ -31,36 +30,45 @@
 					<div class="label label-default pull-right">id: 0</div>
 					<h1>Edit Computer</h1>
 
-					<form action="${pageContext.request.contextPath}/EditComputer" method="POST">
+					<form:form action="${pageContext.request.contextPath}/EditComputer" method="POST" modelAttribute="computerdto">
 						<input type="hidden" value="0" id="id" />
 						<!-- TODO: Change this value with the computer id -->
 						<fieldset>
+							<spring:bind path="id">
 							<div class="form-group">
 								<input
 									type="hidden" class="form-control" name="id" id="computerId"
-									value="${Computer.id}">
+									value="${computerdto.id}">
 							</div>
+							</spring:bind>
+							<spring:bind path="name">
 							<div class="form-group">
 								<label for="computerName">Computer name</label> <input
 									type="text" class="form-control" name="name" id="computerName"
-									value="${Computer.name}" placeholder="Computer name">
+									value="${computerdto.name}" placeholder="Computer name">
 							</div>
+							</spring:bind>
+							<spring:bind path="introduced">
 							<div class="form-group">
 								<label for="introduced">Introduced date</label> <input
 									type="date" data-role="date" class="form-control" name="introduced" id="introduced"
-									value="${Computer.introduced}" placeholder="Introduced date">
+									value="${computerdto.introduced}" placeholder="Introduced date">
 							</div>
+							</spring:bind>
+							<spring:bind path="discontinued">
 							<div class="form-group">
 								<label for="discontinued">Discontinued date</label> <input
 									type="date" data-role="date" class="form-control" name="discontinued" id="discontinued"
-									value="${Computer.discontinued}" placeholder="Discontinued date">
+									value="${computerdto.discontinued}" placeholder="Discontinued date">
 							</div>
+							</spring:bind>
+							<spring:bind path="companyId">
 							<div class="form-group">
 								<label for="companyId">Company</label> <select
-									class="form-control" id="companyId" name="idCompany">
+									class="form-control" id="companyId" name="companyId">
 									<c:forEach items="${CompanyList}" var="current">
 									<c:choose>
-									<c:when test="${current.id == Computer.id }">
+									<c:when test="${current.id == computerdto.id }">
 										<option  value="${current.id}"selected>${current.name}</option>
 									</c:when>
 									<c:otherwise>
@@ -70,13 +78,14 @@
 									</c:forEach>
 								</select>
 							</div>
+							</spring:bind>
 						</fieldset>
 						<div class="actions pull-right">
 							<input type="submit" value="Edit" class="btn btn-primary">
 							or <a href="${pageContext.request.contextPath}/dashboard?navigate=INIT"
 								class="btn btn-default">Cancel</a>
 						</div>
-					</form>
+					</form:form>
 				</div>
 			</div>
 		</div>

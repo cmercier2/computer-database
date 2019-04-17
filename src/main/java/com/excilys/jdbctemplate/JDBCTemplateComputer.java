@@ -9,8 +9,8 @@ import com.excilys.mapper.ComputerMapper;
 import com.excilys.model.Computer;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class JDBCTemplateComputer {
@@ -29,7 +29,6 @@ public class JDBCTemplateComputer {
 	public JDBCTemplateComputer(JdbcTemplate jdbc) {
 		this.jdbctemplate = jdbc;
 	}
-	
 	
 	/**
 	 * 
@@ -59,8 +58,9 @@ public class JDBCTemplateComputer {
 	 * @return
 	 * @throws SQLException
 	 */
-	public int deleteComputerByCompanyId(int id) throws SQLException {
-		return 0;
+	@Transactional
+	public int deleteComputerByCompanyId(int idCompany) throws SQLException {
+		return jdbctemplate.update(DELETECOMPUTERS, idCompany);
 	}
 
 	/**
@@ -69,6 +69,7 @@ public class JDBCTemplateComputer {
 	 * @return
 	 * @throws SQLException
 	 */
+	@Transactional
 	public int delete(int id) throws SQLException {
 		return jdbctemplate.update(DELETE, id);
 	}
@@ -80,7 +81,7 @@ public class JDBCTemplateComputer {
 	 * @throws SQLException
 	 */
 	public Optional<Computer> select(int id) throws SQLException {
-		return Optional.ofNullable(jdbctemplate.queryForObject(SELECT, Computer.class, id));
+		return Optional.ofNullable(jdbctemplate.queryForObject(SELECT, new Object[] {id}, new ComputerMapper()));
 	}
 
 	/**
