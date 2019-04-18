@@ -35,8 +35,8 @@ public class AddComputerService {
 				.setIntroduced(ArgumentHandler.parseDate(computerDTO.getIntroduced()).orElse(null))
 				.setDiscontinued(ArgumentHandler.parseDate(computerDTO.getDiscontinued()).orElse(null))
 				.setCompany(computerDTO.getCompanyId()).build();
-		if ("".equals(computer.getName()))
-			throw new InvalidComputerName("Computer name can't be empty");
+//		if ("".equals(computer.getName()))
+//			throw new InvalidComputerName("Computer name can't be empty");
 		jdb.create(computer);
 	}
 

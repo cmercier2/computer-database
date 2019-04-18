@@ -45,13 +45,22 @@ $(function() {
 (function ( $ ) {
 
     $.fn.toggleEditMode = function() {
+    	var userLang = navigator.language || navigator.userLanguage;
         if($(".editMode").is(":visible")) {
             $(".editMode").hide();
-            $("#editComputer").text("Edit");
+            if(userLang = "en"){
+            	$("#editComputer").text("Editer");
+            }else{
+            	$("#editComputer").text("Edit");
+            } 
         }
         else {
             $(".editMode").show();
-            $("#editComputer").text("View");
+            if(userLang = "en"){
+            	$("#editComputer").text("Vue");
+            }else{
+            	$("#editComputer").text("View");
+            } 
         }
         return this;
     };

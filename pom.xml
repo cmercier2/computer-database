@@ -32,6 +32,8 @@
 		<javaee-api>6.0</javaee-api>
 		<spring.version>5.1.1.RELEASE</spring.version>
 		<javax.servlet.annotations.version>1.3.2</javax.servlet.annotations.version>
+		<javax.validation>2.0.0.Final</javax.validation>
+		<selenium>2.27.0</selenium>
 	</properties>
 	<dependencies>
 
@@ -107,6 +109,19 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>${javax.validation}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${selenium}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

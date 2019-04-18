@@ -3,6 +3,7 @@ package com.excilys.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 
 import com.excilys.dto.ComputerDTO;
 import com.excilys.enums.Navigate;
@@ -24,6 +27,8 @@ public class DashBordController {
 	private PrintComputerService printService;
 	@Autowired
 	private DeleteComputerService deleteService;
+	@Autowired
+	private CookieLocaleResolver localeResolver;
 	private Optional<String> search;
 	private Optional<String> orderBy;
 
@@ -50,6 +55,19 @@ public class DashBordController {
 		}
 	}
 
+	public void changeLanguage(String lang) {
+		switch(lang) {
+		case "en":
+			System.out.println("english");
+			localeResolver.setDefaultLocale(Locale.ENGLISH);
+			break;
+		case "fr":
+			System.out.println("french");
+			localeResolver.setDefaultLocale(Locale.FRENCH);
+			break;
+		}
+	}
+	
 	/**
 	 * 
 	 * @param paths
@@ -59,6 +77,9 @@ public class DashBordController {
 	 */
 	@GetMapping({ "/dashboard", "/" })
 	public String doGet(@RequestParam(required = false) Map<String, String> paths, Model model) throws IOException {
+		if(paths.containsKey("lang")) {
+			changeLanguage(paths.get("lang"));
+		}
 		Optional<String> req = Optional.ofNullable(paths.get("navigate"));
 		search = Optional.ofNullable(paths.get("SEARCH"));
 		orderBy = Optional.ofNullable(paths.get("orderBy"));

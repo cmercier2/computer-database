@@ -1,5 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="com.excilys.model.Computer"%>
@@ -35,16 +35,18 @@
 					<form id="searchForm" action="#" method="GET" class="form-inline">
 
 						<input type="search" id="searchbox" name="SEARCH"
-							class="form-control" placeholder="<spring:message code="search"/>" /> <input
-							type="submit" id="searchsubmit" value="<spring:message code="filter"/>"
-							class="btn btn-primary" />
+							class="form-control"
+							placeholder="<spring:message code="search"/>" /> <input
+							type="submit" id="searchsubmit"
+							value="<spring:message code="filter"/>" class="btn btn-primary" />
 					</form>
 				</div>
 				<div class="pull-right">
 					<a class="btn btn-success" id="addComputer"
-						href="${pageContext.request.contextPath}/AddComputer"><spring:message code="add"/>
-						</a> <a class="btn btn-default" id="editComputer" href="#"
-						onclick="$.fn.toggleEditMode();"><spring:message code="edit"/></a>
+						href="${pageContext.request.contextPath}/AddComputer"><spring:message
+							code="add" /> </a> <a class="btn btn-default" id="editComputer"
+						href="#" onclick="$.fn.toggleEditMode();"><spring:message
+							code="edit" /></a>
 				</div>
 			</div>
 		</div>
@@ -67,19 +69,18 @@
 									class="fa fa-trash-o fa-lg"></i>
 							</a>
 						</span></th>
-						<th><spring:message code="name"/><a
+						<th><spring:message code="name" /><a
 							href="${pageContext.request.contextPath}/dashboard?orderBy=NAME"><span
-								class="glyphicon glyphicon-chevron-up"></span> </a>
-						</th>
-						<th><spring:message code="introduced"/><a
+								class="glyphicon glyphicon-chevron-up"></span> </a></th>
+						<th><spring:message code="introduced" /><a
 							href="${pageContext.request.contextPath}/dashboard?orderBy=INTRODUCED"><span
 								class="glyphicon glyphicon-chevron-up"></span> </a></th>
 						<!-- Table header for Discontinued Date -->
-						<th><spring:message code="discontinued"/><a
+						<th><spring:message code="discontinued" /><a
 							href="${pageContext.request.contextPath}/dashboard?orderBy=DISCONTINUED"><span
 								class="glyphicon glyphicon-chevron-up"></span> </a></th>
 						<!-- Table header for Company -->
-						<th><spring:message code="company"/></th>
+						<th><spring:message code="company" /></th>
 					</tr>
 				</thead>
 				<!-- Browse attribute computers -->
@@ -115,7 +116,11 @@
 				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 			</a></li>
 		</ul>
-
+		<div class="pagination" style="float: right;">
+			Language : <a
+				href="${pageContext.request.contextPath}/dashboard?lang=en"><spring:message code="english" /></a>
+			| <a href="${pageContext.request.contextPath}/dashboard?lang=fr"><spring:message code="french" /></a>
+		</div>
 	</footer>
 	<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>

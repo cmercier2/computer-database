@@ -9,6 +9,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
@@ -73,6 +74,11 @@ public class AppConfig implements WebMvcConfigurer {
 		return interceptor;
 	}
 
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+	   registry.addInterceptor(localeInterceptor());
+	}
+	
 	/**
 	 * 
 	 */

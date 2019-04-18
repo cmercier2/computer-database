@@ -3,15 +3,23 @@ package com.excilys.model;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
 
 import org.springframework.lang.NonNull;
 
 public class Computer implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id = -1;
-	private String name = "";
+	@NotBlank
+	private String name;
+	@Past
 	private Date introduced;
+	@PastOrPresent
 	private Date discontinued;
+	@Positive
 	private int company;
 
 	private Computer(ComputerBuilder comp) {

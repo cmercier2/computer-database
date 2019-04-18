@@ -6,6 +6,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -17,7 +20,7 @@ public class HikariCP {
 	private static HikariConfig config = new HikariConfig();
 	private static HikariDataSource ds;
 	private final static HikariCP _instance = new HikariCP();
-	// private final static Logger logger = Logger.getLogger(HikariCP.class);
+	private final static Logger logger = LoggerFactory.getLogger(HikariCP.class);
 
 	private HikariCP() {
 		try (InputStream in = HikariCP.class.getResourceAsStream("/database.properties")) {
@@ -26,9 +29,12 @@ public class HikariCP {
 			this.JDBCurl = properties.getProperty("jdbc.url");
 			this.username = properties.getProperty("username");
 			this.password = properties.getProperty("password");
-		} catch (ClassNotFoundException | IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
-			// logger.error("Cannot find property file for database.", e);
+			logger.error("Cannot find property file for database.", e);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			logger.error("Cannot find property file for database.", e);
 		}
 		config.setJdbcUrl(this.JDBCurl);
 		config.setUsername(this.username);
