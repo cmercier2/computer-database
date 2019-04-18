@@ -3,7 +3,6 @@ package com.excilys.dto;
 import java.io.Serializable;
 import java.util.Objects;
 
-
 public class ComputerDTO implements Serializable {
 	private static final long serialVersionUID = 3586569842068018630L;
 	private int id;
@@ -62,13 +61,13 @@ public class ComputerDTO implements Serializable {
 	public void setCompanyId(int companyId) {
 		this.companyId = companyId;
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.id + " " + this.name + " " + Objects.toString(this.introduced) + " "
 				+ Objects.toString(this.discontinued) + " " + this.companyId;
 	}
-	
+
 	public static class ComputerDTOBuilder {
 		private int id;
 		private String name;

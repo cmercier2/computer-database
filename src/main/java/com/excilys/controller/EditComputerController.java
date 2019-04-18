@@ -25,6 +25,13 @@ public class EditComputerController {
 	@Autowired
 	private EditComputerService service;
 
+	/**
+	 * 
+	 * @param paths
+	 * @param model
+	 * @return
+	 * @throws IOException
+	 */
 	@GetMapping({ "/EditComputer" })
 	public String doGet(@RequestParam(required = false) Map<String, String> paths, Model model) throws IOException {
 		currentId = Integer.parseInt(paths.get("id"));
@@ -38,8 +45,16 @@ public class EditComputerController {
 		return "editComputer";
 	}
 
+	/**
+	 * 
+	 * @param computer
+	 * @param model
+	 * @return
+	 * @throws IOException
+	 */
 	@PostMapping({ "/EditComputer" })
-	public String doPost(@ModelAttribute("computerdto") @Validated ComputerDTO computer, ModelMap model) throws IOException {
+	public String doPost(@ModelAttribute("computerdto") @Validated ComputerDTO computer, ModelMap model)
+			throws IOException {
 		try {
 			service.editComputer(computer);
 		} catch (InvalidComputerName | SQLException e) {

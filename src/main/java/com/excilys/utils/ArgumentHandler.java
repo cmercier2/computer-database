@@ -13,7 +13,7 @@ public class ArgumentHandler {
 	 * @param dateString
 	 * @return Date
 	 */
-	public static Optional<Date> parseDate(String dateString){
+	public static Optional<Date> parseDate(String dateString) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		try {
 			return Optional.of(Date.valueOf(LocalDate.parse(dateString.trim(), formatter)));

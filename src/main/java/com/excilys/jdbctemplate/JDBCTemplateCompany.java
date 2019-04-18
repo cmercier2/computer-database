@@ -14,15 +14,30 @@ public class JDBCTemplateCompany {
 	private final String SELECTALL = "SELECT id, name FROM company;";
 	private final String DELETE = "DELETE FROM company WHERE id = ?;";
 	private JdbcTemplate jdbctemplate;
-	
+
+	/**
+	 * 
+	 * @param jdbc
+	 */
 	public JDBCTemplateCompany(JdbcTemplate jdbc) {
 		this.jdbctemplate = jdbc;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<Company> selectAll() throws SQLException {
 		return new ArrayList<>(jdbctemplate.query(SELECTALL, new CompanyMapper()));
 	}
 
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 	@Transactional
 	public int delete(int id) throws SQLException {
 		return jdbctemplate.update(DELETE, id);

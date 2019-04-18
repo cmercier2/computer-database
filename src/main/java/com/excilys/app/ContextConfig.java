@@ -10,18 +10,21 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 @Configuration
 public class ContextConfig implements WebApplicationInitializer {
-    public static AnnotationConfigWebApplicationContext context;
-    
-    @Override
-    public void onStartup(ServletContext servletContext) {
-    	context = new AnnotationConfigWebApplicationContext();
-    	context.register(AppConfig.class);
-    	context.setServletContext(servletContext);
-    	context.refresh();
-        DispatcherServlet servlet = new DispatcherServlet(context);
-        ServletRegistration.Dynamic registration = servletContext.addServlet("app", servlet);
-        registration.setLoadOnStartup(1);
-        registration.addMapping("/");
-    }
+	public static AnnotationConfigWebApplicationContext context;
+
+	/**
+	 * 
+	 */
+	@Override
+	public void onStartup(ServletContext servletContext) {
+		context = new AnnotationConfigWebApplicationContext();
+		context.register(AppConfig.class);
+		context.setServletContext(servletContext);
+		context.refresh();
+		DispatcherServlet servlet = new DispatcherServlet(context);
+		ServletRegistration.Dynamic registration = servletContext.addServlet("app", servlet);
+		registration.setLoadOnStartup(1);
+		registration.addMapping("/");
+	}
 
 }

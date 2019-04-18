@@ -105,7 +105,7 @@ public class Computer implements Serializable {
 		}
 
 		@NonNull
-		public ComputerBuilder setName(String name){
+		public ComputerBuilder setName(String name) {
 			this.name = name;
 			return this;
 		}

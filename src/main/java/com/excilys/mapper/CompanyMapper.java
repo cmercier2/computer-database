@@ -14,5 +14,4 @@ public class CompanyMapper implements RowMapper<Company> {
 		return new Company(res.getInt("id"), res.getString("name"));
 	}
 
-
 }

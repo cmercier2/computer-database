@@ -33,8 +33,10 @@ public class EditComputerService {
 	 */
 	public Optional<ComputerDTO> getComputer(int id) throws SQLException, InvalidComputerName {
 		Computer comp = jdb.select(id).orElse(new ComputerBuilder().setId(id).build());
-		return Optional.of(new ComputerDTOBuilder().setId(comp.getId()).setName(comp.getName()).setIntroduced(comp.getIntroduced() != null ? comp.getIntroduced().toString() : "")
-				.setDiscontinued(comp.getDiscontinued() != null ? comp.getDiscontinued().toString() : "").setCompany(comp.getCompany()).build());
+		return Optional.of(new ComputerDTOBuilder().setId(comp.getId()).setName(comp.getName())
+				.setIntroduced(comp.getIntroduced() != null ? comp.getIntroduced().toString() : "")
+				.setDiscontinued(comp.getDiscontinued() != null ? comp.getDiscontinued().toString() : "")
+				.setCompany(comp.getCompany()).build());
 	}
 
 	/**
@@ -47,6 +49,12 @@ public class EditComputerService {
 		return jdbcompany.selectAll();
 	}
 
+	/**
+	 * 
+	 * @param computerDTO
+	 * @throws InvalidComputerName
+	 * @throws SQLException
+	 */
 	public void editComputer(ComputerDTO computerDTO) throws InvalidComputerName, SQLException {
 		Computer computer = new ComputerBuilder().setId(computerDTO.getId())
 				.setName(computerDTO.getName() != null ? computerDTO.getName().trim() : "")
@@ -57,5 +65,4 @@ public class EditComputerService {
 			throw new InvalidComputerName("Computer name can't be empty");
 		jdb.update(computer);
 	}
-
 }

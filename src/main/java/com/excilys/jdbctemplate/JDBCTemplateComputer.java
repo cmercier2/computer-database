@@ -25,11 +25,11 @@ public class JDBCTemplateComputer {
 	private final String SELECTSEARCHDISCONTINUED = "SELECT id, name, introduced, discontinued, company_id FROM computer WHERE name LIKE ? ORDER BY discontinued LIMIT ? OFFSET ?;";
 	private final String COUNT = "SELECT COUNT(*) FROM computer WHERE name like ?;";
 	private JdbcTemplate jdbctemplate;
-	
+
 	public JDBCTemplateComputer(JdbcTemplate jdbc) {
 		this.jdbctemplate = jdbc;
 	}
-	
+
 	/**
 	 * 
 	 * @param computer
@@ -48,8 +48,8 @@ public class JDBCTemplateComputer {
 	 * @throws SQLException
 	 */
 	public int update(Computer computer) throws SQLException {
-		return jdbctemplate.update(UPDATE, computer.getName(), computer.getIntroduced(),
-				computer.getDiscontinued(), computer.getCompany(), computer.getId());
+		return jdbctemplate.update(UPDATE, computer.getName(), computer.getIntroduced(), computer.getDiscontinued(),
+				computer.getCompany(), computer.getId());
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class JDBCTemplateComputer {
 	 * @throws SQLException
 	 */
 	public Optional<Computer> select(int id) throws SQLException {
-		return Optional.ofNullable(jdbctemplate.queryForObject(SELECT, new Object[] {id}, new ComputerMapper()));
+		return Optional.ofNullable(jdbctemplate.queryForObject(SELECT, new Object[] { id }, new ComputerMapper()));
 	}
 
 	/**

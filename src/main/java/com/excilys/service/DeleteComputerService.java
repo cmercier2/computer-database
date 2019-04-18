@@ -12,9 +12,15 @@ public class DeleteComputerService {
 	@Autowired
 	private JDBCTemplateComputer jdb;
 
+	/**
+	 * 
+	 * @param toDelete
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public void delete(String[] toDelete) throws ClassNotFoundException, SQLException {
-		if(toDelete.length > 0) {
-			for(String idStr : toDelete) {
+		if (toDelete.length > 0) {
+			for (String idStr : toDelete) {
 				int id = Integer.parseInt(idStr);
 				jdb.delete(id);
 			}

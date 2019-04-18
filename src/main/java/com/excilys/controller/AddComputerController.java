@@ -27,6 +27,13 @@ public class AddComputerController {
 	@Autowired
 	private AddComputerService service;
 
+	/**
+	 * 
+	 * @param paths
+	 * @param model
+	 * @return
+	 * @throws IOException
+	 */
 	@GetMapping({ "/AddComputer" })
 	public String doGet(@RequestParam(required = false) Map<String, String> paths, Model model) throws IOException {
 		ArrayList<Company> comp = service.listCompanys();
@@ -40,7 +47,8 @@ public class AddComputerController {
 	 *      response)
 	 */
 	@PostMapping({ "/AddComputer" })
-	protected String doPost(@ModelAttribute("Computer") @Validated ComputerDTO computer, ModelMap model) throws IOException {
+	protected String doPost(@ModelAttribute("Computer") @Validated ComputerDTO computer, ModelMap model)
+			throws IOException {
 		System.out.println("computer : " + computer.toString());
 		try {
 			service.addComputer(computer);

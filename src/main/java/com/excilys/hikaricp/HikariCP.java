@@ -1,7 +1,5 @@
 package com.excilys.hikaricp;
 
-import java.io.FileNotFoundException;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -12,16 +10,14 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 public class HikariCP {
-
 	private static Properties properties = new Properties();
 	private String JDBCurl;
 	private String username;
 	private String password;
-	//private final static Logger logger = Logger.getLogger(HikariCP.class);
-
 	private static HikariConfig config = new HikariConfig();
 	private static HikariDataSource ds;
 	private final static HikariCP _instance = new HikariCP();
+	// private final static Logger logger = Logger.getLogger(HikariCP.class);
 
 	private HikariCP() {
 		try (InputStream in = HikariCP.class.getResourceAsStream("/database.properties")) {
@@ -30,17 +26,10 @@ public class HikariCP {
 			this.JDBCurl = properties.getProperty("jdbc.url");
 			this.username = properties.getProperty("username");
 			this.password = properties.getProperty("password");
-		} catch (FileNotFoundException e) {
+		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
-			//logger.error("Cannot find property file for database.", e);
-		} catch (IOException e) {
-			e.printStackTrace();
-			//logger.error("Cannot load or close property file stream.", e);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			//logger.error("Cannot load mysql Driver", e);
+			// logger.error("Cannot find property file for database.", e);
 		}
-
 		config.setJdbcUrl(this.JDBCurl);
 		config.setUsername(this.username);
 		config.setPassword(this.password);
@@ -57,7 +46,7 @@ public class HikariCP {
 	public Connection getConnection() throws SQLException {
 		return ds.getConnection();
 	}
-	
+
 	public static HikariDataSource getDataSource() {
 		return ds;
 	}

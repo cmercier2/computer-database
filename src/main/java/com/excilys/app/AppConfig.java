@@ -22,8 +22,12 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.excilys.app", "com.excilys.controller", "com.excilys.jdbctemplate",
-		"com.excilys.mapper", "com.excilys.pagination", "com.excilys.service", "com.excilys.model"})
+		"com.excilys.mapper", "com.excilys.pagination", "com.excilys.service", "com.excilys.model" })
 public class AppConfig implements WebMvcConfigurer {
+	/**
+	 * 
+	 * @return
+	 */
 	@Bean
 	public ViewResolver internalResourceViewResolver() {
 		InternalResourceViewResolver bean = new InternalResourceViewResolver();
@@ -33,39 +37,63 @@ public class AppConfig implements WebMvcConfigurer {
 		return bean;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	@Bean
-    public ReloadableResourceBundleMessageSource messageSource(){
-        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("classpath:messages");
-        messageSource.setDefaultEncoding("UTF-8");
-        return messageSource;
-    }
+	public ReloadableResourceBundleMessageSource messageSource() {
+		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+		messageSource.setBasename("classpath:messages");
+		messageSource.setDefaultEncoding("UTF-8");
+		return messageSource;
+	}
 
-    @Bean
-    public CookieLocaleResolver localeResolver(){
-        CookieLocaleResolver localeResolver = new CookieLocaleResolver();
-        localeResolver.setDefaultLocale(Locale.FRENCH);
-        localeResolver.setCookieName("my-locale-cookie");
-        localeResolver.setCookieMaxAge(3600);
-        return localeResolver;
-    }
+	/**
+	 * 
+	 * @return
+	 */
+	@Bean
+	public CookieLocaleResolver localeResolver() {
+		CookieLocaleResolver localeResolver = new CookieLocaleResolver();
+		localeResolver.setDefaultLocale(Locale.FRENCH);
+		localeResolver.setCookieName("my-locale-cookie");
+		localeResolver.setCookieMaxAge(3600);
+		return localeResolver;
+	}
 
-    @Bean
-    public LocaleChangeInterceptor localeInterceptor(){
-        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
-        interceptor.setParamName("lang");
-        return interceptor;
-    }
+	/**
+	 * 
+	 * @return
+	 */
+	@Bean
+	public LocaleChangeInterceptor localeInterceptor() {
+		LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+		interceptor.setParamName("lang");
+		return interceptor;
+	}
+
+	/**
+	 * 
+	 */
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	@Bean
 	public JdbcTemplate initJdbcTemplate() {
 		return new JdbcTemplate(initDatasource());
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	@Bean
 	public HikariDataSource initDatasource() {
 		return HikariCP.getDataSource();

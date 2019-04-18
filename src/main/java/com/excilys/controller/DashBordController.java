@@ -27,6 +27,13 @@ public class DashBordController {
 	private Optional<String> search;
 	private Optional<String> orderBy;
 
+	/**
+	 * 
+	 * @param req
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	private ArrayList<ComputerDTO> handleRequest(Optional<String> req) throws ClassNotFoundException, SQLException {
 		String str = search.orElse("");
 		switch (Navigate.valueOf(req.orElse("INIT"))) {
@@ -43,6 +50,13 @@ public class DashBordController {
 		}
 	}
 
+	/**
+	 * 
+	 * @param paths
+	 * @param model
+	 * @return
+	 * @throws IOException
+	 */
 	@GetMapping({ "/dashboard", "/" })
 	public String doGet(@RequestParam(required = false) Map<String, String> paths, Model model) throws IOException {
 		Optional<String> req = Optional.ofNullable(paths.get("navigate"));
@@ -62,9 +76,16 @@ public class DashBordController {
 		return "dashboard";
 	}
 
+	/**
+	 * 
+	 * @param paths
+	 * @param model
+	 * @return
+	 * @throws IOException
+	 */
 	@PostMapping({ "/dashboard", "/" })
 	public String doPost(@RequestParam(required = false) Map<String, String> paths, Model model) throws IOException {
-		Optional<String> req = Optional.ofNullable( paths.get("selection"));
+		Optional<String> req = Optional.ofNullable(paths.get("selection"));
 		try {
 			deleteService.delete(req.orElse("").split(","));
 			doGet(paths, model);
