@@ -1,4 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page import="java.util.ArrayList"%>
@@ -28,34 +29,34 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-8 col-xs-offset-2 box">
-					<h1>Add Computer</h1>
+					<h1><spring:message code="addTitle"/></h1>
 					<form:form action="${pageContext.request.contextPath}/AddComputer"
 						method="POST" modelAttribute="Computer">
 						<fieldset>
 							<spring:bind path="name">
 							<div class="form-group">
-								<label for="computerName">Computer name</label> <input
+								<label for="computerName"><spring:message code="name"/></label> <input
 									type="text" class="form-control" name="name" id="computerName"
-									placeholder="Computer name">
+									placeholder="<spring:message code="name"/>">
 							</div>
 							</spring:bind>
 							<spring:bind path="introduced">
 							<div class="form-group">
-								<label for="introduced">Introduced date</label> <input
+								<label for="introduced"><spring:message code="introduced"/></label> <input
 									type="date" data-role="date" class="form-control" name="introduced"
-									id="introduced" placeholder="Introduced date">
+									id="introduced" placeholder="<spring:message code="introduced"/>">
 							</div>
 							</spring:bind>
 							<spring:bind path="discontinued">
 							<div class="form-group">
-								<label for="discontinued">Discontinued date</label> <input
+								<label for="discontinued"><spring:message code="discontinued"/></label> <input
 									type="date" data-role="date" class="form-control" name="discontinued"
-									id="discontinued" placeholder="Discontinued date">
+									id="discontinued" placeholder="<spring:message code="discontinued"/>">
 							</div>
 							</spring:bind>
 							<spring:bind path="companyId">
 							<div class="form-group">
-								<label for="companyId">Company</label> <select
+								<label for="companyId"><spring:message code="company"/></label> <select
 									class="form-control" id="companyId" name="companyId">
 									<c:forEach items="${CompanyList}" var="current">
 										<option value="${current.id}">${current.name}</option>
@@ -65,9 +66,9 @@
 							</spring:bind>
 						</fieldset>
 						<div class="actions pull-right">
-							<input type="submit" value="Add" class="btn btn-primary">
+							<input type="submit" value="<spring:message code="adding"/>" class="btn btn-primary">
 							or <a href="${pageContext.request.contextPath}/dashboard"
-								class="btn btn-default">Cancel</a>
+								class="btn btn-default"><spring:message code="cancel"/></a>
 						</div>
 					</form:form>
 				</div>

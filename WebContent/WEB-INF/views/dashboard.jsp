@@ -1,4 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="com.excilys.model.Computer"%>
@@ -9,10 +10,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="utf-8">
 <!-- Bootstrap -->
-<link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet"
+<link href="<c:url value="/resources/css/bootstrap.min.css"/>"
+	rel="stylesheet" media="screen">
+<link href="<c:url value="/resources/css/font-awesome.css"/>"
+	rel="stylesheet" media="screen">
+<link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet"
 	media="screen">
-<link href="<c:url value="/resources/css/font-awesome.css"/>" rel="stylesheet" media="screen">
-<link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet" media="screen">
 </head>
 <body>
 	<header class="navbar navbar-inverse navbar-fixed-top">
@@ -22,25 +25,26 @@
 				- Computer Database </a>
 		</div>
 	</header>
-
 	<section id="main">
 		<div class="container">
-			<h1 id="homeTitle">${size} Computers found</h1>
+			<h1 id="homeTitle">
+				<spring:message code="homeTitle" arguments="${size}" />
+			</h1>
 			<div id="actions" class="form-horizontal">
 				<div class="pull-left">
 					<form id="searchForm" action="#" method="GET" class="form-inline">
 
 						<input type="search" id="searchbox" name="SEARCH"
-							class="form-control" placeholder="Search name" /> <input
-							type="submit" id="searchsubmit" value="Filter by name"
+							class="form-control" placeholder="<spring:message code="search"/>" /> <input
+							type="submit" id="searchsubmit" value="<spring:message code="filter"/>"
 							class="btn btn-primary" />
 					</form>
 				</div>
 				<div class="pull-right">
 					<a class="btn btn-success" id="addComputer"
-						href="${pageContext.request.contextPath}/AddComputer">Add
-						Computer</a> <a class="btn btn-default" id="editComputer" href="#"
-						onclick="$.fn.toggleEditMode();">Edit</a>
+						href="${pageContext.request.contextPath}/AddComputer"><spring:message code="add"/>
+						</a> <a class="btn btn-default" id="editComputer" href="#"
+						onclick="$.fn.toggleEditMode();"><spring:message code="edit"/></a>
 				</div>
 			</div>
 		</div>
@@ -63,16 +67,19 @@
 									class="fa fa-trash-o fa-lg"></i>
 							</a>
 						</span></th>
-						<th>Computer name<a href="${pageContext.request.contextPath}/dashboard?orderBy=NAME"><span
+						<th><spring:message code="name"/><a
+							href="${pageContext.request.contextPath}/dashboard?orderBy=NAME"><span
 								class="glyphicon glyphicon-chevron-up"></span> </a>
 						</th>
-						<th>Introduced date<a href="${pageContext.request.contextPath}/dashboard?orderBy=INTRODUCED"><span
+						<th><spring:message code="introduced"/><a
+							href="${pageContext.request.contextPath}/dashboard?orderBy=INTRODUCED"><span
 								class="glyphicon glyphicon-chevron-up"></span> </a></th>
 						<!-- Table header for Discontinued Date -->
-						<th>Discontinued date<a href="${pageContext.request.contextPath}/dashboard?orderBy=DISCONTINUED"><span
+						<th><spring:message code="discontinued"/><a
+							href="${pageContext.request.contextPath}/dashboard?orderBy=DISCONTINUED"><span
 								class="glyphicon glyphicon-chevron-up"></span> </a></th>
 						<!-- Table header for Company -->
-						<th>Company</th>
+						<th><spring:message code="company"/></th>
 					</tr>
 				</thead>
 				<!-- Browse attribute computers -->
