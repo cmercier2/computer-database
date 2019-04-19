@@ -58,11 +58,9 @@ public class DashBordController {
 	public void changeLanguage(String lang) {
 		switch(lang) {
 		case "en":
-			System.out.println("english");
 			localeResolver.setDefaultLocale(Locale.ENGLISH);
 			break;
 		case "fr":
-			System.out.println("french");
 			localeResolver.setDefaultLocale(Locale.FRENCH);
 			break;
 		}

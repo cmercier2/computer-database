@@ -18,6 +18,10 @@
 	media="screen">
 </head>
 <body>
+    <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const lang = urlParams.get('lang');
+    </script>  
 	<header class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<a class="navbar-brand"
@@ -118,8 +122,8 @@
 		</ul>
 		<div class="pagination" style="float: right;">
 			Language : <a
-				href="${pageContext.request.contextPath}/dashboard?lang=en"><spring:message code="english" /></a>
-			| <a href="${pageContext.request.contextPath}/dashboard?lang=fr"><spring:message code="french" /></a>
+				href="${pageContext.request.contextPath}/dashboard?lang=en" id="englishSwitch" onclick="$.fn.englishSwitch();" ><spring:message code="english" /></a>
+			| <a href="${pageContext.request.contextPath}/dashboard?lang=fr" id="frenchSwitch" onclick="$.fn.frenchSwitch();"><spring:message code="french" /></a>
 		</div>
 	</footer>
 	<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
