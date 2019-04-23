@@ -25,7 +25,7 @@
 	<header class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<a class="navbar-brand"
-				href="${pageContext.request.contextPath}/dashboard"> Application
+				href="${pageContext.request.contextPath}/Computers"> Application
 				- Computer Database </a>
 		</div>
 	</header>
@@ -47,7 +47,7 @@
 				</div>
 				<div class="pull-right">
 					<a class="btn btn-success" id="addComputer"
-						href="${pageContext.request.contextPath}/AddComputer"><spring:message
+						href="${pageContext.request.contextPath}/Computer/add"><spring:message
 							code="add" /> </a> <a class="btn btn-default" id="editComputer"
 						href="#" onclick="$.fn.toggleEditMode();"><spring:message
 							code="edit" /></a>
@@ -74,14 +74,14 @@
 							</a>
 						</span></th>
 						<th><spring:message code="name" /><a
-							href="${pageContext.request.contextPath}/dashboard?orderBy=NAME"><span
+							href="${pageContext.request.contextPath}/Computers?orderBy=NAME"><span
 								class="glyphicon glyphicon-chevron-up"></span> </a></th>
 						<th><spring:message code="introduced" /><a
-							href="${pageContext.request.contextPath}/dashboard?orderBy=INTRODUCED"><span
+							href="${pageContext.request.contextPath}/Computers?orderBy=INTRODUCED"><span
 								class="glyphicon glyphicon-chevron-up"></span> </a></th>
 						<!-- Table header for Discontinued Date -->
 						<th><spring:message code="discontinued" /><a
-							href="${pageContext.request.contextPath}/dashboard?orderBy=DISCONTINUED"><span
+							href="${pageContext.request.contextPath}/Computers?orderBy=DISCONTINUED"><span
 								class="glyphicon glyphicon-chevron-up"></span> </a></th>
 						<!-- Table header for Company -->
 						<th><spring:message code="company" /></th>
@@ -95,7 +95,7 @@
 								class="cb" value="${current.id}"></td>
 							<td style="display: none;"><c:out value="${current.id}" /></td>
 							<td><a
-								href="${pageContext.request.contextPath}/EditComputer?id=${current.id}"
+								href="${pageContext.request.contextPath}/Computer/edit?id=${current.id}"
 								onclick=""><c:out value="${current.name}" /></a></td>
 							<td><c:out value="${current.introduced}" /></td>
 							<td><c:out value="${current.discontinued}" /></td>
@@ -112,18 +112,18 @@
 		<!-- <div class="container text-center"> -->
 		<ul class="pagination">
 			<li><a
-				href="${pageContext.request.contextPath}/dashboard?navigate=PREVIOUS"
+				href="${pageContext.request.contextPath}/Computers?navigate=PREVIOUS"
 				aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 			</a></li>
 			<li><a
-				href="${pageContext.request.contextPath}/dashboard?navigate=NEXT"
+				href="${pageContext.request.contextPath}/Computers?navigate=NEXT"
 				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 			</a></li>
 		</ul>
 		<div class="pagination" style="float: right;">
 			Language : <a
-				href="${pageContext.request.contextPath}/dashboard?lang=en" id="englishSwitch" onclick="$.fn.englishSwitch();" ><spring:message code="english" /></a>
-			| <a href="${pageContext.request.contextPath}/dashboard?lang=fr" id="frenchSwitch" onclick="$.fn.frenchSwitch();"><spring:message code="french" /></a>
+				href="${pageContext.request.contextPath}/Computers?lang=en" id="englishSwitch" onclick="$.fn.englishSwitch();" ><spring:message code="english" /></a>
+			| <a href="${pageContext.request.contextPath}/Computers?lang=fr" id="frenchSwitch" onclick="$.fn.frenchSwitch();"><spring:message code="french" /></a>
 		</div>
 	</footer>
 	<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>

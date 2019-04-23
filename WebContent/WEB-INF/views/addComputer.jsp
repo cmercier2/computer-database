@@ -20,7 +20,7 @@
 	<header class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<a class="navbar-brand"
-				href="${pageContext.request.contextPath}/dashboard"> Application
+				href="${pageContext.request.contextPath}/Computers"> Application
 				- Computer Database </a>
 		</div>
 	</header>
@@ -30,7 +30,7 @@
 			<div class="row">
 				<div class="col-xs-8 col-xs-offset-2 box">
 					<h1><spring:message code="addTitle"/></h1>
-					<form:form action="${pageContext.request.contextPath}/AddComputer"
+					<form:form action="${pageContext.request.contextPath}/Computer/add"
 						method="POST" modelAttribute="Computer">
 						<fieldset>
 							<spring:bind path="name">
@@ -67,7 +67,7 @@
 						</fieldset>
 						<div class="actions pull-right">
 							<input type="submit" value="<spring:message code="adding"/>" class="btn btn-primary">
-							or <a href="${pageContext.request.contextPath}/dashboard"
+							or <a href="${pageContext.request.contextPath}/Computers"
 								class="btn btn-default"><spring:message code="cancel"/></a>
 						</div>
 					</form:form>
