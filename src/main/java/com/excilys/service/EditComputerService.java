@@ -10,19 +10,18 @@ import org.springframework.stereotype.Service;
 import com.excilys.dto.ComputerDTO;
 import com.excilys.dto.ComputerDTO.ComputerDTOBuilder;
 import com.excilys.exception.InvalidComputerName;
-import com.excilys.jdbctemplate.JDBCTemplateCompany;
-import com.excilys.jdbctemplate.JDBCTemplateComputer;
+import com.excilys.hibernate.HibernateCompany;
+import com.excilys.hibernate.HibernateComputer;
 import com.excilys.model.Company;
 import com.excilys.model.Computer;
-import com.excilys.model.Computer.ComputerBuilder;
-import com.excilys.utils.ArgumentHandler;
+//import com.excilys.model.Computer.ComputerBuilder;
 
 @Service
 public class EditComputerService {
 	@Autowired
-	private JDBCTemplateComputer jdb;
+	private HibernateComputer hbntComputer;
 	@Autowired
-	private JDBCTemplateCompany jdbcompany;
+	private HibernateCompany hbntCompany;
 
 	/**
 	 * 
@@ -32,7 +31,7 @@ public class EditComputerService {
 	 * @throws InvalidComputerName
 	 */
 	public Optional<ComputerDTO> getComputer(int id) throws SQLException, InvalidComputerName {
-		Computer comp = jdb.select(id).orElse(new ComputerBuilder().setId(id).build());
+		Computer comp = hbntComputer.select(id).orElse(new Computer()/*ComputerBuilder().setId(id).build()*/);
 		return Optional.of(new ComputerDTOBuilder().setId(comp.getId()).setName(comp.getName())
 				.setIntroduced(comp.getIntroduced() != null ? comp.getIntroduced().toString() : "")
 				.setDiscontinued(comp.getDiscontinued() != null ? comp.getDiscontinued().toString() : "")
@@ -46,7 +45,7 @@ public class EditComputerService {
 	 * @throws ClassNotFoundException
 	 */
 	public ArrayList<Company> listCompanys() throws SQLException {
-		return jdbcompany.selectAll();
+		return hbntCompany.selectAll();
 	}
 
 	/**
@@ -56,13 +55,13 @@ public class EditComputerService {
 	 * @throws SQLException
 	 */
 	public void editComputer(ComputerDTO computerDTO) throws InvalidComputerName, SQLException {
-		Computer computer = new ComputerBuilder().setId(computerDTO.getId())
+		Computer computer = new Computer()/*ComputerBuilder().setId(computerDTO.getId())
 				.setName(computerDTO.getName() != null ? computerDTO.getName().trim() : "")
 				.setIntroduced(ArgumentHandler.parseDate(computerDTO.getIntroduced()).orElse(null))
 				.setDiscontinued(ArgumentHandler.parseDate(computerDTO.getDiscontinued()).orElse(null))
-				.setCompany(computerDTO.getCompanyId()).build();
+				.setCompany(computerDTO.getCompanyId()).build()*/;
 		if ("".equals(computer.getName()))
 			throw new InvalidComputerName("Computer name can't be empty");
-		jdb.update(computer);
+		hbntComputer.update(computer);
 	}
 }

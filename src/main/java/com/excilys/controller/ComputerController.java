@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
-
 import com.excilys.dto.ComputerDTO;
 import com.excilys.dto.ComputerDTO.ComputerDTOBuilder;
 import com.excilys.enums.Navigate;
@@ -44,9 +42,9 @@ public class ComputerController {
 	private int currentId;
 	private Optional<String> search;
 	private Optional<String> orderBy;
-	
+
 	public void changeLanguage(String lang) {
-		switch(lang) {
+		switch (lang) {
 		case "en":
 			localeResolver.setDefaultLocale(Locale.ENGLISH);
 			break;
@@ -55,7 +53,7 @@ public class ComputerController {
 			break;
 		}
 	}
-	
+
 	private ArrayList<ComputerDTO> handleRequest(Optional<String> req) throws ClassNotFoundException, SQLException {
 		String str = search.orElse("");
 		switch (Navigate.valueOf(req.orElse("INIT"))) {
@@ -71,7 +69,7 @@ public class ComputerController {
 			return printService.init(str, orderBy);
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param paths
@@ -81,7 +79,7 @@ public class ComputerController {
 	 */
 	@GetMapping({ "/Computers", "/" })
 	public String doGet(@RequestParam(required = false) Map<String, String> paths, Model model) throws IOException {
-		if(paths.containsKey("lang")) {
+		if (paths.containsKey("lang")) {
 			changeLanguage(paths.get("lang"));
 		}
 		Optional<String> req = Optional.ofNullable(paths.get("navigate"));
@@ -100,7 +98,7 @@ public class ComputerController {
 		}
 		return "dashboard";
 	}
-	
+
 	/**
 	 * 
 	 * @param paths
@@ -108,8 +106,9 @@ public class ComputerController {
 	 * @return
 	 * @throws IOException
 	 */
-	@PostMapping({ "/Computers"})
-	public String doPostDelete(@RequestParam(required = false) Map<String, String> paths, Model model) throws IOException {
+	@PostMapping({ "/Computers" })
+	public String doPostDelete(@RequestParam(required = false) Map<String, String> paths, Model model)
+			throws IOException {
 		Optional<String> req = Optional.ofNullable(paths.get("selection"));
 		try {
 			deleteService.delete(req.orElse("").split(","));
@@ -119,7 +118,7 @@ public class ComputerController {
 		}
 		return "dashboard";
 	}
-	
+
 	/**
 	 * 
 	 * @param paths
@@ -139,7 +138,7 @@ public class ComputerController {
 		}
 		return "editComputer";
 	}
-	
+
 	/**
 	 * 
 	 * @param computer
@@ -158,7 +157,7 @@ public class ComputerController {
 		model.addAttribute("id", currentId);
 		return "dashboard";
 	}
-	
+
 	/**
 	 * 
 	 * @param paths
@@ -173,7 +172,7 @@ public class ComputerController {
 		model.addAttribute("Computer", new ComputerDTOBuilder().build());
 		return "addComputer";
 	}
-	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -189,5 +188,5 @@ public class ComputerController {
 		}
 		return "dashboard";
 	}
-	
+
 }

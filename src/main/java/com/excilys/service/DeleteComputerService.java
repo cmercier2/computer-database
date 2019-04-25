@@ -5,12 +5,12 @@ import java.sql.SQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.excilys.jdbctemplate.JDBCTemplateComputer;
+import com.excilys.hibernate.HibernateComputer;
 
 @Service
 public class DeleteComputerService {
 	@Autowired
-	private JDBCTemplateComputer jdb;
+	private HibernateComputer hbntComputer;
 
 	/**
 	 * 
@@ -22,7 +22,7 @@ public class DeleteComputerService {
 		if (toDelete.length > 0) {
 			for (String idStr : toDelete) {
 				int id = Integer.parseInt(idStr);
-				jdb.delete(id);
+				hbntComputer.delete(id);
 			}
 		}
 	}

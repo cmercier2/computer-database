@@ -3,33 +3,37 @@ package com.excilys.model;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Positive;
 
-import org.springframework.lang.NonNull;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "computer")
 public class Computer implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private int id = -1;
-	@NotBlank
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
+	@Column(name = "name")
 	private String name;
-	@Past
+	@Column(name = "introduced")
 	private Date introduced;
-	@PastOrPresent
+	@Column(name = "discontinued")
 	private Date discontinued;
-	@Positive
+	@Column(name = "company_id")
 	private int company;
 
-	private Computer(ComputerBuilder comp) {
-		this.id = comp.id;
-		this.name = comp.name;
-		this.introduced = comp.introduced;
-		this.discontinued = comp.discontinued;
-		this.company = comp.company;
+	public Computer() {
+		
 	}
 
+	public Computer(int id, String name, Date introduced, Date discontinued, int company) {
+		this.id = id;
+		this.name = name;
+		this.introduced = introduced;
+		this.discontinued = discontinued;
+		this.company = company;
+	}
+	
 	/**
 	 * getter id
 	 * 
@@ -75,6 +79,51 @@ public class Computer implements Serializable {
 		return company;
 	}
 
+	/**
+	 * getter id
+	 * 
+	 * @return
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * getter name
+	 * 
+	 * @return
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * getter introduced date
+	 * 
+	 * @return
+	 */
+	public void setIntroduced(Date introduced) {
+		this.introduced = introduced;
+	}
+
+	/**
+	 * getter discontinued date
+	 * 
+	 * @return
+	 */
+	public void setDiscontinued(Date discontinued) {
+		this.discontinued = discontinued;
+	}
+
+	/**
+	 * getter company id
+	 * 
+	 * @return
+	 */
+	public void setCompany(int company) {
+		this.company = company;
+	}
+	
 	@Override
 	public String toString() {
 		return this.id + " " + this.name + " " + Objects.toString(this.introduced) + " "
@@ -100,6 +149,16 @@ public class Computer implements Serializable {
 		return (str1 == null ? str2 == null : str1.equals(str2));
 	}
 
+	
+/*
+	private Computer(ComputerBuilder comp) {
+		this.id = comp.id;
+		this.name = comp.name;
+		this.introduced = comp.introduced;
+		this.discontinued = comp.discontinued;
+		this.company = comp.company;
+	}
+	
 	public static class ComputerBuilder {
 		private int id;
 		private String name;
@@ -137,6 +196,6 @@ public class Computer implements Serializable {
 			return new Computer(this);
 		}
 
-	}
+	}*/
 
 }

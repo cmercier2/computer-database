@@ -1,12 +1,23 @@
 package com.excilys.app;
 
 import java.util.Locale;
+import java.util.Properties;
 
+import javax.sql.DataSource;
+
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.core.env.Environment;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -17,14 +28,15 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-import com.excilys.hikaricp.HikariCP;
-import com.zaxxer.hikari.HikariDataSource;
-
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "com.excilys.app", "com.excilys.controller", "com.excilys.jdbctemplate",
-		"com.excilys.mapper", "com.excilys.pagination", "com.excilys.service", "com.excilys.model" })
+@ComponentScan(basePackages = { "com.excilys.app", "com.excilys.controller", "com.excilys.mapper",
+		"com.excilys.pagination", "com.excilys.service", "com.excilys.hibernate" })
+@PropertySources({ @PropertySource("classpath:database.properties") })
 public class AppConfig implements WebMvcConfigurer {
+	@Autowired
+	private Environment env;
+
 	/**
 	 * 
 	 * @return
@@ -76,9 +88,9 @@ public class AppConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-	   registry.addInterceptor(localeInterceptor());
+		registry.addInterceptor(localeInterceptor());
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -87,21 +99,38 @@ public class AppConfig implements WebMvcConfigurer {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	@Bean
-	public JdbcTemplate initJdbcTemplate() {
-		return new JdbcTemplate(initDatasource());
+	public LocalSessionFactoryBean sessionFactory() {
+		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+		sessionFactory.setDataSource(dataSource());
+		sessionFactory.setPackagesToScan("com.excilys.hibernate");
+		sessionFactory.setHibernateProperties(hibernateProperties());
+		return sessionFactory;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	@Bean
-	public HikariDataSource initDatasource() {
-		return HikariCP.getDataSource();
+	public DataSource dataSource() {
+		BasicDataSource dataSource = new BasicDataSource();
+		dataSource.setDriverClassName(env.getRequiredProperty("driver"));
+		dataSource.setUrl(env.getRequiredProperty("url"));
+		dataSource.setUsername(env.getRequiredProperty("username"));
+		dataSource.setPassword(env.getRequiredProperty("password"));
+
+		return dataSource;
 	}
+
+	@Bean
+	public PlatformTransactionManager hibernateTransactionManager() {
+		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+		transactionManager.setSessionFactory(sessionFactory().getObject());
+		return transactionManager;
+	}
+
+	private final Properties hibernateProperties() {
+		Properties hibernateProperties = new Properties();
+		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+		return hibernateProperties;
+	}
+
 }

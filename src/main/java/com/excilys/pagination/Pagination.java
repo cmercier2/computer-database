@@ -2,12 +2,13 @@ package com.excilys.pagination;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.excilys.enums.OrderBy;
-import com.excilys.jdbctemplate.JDBCTemplateComputer;
+import com.excilys.hibernate.HibernateComputer;
 import com.excilys.model.Computer;
 
 @Service
@@ -19,17 +20,17 @@ public class Pagination {
 	private int sizeList = -1;
 	private OrderBy ord = OrderBy.ID;
 	@Autowired
-	private JDBCTemplateComputer jdb;
+	private HibernateComputer hbnt;
 
 	/**
 	 * 
 	 * @return @throws SQLException @throws ClassNotFoundException @throws
 	 */
-	public ArrayList<Computer> next() throws SQLException {
-		ArrayList<Computer> toPrint = new ArrayList<>();
+	public List<Computer> next() throws SQLException {
+		List<Computer> toPrint = new ArrayList<>();
 		if (!end)
 			startStep += step;
-		toPrint = jdb.selectAllSearchOrder(startStep, step, search, ord);
+		toPrint = hbnt.selectAllSearchOrder(startStep, step, search, ord);
 		if (toPrint.size() < step)
 			end = true;
 		return toPrint;
@@ -41,7 +42,7 @@ public class Pagination {
 	 * @throws SQLException
 	 */
 	private int totalSize() throws SQLException {
-		return jdb.count(search);
+		return hbnt.count(search);
 	}
 
 	/**
@@ -50,9 +51,9 @@ public class Pagination {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public ArrayList<Computer> current() throws SQLException {
-		ArrayList<Computer> toPrint = new ArrayList<>();
-		toPrint = jdb.selectAllSearchOrder(startStep, step, search, ord);
+	public List<Computer> current() throws SQLException {
+		List<Computer> toPrint = new ArrayList<>();
+		toPrint = hbnt.selectAllSearchOrder(startStep, step, search, ord);
 		if (toPrint.size() < step)
 			end = true;
 		return toPrint;
@@ -64,12 +65,12 @@ public class Pagination {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public ArrayList<Computer> previous() throws SQLException {
+	public List<Computer> previous() throws SQLException {
 		end = false;
-		ArrayList<Computer> toPrint = new ArrayList<>();
+		List<Computer> toPrint = new ArrayList<>();
 		if (startStep != 0)
 			startStep -= step;
-		toPrint = jdb.selectAllSearchOrder(startStep, step, search, ord);
+		toPrint = hbnt.selectAllSearchOrder(startStep, step, search, ord);
 		return toPrint;
 	}
 
@@ -79,12 +80,16 @@ public class Pagination {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public ArrayList<Computer> init(String str, OrderBy order) throws SQLException {
+	public List<Computer> init(String str, OrderBy order) throws SQLException {
 		ord = order;
 		search = str;
-		ArrayList<Computer> toPrint = new ArrayList<>();
+		List<Computer> toPrint = new ArrayList<>();
 		startStep = 0;
-		toPrint = jdb.selectAllSearchOrder(startStep, step, search, ord);
+		toPrint = hbnt.selectAllSearchOrder(startStep, step, search, ord);
+		System.out.println(" TAILLE : " + toPrint.size());
+		for(Computer c : toPrint){
+			System.out.println(c.toString());
+		}
 		sizeList = totalSize();
 		return toPrint;
 	}
