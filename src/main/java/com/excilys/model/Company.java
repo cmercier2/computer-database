@@ -1,11 +1,22 @@
 package com.excilys.model;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-public class Company implements Serializable {
-	private static final long serialVersionUID = 1L;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "company")
+public class Company {
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
 	private int id;
+	@Column(name = "name")
 	private String name;
 
 	/**
@@ -19,6 +30,10 @@ public class Company implements Serializable {
 		this.name = name;
 	}
 
+	public Company() {
+		super();
+	}
+	
 	/**
 	 * getter id
 	 * 

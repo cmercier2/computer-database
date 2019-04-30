@@ -9,14 +9,14 @@ public class ComputerDTO implements Serializable {
 	private String name;
 	private String introduced;
 	private String discontinued;
-	private int companyId;
+	private int company;
 
 	private ComputerDTO(ComputerDTOBuilder builderDTO) {
 		this.id = builderDTO.id;
 		this.name = builderDTO.name;
 		this.introduced = builderDTO.introduced;
 		this.discontinued = builderDTO.discontinued;
-		this.companyId = builderDTO.companyId;
+		this.company = builderDTO.company;
 	}
 
 	private ComputerDTO() {
@@ -38,8 +38,8 @@ public class ComputerDTO implements Serializable {
 		return discontinued;
 	}
 
-	public int getCompanyId() {
-		return companyId;
+	public int getCompany() {
+		return company;
 	}
 
 	public void setId(int id) {
@@ -58,14 +58,14 @@ public class ComputerDTO implements Serializable {
 		this.discontinued = discontinued;
 	}
 
-	public void setCompanyId(int companyId) {
-		this.companyId = companyId;
+	public void setCompany(int company) {
+		this.company = company;
 	}
 
 	@Override
 	public String toString() {
 		return this.id + " " + this.name + " " + Objects.toString(this.introduced) + " "
-				+ Objects.toString(this.discontinued) + " " + this.companyId;
+				+ Objects.toString(this.discontinued) + " " + this.company;
 	}
 
 	public static class ComputerDTOBuilder {
@@ -73,7 +73,7 @@ public class ComputerDTO implements Serializable {
 		private String name;
 		private String introduced;
 		private String discontinued;
-		private int companyId;
+		private int company;
 
 		public ComputerDTOBuilder setId(int id) {
 			this.id = id;
@@ -95,8 +95,8 @@ public class ComputerDTO implements Serializable {
 			return this;
 		}
 
-		public ComputerDTOBuilder setCompany(int companyId) {
-			this.companyId = companyId;
+		public ComputerDTOBuilder setCompany(int company) {
+			this.company = company;
 			return this;
 		}
 

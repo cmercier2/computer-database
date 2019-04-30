@@ -2,7 +2,7 @@ package com.excilys.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
@@ -16,12 +16,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+
 import com.excilys.dto.ComputerDTO;
-import com.excilys.dto.ComputerDTO.ComputerDTOBuilder;
 import com.excilys.enums.Navigate;
 import com.excilys.exception.ComputerNotFoundException;
 import com.excilys.exception.InvalidComputerName;
 import com.excilys.model.Company;
+import com.excilys.model.Computer;
 import com.excilys.service.AddComputerService;
 import com.excilys.service.DeleteComputerService;
 import com.excilys.service.EditComputerService;
@@ -54,7 +55,7 @@ public class ComputerController {
 		}
 	}
 
-	private ArrayList<ComputerDTO> handleRequest(Optional<String> req) throws ClassNotFoundException, SQLException {
+	private List<Computer> handleRequest(Optional<String> req) throws ClassNotFoundException, SQLException {
 		String str = search.orElse("");
 		switch (Navigate.valueOf(req.orElse("INIT"))) {
 		case NEXT:
@@ -85,10 +86,10 @@ public class ComputerController {
 		Optional<String> req = Optional.ofNullable(paths.get("navigate"));
 		search = Optional.ofNullable(paths.get("SEARCH"));
 		orderBy = Optional.ofNullable(paths.get("orderBy"));
-		ArrayList<ComputerDTO> comp;
+		List<Computer> comp;
 		try {
 			comp = handleRequest(req);
-			for (ComputerDTO c : comp) {
+			for (Computer c : comp) {
 				c.toString();
 			}
 			model.addAttribute("ComputerList", comp);
@@ -130,7 +131,7 @@ public class ComputerController {
 	public String doGetEdit(@RequestParam(required = false) Map<String, String> paths, Model model) throws IOException {
 		currentId = Integer.parseInt(paths.get("id"));
 		try {
-			model.addAttribute("computerdto", editService.getComputer(currentId)
+			model.addAttribute("computer", editService.getComputer(currentId)
 					.orElseThrow(() -> new ComputerNotFoundException("No computer with id " + currentId)));
 			model.addAttribute("CompanyList", editService.listCompanys());
 		} catch (SQLException | ComputerNotFoundException | InvalidComputerName e) {
@@ -147,7 +148,7 @@ public class ComputerController {
 	 * @throws IOException
 	 */
 	@PostMapping({ "/Computer/edit" })
-	public String doPostEdit(@ModelAttribute("computerdto") @Validated ComputerDTO computer, ModelMap model)
+	public String doPostEdit(@ModelAttribute("computer") @Validated ComputerDTO computer, ModelMap model)
 			throws IOException {
 		try {
 			editService.editComputer(computer);
@@ -167,9 +168,9 @@ public class ComputerController {
 	 */
 	@GetMapping({ "/Computer/add" })
 	public String doGetAdd(@RequestParam(required = false) Map<String, String> paths, Model model) throws IOException {
-		ArrayList<Company> comp = service.listCompanys();
+		List<Company> comp = service.listCompanys();
 		model.addAttribute("CompanyList", comp);
-		model.addAttribute("Computer", new ComputerDTOBuilder().build());
+		model.addAttribute("Computer", new Computer());
 		return "addComputer";
 	}
 

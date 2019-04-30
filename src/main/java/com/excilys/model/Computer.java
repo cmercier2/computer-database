@@ -1,6 +1,5 @@
 package com.excilys.model;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
@@ -8,25 +7,31 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "computer")
-public class Computer implements Serializable {
-	private static final long serialVersionUID = 1L;
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Computer {
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
+	
 	@Column(name = "name")
 	private String name;
+	
 	@Column(name = "introduced")
 	private Date introduced;
+	
 	@Column(name = "discontinued")
 	private Date discontinued;
-	@Column(name = "company_id")
-	private int company;
+	
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Company.class)
+	@JoinColumn(name = "company_id")
+	private Company company;
 
 	public Computer() {
-		
+		super();
 	}
 
-	public Computer(int id, String name, Date introduced, Date discontinued, int company) {
+	public Computer(int id, String name, Date introduced, Date discontinued, Company company) {
+		super();
 		this.id = id;
 		this.name = name;
 		this.introduced = introduced;
@@ -75,7 +80,7 @@ public class Computer implements Serializable {
 	 * 
 	 * @return
 	 */
-	public int getCompany() {
+	public Company getCompany() {
 		return company;
 	}
 
@@ -120,7 +125,7 @@ public class Computer implements Serializable {
 	 * 
 	 * @return
 	 */
-	public void setCompany(int company) {
+	public void setCompany(Company company) {
 		this.company = company;
 	}
 	
@@ -150,7 +155,7 @@ public class Computer implements Serializable {
 	}
 
 	
-/*
+
 	private Computer(ComputerBuilder comp) {
 		this.id = comp.id;
 		this.name = comp.name;
@@ -164,14 +169,13 @@ public class Computer implements Serializable {
 		private String name;
 		private Date introduced;
 		private Date discontinued;
-		private int company;
+		private Company company;
 
 		public ComputerBuilder setId(int id) {
 			this.id = id;
 			return this;
 		}
 
-		@NonNull
 		public ComputerBuilder setName(String name) {
 			this.name = name;
 			return this;
@@ -187,7 +191,7 @@ public class Computer implements Serializable {
 			return this;
 		}
 
-		public ComputerBuilder setCompany(int company) {
+		public ComputerBuilder setCompany(Company company) {
 			this.company = company;
 			return this;
 		}
@@ -196,6 +200,6 @@ public class Computer implements Serializable {
 			return new Computer(this);
 		}
 
-	}*/
+	}
 
 }

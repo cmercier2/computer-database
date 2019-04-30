@@ -86,10 +86,6 @@ public class Pagination {
 		List<Computer> toPrint = new ArrayList<>();
 		startStep = 0;
 		toPrint = hbnt.selectAllSearchOrder(startStep, step, search, ord);
-		System.out.println(" TAILLE : " + toPrint.size());
-		for(Computer c : toPrint){
-			System.out.println(c.toString());
-		}
 		sizeList = totalSize();
 		return toPrint;
 	}

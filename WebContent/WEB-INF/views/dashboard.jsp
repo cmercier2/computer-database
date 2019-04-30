@@ -99,7 +99,7 @@
 								onclick=""><c:out value="${current.name}" /></a></td>
 							<td><c:out value="${current.introduced}" /></td>
 							<td><c:out value="${current.discontinued}" /></td>
-							<td><c:out value="${current.companyId}" /></td>
+							<td><c:out value="${current.company.name}" /></td>
 
 						</tr>
 					</c:forEach>

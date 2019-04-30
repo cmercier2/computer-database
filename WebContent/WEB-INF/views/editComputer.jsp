@@ -30,7 +30,7 @@
 				<div class="col-xs-8 col-xs-offset-2 box">
 					<h1><spring:message code="editTitle"/></h1>
 
-					<form:form action="${pageContext.request.contextPath}/Computer/edit" method="POST" modelAttribute="computerdto">
+					<form:form action="${pageContext.request.contextPath}/Computer/edit" method="POST" modelAttribute="computer">
 						<input type="hidden" value="0" id="id" />
 						<!-- TODO: Change this value with the computer id -->
 						<fieldset>
@@ -38,41 +38,41 @@
 							<div class="form-group">
 								<input
 									type="hidden" class="form-control" name="id" id="computerId"
-									value="${computerdto.id}">
+									value="${computer.id}">
 							</div>
 							</spring:bind>
 							<spring:bind path="name">
 							<div class="form-group">
 								<label for="computerName"><spring:message code="name"/></label> <input
 									type="text" class="form-control" name="name" id="computerName"
-									value="${computerdto.name}" placeholder="Computer name">
+									value="${computer.name}" placeholder="Computer name">
 							</div>
 							</spring:bind>
 							<spring:bind path="introduced">
 							<div class="form-group">
 								<label for="introduced"><spring:message code="introduced"/></label> <input
 									type="date" data-role="date" class="form-control" name="introduced" id="introduced"
-									value="${computerdto.introduced}" placeholder="Introduced date">
+									value="${computer.introduced}" placeholder="Introduced date">
 							</div>
 							</spring:bind>
 							<spring:bind path="discontinued">
 							<div class="form-group">
 								<label for="discontinued"><spring:message code="discontinued"/></label> <input
 									type="date" data-role="date" class="form-control" name="discontinued" id="discontinued"
-									value="${computerdto.discontinued}" placeholder="Discontinued date">
+									value="${computer.discontinued}" placeholder="Discontinued date">
 							</div>
 							</spring:bind>
-							<spring:bind path="companyId">
+							<spring:bind path="company">
 							<div class="form-group">
-								<label for="companyId"><spring:message code="company"/></label> <select
-									class="form-control" id="companyId" name="companyId">
+								<label for="company"><spring:message code="company"/></label> <select
+									class="form-control" id="company" name="company">
 									<c:forEach items="${CompanyList}" var="current">
 									<c:choose>
-									<c:when test="${current.id == computerdto.id }">
-										<option  value="${current.id}"selected>${current.name}</option>
+									<c:when test="${current.id == computer.company.id }">
+										<option  value="${current.id}" selected>${current.name}</option>
 									</c:when>
 									<c:otherwise>
-										<option value="${current.id}">${current.name}</option>
+										<option value="${current.id}" >${current.name}</option>
 									</c:otherwise>
 									</c:choose>
 									</c:forEach>

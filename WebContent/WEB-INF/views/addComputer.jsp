@@ -54,10 +54,10 @@
 									id="discontinued" placeholder="<spring:message code="discontinued"/>">
 							</div>
 							</spring:bind>
-							<spring:bind path="companyId">
+							<spring:bind path="company">
 							<div class="form-group">
-								<label for="companyId"><spring:message code="company"/></label> <select
-									class="form-control" id="companyId" name="companyId">
+								<label for="company"><spring:message code="company"/></label> <select
+									class="form-control" id="company" name="company">
 									<c:forEach items="${CompanyList}" var="current">
 										<option value="${current.id}">${current.name}</option>
 									</c:forEach>
