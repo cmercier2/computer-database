@@ -5,8 +5,8 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -107,16 +107,11 @@ public class AppConfig implements WebMvcConfigurer {
 		return sessionFactory;
 	}
 	
-
-	@Bean
+	@Bean(destroyMethod = "close")
 	public DataSource dataSource() {
-		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName(env.getRequiredProperty("driver"));
-		dataSource.setUrl(env.getRequiredProperty("url"));
-		dataSource.setUsername(env.getRequiredProperty("usrname"));
-		dataSource.setPassword(env.getRequiredProperty("password"));
-
-		return dataSource;
+		return DataSourceBuilder.create().driverClassName(env.getProperty("driver"))
+				.url(env.getProperty("url")).username(env.getProperty("usrname"))
+				.password(env.getProperty("password")).build();
 	}
 
 	@Bean
