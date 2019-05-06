@@ -20,7 +20,6 @@ public class PrintComputerService {
 	 * 
 	 * @return
 	 * @throws SQLException
-	 * @throws ClassNotFoundException
 	 */
 	public List<Computer> init(String search, Optional<String> ord) throws SQLException {
 		return page.init(search, OrderBy.valueOf(ord.orElse("ID")));
@@ -30,7 +29,6 @@ public class PrintComputerService {
 	 * 
 	 * @return
 	 * @throws SQLException
-	 * @throws ClassNotFoundException
 	 */
 	public List<Computer> current() throws SQLException {
 		return page.current();
@@ -40,7 +38,6 @@ public class PrintComputerService {
 	 * 
 	 * @return
 	 * @throws SQLException
-	 * @throws ClassNotFoundException
 	 */
 	public List<Computer> next() throws SQLException {
 		return page.next();
@@ -58,7 +55,6 @@ public class PrintComputerService {
 	 * 
 	 * @return
 	 * @throws SQLException
-	 * @throws ClassNotFoundException
 	 */
 	public List<Computer> previous() throws SQLException {
 		return page.previous();

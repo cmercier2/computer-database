@@ -53,8 +53,7 @@ public class EditComputerService {
 	 */
 	public void editComputer(ComputerDTO computerDTO) throws SQLException, InvalidComputerName {
 		Company company = hbntCompany.getCompanyById(computerDTO.getCompany());
-		Computer computer = new ComputerBuilder()
-				.setId(computerDTO.getId())
+		Computer computer = new ComputerBuilder().setId(computerDTO.getId())
 				.setName(computerDTO.getName() != null ? computerDTO.getName().trim() : "")
 				.setIntroduced(ArgumentHandler.parseDate(computerDTO.getIntroduced()).orElse(null))
 				.setDiscontinued(ArgumentHandler.parseDate(computerDTO.getDiscontinued()).orElse(null))

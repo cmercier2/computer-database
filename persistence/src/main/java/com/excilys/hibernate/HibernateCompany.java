@@ -30,7 +30,7 @@ public class HibernateCompany {
 		sessionFactory = session.getObject();
 		manager = session.getObject().createEntityManager();
 	}
-	
+
 	public List<Company> selectAll() {
 		CriteriaBuilder criteriaBuilder = sessionFactory.getCriteriaBuilder();
 		CriteriaQuery<Company> criteriaQuery = criteriaBuilder.createQuery(Company.class);
@@ -39,7 +39,7 @@ public class HibernateCompany {
 		TypedQuery<Company> q = manager.createQuery(criteriaQuery);
 		return q.getResultList();
 	}
-	
+
 	@Transactional
 	public Company getCompanyById(int company) {
 		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
@@ -50,7 +50,4 @@ public class HibernateCompany {
 		TypedQuery<Company> q = manager.createQuery(criteriaQuery);
 		return q.getSingleResult();
 	}
-	
-	
-	
 }

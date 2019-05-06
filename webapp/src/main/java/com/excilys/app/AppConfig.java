@@ -48,7 +48,7 @@ public class AppConfig implements WebMvcConfigurer {
 		bean.setSuffix(".jsp");
 		return bean;
 	}
-	
+
 	/**
 	 * 
 	 * @return
@@ -106,12 +106,11 @@ public class AppConfig implements WebMvcConfigurer {
 		sessionFactory.setHibernateProperties(hibernateProperties());
 		return sessionFactory;
 	}
-	
+
 	@Bean(destroyMethod = "close")
 	public DataSource dataSource() {
-		return DataSourceBuilder.create().driverClassName(env.getProperty("driver"))
-				.url(env.getProperty("url")).username(env.getProperty("usrname"))
-				.password(env.getProperty("password")).build();
+		return DataSourceBuilder.create().driverClassName(env.getProperty("driver")).url(env.getProperty("url"))
+				.username(env.getProperty("usrname")).password(env.getProperty("password")).build();
 	}
 
 	@Bean
@@ -127,5 +126,4 @@ public class AppConfig implements WebMvcConfigurer {
 		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
 		return hibernateProperties;
 	}
-
 }
