@@ -48,7 +48,7 @@ public class AppConfig implements WebMvcConfigurer {
 		bean.setSuffix(".jsp");
 		return bean;
 	}
-
+	
 	/**
 	 * 
 	 * @return
