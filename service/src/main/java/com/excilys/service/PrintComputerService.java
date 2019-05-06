@@ -24,12 +24,6 @@ public class PrintComputerService {
 	 */
 	public List<Computer> init(String search, Optional<String> ord) throws SQLException {
 		return page.init(search, OrderBy.valueOf(ord.orElse("ID")));
-		/*return new ArrayList<ComputerDTO>(page.init(search, OrderBy.valueOf(ord.orElse("ID"))).stream()
-				.map(x -> new ComputerDTOBuilder().setId(x.getId()).setName(x.getName())
-						.setIntroduced(x.getIntroduced() == null ? "" : x.getIntroduced().toString())
-						.setDiscontinued(x.getDiscontinued() == null ? "" : x.getDiscontinued().toString())
-						.setCompany(x.getCompany()).build())
-				.collect(Collectors.toList()));*/
 	}
 
 	/**
@@ -40,12 +34,6 @@ public class PrintComputerService {
 	 */
 	public List<Computer> current() throws SQLException {
 		return page.current();
-		/*return new ArrayList<ComputerDTO>(page.current().stream()
-				.map(x -> new ComputerDTOBuilder().setId(x.getId()).setName(x.getName())
-						.setIntroduced(x.getIntroduced() == null ? "" : x.getIntroduced().toString())
-						.setDiscontinued(x.getDiscontinued() == null ? "" : x.getDiscontinued().toString())
-						.setCompany(x.getCompany()).build())
-				.collect(Collectors.toList()));*/
 	}
 
 	/**
@@ -56,12 +44,6 @@ public class PrintComputerService {
 	 */
 	public List<Computer> next() throws SQLException {
 		return page.next();
-		/*return new ArrayList<ComputerDTO>(page.next().stream()
-				.map(x -> new ComputerDTOBuilder().setId(x.getId()).setName(x.getName())
-						.setIntroduced(x.getIntroduced() == null ? "" : x.getIntroduced().toString())
-						.setDiscontinued(x.getDiscontinued() == null ? "" : x.getDiscontinued().toString())
-						.setCompany(x.getCompany()).build())
-				.collect(Collectors.toList()));*/
 	}
 
 	/**
@@ -80,11 +62,5 @@ public class PrintComputerService {
 	 */
 	public List<Computer> previous() throws SQLException {
 		return page.previous();
-		/*return new ArrayList<ComputerDTO>(page.previous().stream()
-				.map(x -> new ComputerDTOBuilder().setId(x.getId()).setName(x.getName())
-						.setIntroduced(x.getIntroduced() == null ? "" : x.getIntroduced().toString())
-						.setDiscontinued(x.getDiscontinued() == null ? "" : x.getDiscontinued().toString())
-						.setCompany(x.getCompany()).build())
-				.collect(Collectors.toList()));*/
 	}
 }

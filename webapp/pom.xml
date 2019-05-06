@@ -11,7 +11,6 @@
 	</parent>
 	<artifactId>webapp</artifactId>
 	<name>webapp</name>
-	<packaging>jar</packaging>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<mysql-connector>8.0.15</mysql-connector>
@@ -30,13 +29,25 @@
 		<javax.validation>2.0.0.Final</javax.validation>
 		<selenium>2.27.0</selenium>
 		<hibernate>5.3.1.Final</hibernate>
+		<javax.servlet-api>3.0.1</javax.servlet-api>
 	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<webXml>WebContent\WEB-INF\web.xml</webXml>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 	<dependencies>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.0.1</version>
+			<version>${javax.servlet-api}</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -151,5 +162,12 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
+		<dependency>
+			<groupId>computer-database</groupId>
+			<artifactId>binding</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
 	</dependencies>
+	<packaging>war</packaging>
 </project>

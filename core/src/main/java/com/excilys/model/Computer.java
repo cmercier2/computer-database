@@ -8,20 +8,20 @@ import javax.persistence.*;
 @Entity
 @Table(name = "computer")
 public class Computer {
-	@Id 
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-	
+
 	@Column(name = "name")
 	private String name;
-	
+
 	@Column(name = "introduced")
 	private Date introduced;
-	
+
 	@Column(name = "discontinued")
 	private Date discontinued;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Company.class)
 	@JoinColumn(name = "company_id")
 	private Company company;
@@ -38,7 +38,7 @@ public class Computer {
 		this.discontinued = discontinued;
 		this.company = company;
 	}
-	
+
 	/**
 	 * getter id
 	 * 
@@ -128,7 +128,7 @@ public class Computer {
 	public void setCompany(Company company) {
 		this.company = company;
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.id + " " + this.name + " " + Objects.toString(this.introduced) + " "
@@ -154,8 +154,6 @@ public class Computer {
 		return (str1 == null ? str2 == null : str1.equals(str2));
 	}
 
-	
-
 	private Computer(ComputerBuilder comp) {
 		this.id = comp.id;
 		this.name = comp.name;
@@ -163,7 +161,7 @@ public class Computer {
 		this.discontinued = comp.discontinued;
 		this.company = comp.company;
 	}
-	
+
 	public static class ComputerBuilder {
 		private int id;
 		private String name;

@@ -114,7 +114,7 @@ public class ComputerController {
 		try {
 			deleteService.delete(req.orElse("").split(","));
 			doGet(paths, model);
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return "dashboard";
@@ -134,7 +134,7 @@ public class ComputerController {
 			model.addAttribute("computer", editService.getComputer(currentId)
 					.orElseThrow(() -> new ComputerNotFoundException("No computer with id " + currentId)));
 			model.addAttribute("CompanyList", editService.listCompanys());
-		} catch (SQLException | ComputerNotFoundException | InvalidComputerName e) {
+		} catch (SQLException | ComputerNotFoundException e) {
 			e.printStackTrace();
 		}
 		return "editComputer";

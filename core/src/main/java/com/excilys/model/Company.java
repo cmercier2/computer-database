@@ -32,7 +32,7 @@ public class Company {
 	public Company() {
 		super();
 	}
-	
+
 	/**
 	 * getter id
 	 * 

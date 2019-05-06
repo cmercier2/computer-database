@@ -26,5 +26,4 @@ public class ContextConfig implements WebApplicationInitializer {
 		registration.setLoadOnStartup(1);
 		registration.addMapping("/");
 	}
-
 }

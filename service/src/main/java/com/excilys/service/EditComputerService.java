@@ -30,12 +30,8 @@ public class EditComputerService {
 	 * @throws SQLException
 	 * @throws InvalidComputerName
 	 */
-	public Optional<Computer> getComputer(int id) throws SQLException, InvalidComputerName {
-		Computer comp = hbntComputer.select(id).orElse(new Computer()/*ComputerBuilder().setId(id).build()*/);
-		/*return Optional.of(new ComputerBuilder().setId(comp.getId()).setName(comp.getName())
-				.setIntroduced(comp.getIntroduced() != null ? comp.getIntroduced().toString() : "")
-				.setDiscontinued(comp.getDiscontinued() != null ? comp.getDiscontinued().toString() : "")
-				.setCompany(comp.getCompany()).build());*/
+	public Optional<Computer> getComputer(int id) throws SQLException {
+		Computer comp = hbntComputer.select(id).orElse(new Computer());
 		return Optional.of(comp);
 	}
 
@@ -55,7 +51,7 @@ public class EditComputerService {
 	 * @throws InvalidComputerName
 	 * @throws SQLException
 	 */
-	public void editComputer(ComputerDTO computerDTO) throws InvalidComputerName, SQLException {
+	public void editComputer(ComputerDTO computerDTO) throws SQLException, InvalidComputerName {
 		Company company = hbntCompany.getCompanyById(computerDTO.getCompany());
 		Computer computer = new ComputerBuilder()
 				.setId(computerDTO.getId())

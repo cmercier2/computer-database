@@ -18,7 +18,7 @@ public class DeleteComputerService {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public void delete(String[] toDelete) throws ClassNotFoundException, SQLException {
+	public void delete(String[] toDelete) throws SQLException {
 		if (toDelete.length > 0) {
 			for (String idStr : toDelete) {
 				int id = Integer.parseInt(idStr);

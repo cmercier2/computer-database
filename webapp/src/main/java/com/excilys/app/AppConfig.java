@@ -30,7 +30,7 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.excilys.app", "com.excilys.controller", "com.excilys.mapper",
-		"com.excilys.pagination", "com.excilys.service", "com.excilys.hibernate" })
+		"com.excilys.pagination", "com.excilys.service", "com.excilys.hibernate", "com.excilys.exception" })
 @PropertySources({ @PropertySource("classpath:database.properties") })
 public class AppConfig implements WebMvcConfigurer {
 	@Autowired
