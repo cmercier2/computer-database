@@ -78,8 +78,9 @@ public class ComputerController {
 	 * @return
 	 * @throws IOException
 	 */
-	@GetMapping({ "/Computers", "/" })
+	@GetMapping({ "/", "/Computers" })
 	public String doGet(@RequestParam(required = false) Map<String, String> paths, Model model) throws IOException {
+		System.out.println("HERE");
 		if (paths.containsKey("lang")) {
 			changeLanguage(paths.get("lang"));
 		}
