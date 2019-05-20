@@ -28,9 +28,17 @@
 	</build>
 	<properties>
 		<spring.boot>2.1.4.RELEASE</spring.boot>
+		<jackson>2.8.1</jackson>
 	</properties>
+
 	<dependencies>
 
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>

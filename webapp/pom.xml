@@ -31,6 +31,7 @@
 		<selenium>2.27.0</selenium>
 		<hibernate>5.3.1.Final</hibernate>
 		<javax.servlet-api>3.0.1</javax.servlet-api>
+		<jackson>2.8.1</jackson>
 	</properties>
 
 	<dependencies>

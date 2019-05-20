@@ -55,7 +55,7 @@ public class ComputerController {
 		}
 	}
 
-	private List<Computer> handleRequest(Optional<String> req) throws ClassNotFoundException, SQLException {
+	private List<ComputerDTO> handleRequest(Optional<String> req) throws ClassNotFoundException, SQLException {
 		String str = search.orElse("");
 		switch (Navigate.valueOf(req.orElse("INIT"))) {
 		case NEXT:
@@ -78,27 +78,23 @@ public class ComputerController {
 	 * @return
 	 * @throws IOException
 	 */
-	@GetMapping({ "/", "/Computers" })
+	@GetMapping({ "/" })
 	public String doGet(@RequestParam(required = false) Map<String, String> paths, Model model) throws IOException {
-		System.out.println("HERE");
 		if (paths.containsKey("lang")) {
 			changeLanguage(paths.get("lang"));
 		}
 		Optional<String> req = Optional.ofNullable(paths.get("navigate"));
 		search = Optional.ofNullable(paths.get("SEARCH"));
 		orderBy = Optional.ofNullable(paths.get("orderBy"));
-		List<Computer> comp;
+		List<ComputerDTO> comp;
 		try {
 			comp = handleRequest(req);
-			for (Computer c : comp) {
-				c.toString();
-			}
 			model.addAttribute("ComputerList", comp);
 			model.addAttribute("size", printService.getsize());
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		return "dashboard";
+		return "redirect:/Computers";
 	}
 
 	/**

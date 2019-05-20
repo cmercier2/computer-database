@@ -7,8 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.excilys.dto.ComputerDTO;
 import com.excilys.enums.OrderBy;
-import com.excilys.model.Computer;
 import com.excilys.pagination.Pagination;
 
 @Service
@@ -21,7 +21,7 @@ public class PrintComputerService {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Computer> init(String search, Optional<String> ord) throws SQLException {
+	public List<ComputerDTO> init(String search, Optional<String> ord) throws SQLException {
 		return page.init(search, OrderBy.valueOf(ord.orElse("ID")));
 	}
 
@@ -30,7 +30,7 @@ public class PrintComputerService {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Computer> current() throws SQLException {
+	public List<ComputerDTO> current() throws SQLException {
 		return page.current();
 	}
 
@@ -39,7 +39,7 @@ public class PrintComputerService {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Computer> next() throws SQLException {
+	public List<ComputerDTO> next() throws SQLException {
 		return page.next();
 	}
 
@@ -56,7 +56,7 @@ public class PrintComputerService {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Computer> previous() throws SQLException {
+	public List<ComputerDTO> previous() throws SQLException {
 		return page.previous();
 	}
 }
